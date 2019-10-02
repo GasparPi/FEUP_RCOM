@@ -11,13 +11,29 @@
 #define FALSE 0
 #define TRUE 1
 
-volatile int STOP=FALSE;
+#define C_SET 0x03
+#define C_UA 0x07
+#define FLAG 0x7E
+#define A 0x03
+#define C_SET 0x03
+#define BCC_UA A ^ C_UA
+#define BCC_SET A ^ C_SET
+
+enum state
+{
+    START,
+    FLAG_RCV,
+    A_RCV,
+    C_RCV,
+    BCC_OK,
+	STOP
+};
 
 int main(int argc, char** argv)
 {
     int fd,c, res;
     struct termios oldtio,newtio;
-    char buf[255];
+    char frame[255];
 
     if ( (argc < 2) || 
   	     ((strcmp("/dev/ttyS0", argv[1])!=0) && 
@@ -70,35 +86,84 @@ int main(int argc, char** argv)
 
     printf("New termios structure set\n");
 
+	sleep(1);
 
-
-	char c1;
-	int i = 0;
-    while (STOP==FALSE) {       /* loop for input */
-      res = read(fd,&c1,1);   /* returns after 5 chars have been input */
-      buf[i++]= c1;               /* so we can printf... */
-      if (c1 =='\0') STOP=TRUE;
-    }
-	printf(":%s:%d\n", buf, res);
-
-
-
-  /* 
-    O ciclo WHILE deve ser alterado de modo a respeitar o indicado no guião 
-  */
-
-
+ 	if(readMessage(fd) == -1)
+		return -1;
+ 	else {
+		frame[0] = FLAG;
+		frame[1] = A;
+		frame[2] = C_UA;
+		frame[3] = BCC_UA;
+		frame[4] = FLAG;
+	
+		write(fd, frame, sizeof(frame)/sizeof(unsigned char));
+	}
 
 	sleep(1);
 	tcflush(fd, TCIOFLUSH);
-
-
-	res = write(fd, buf, strlen(buf) + 1);   
-    printf("Sent %d bytes with message %s\n", res, buf);
-
 	
-	sleep(1);
     tcsetattr(fd,TCSANOW,&oldtio);
     close(fd);
     return 0;
 }
+
+int readMessage(int fd){
+	
+	enum state current_state = START;
+
+	unsigned char byte_read;
+	printf("Starting state machine\n");
+	while (current_state != STOP) {
+	
+		if (read(fd, &byte_read, 1) != 1) return -1;
+		switch(current_state){
+			case START: {
+				printf("In START state\n");
+				if(byte_read == FLAG) 			
+					current_state = FLAG_RCV;
+				break;
+			}
+			case FLAG_RCV: {
+				printf("IN flag_rcv state!\n");
+				if(byte_read == A)
+					current_state = A_RCV;
+				else if(byte_read != FLAG)
+					current_state = START;
+				break;		
+			}
+			case A_RCV: {
+				printf("IN a_rcv state!\n");
+				if (byte_read == C_SET)
+					current_state = C_RCV;
+				else if (byte_read == FLAG_RCV)
+					current_state = FLAG_RCV;
+				else current_state = START;	
+				break;			
+			}
+			case C_RCV: {
+				printf("IN c_rcv state!\n");
+				unsigned char bcc = BCC_SET;
+				if (byte_read == bcc)
+					current_state = BCC_OK;
+				else if (byte_read == FLAG_RCV)
+					current_state = FLAG_RCV;
+				else current_state = START;	
+				break;				
+			}
+			case BCC_OK: {
+				printf("IN bcc_ok state!\n");
+				if (byte_read == FLAG)
+					current_state = STOP;
+				else current_state = START;
+				break;			
+			}
+		};
+	}
+
+	printf("Everything OK!\n");
+
+	return 0;
+}
+
+
