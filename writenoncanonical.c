@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <stdio.h>
+#include <signal.h>
 
 #define BAUDRATE B38400
 #define MODEMDEVICE "/dev/ttyS1"
@@ -17,9 +18,22 @@
 #define A_CMD 0x03
 #define A_REP 0x01 // Not used yet :)
 #define C_SET 0x03
+#define C_UA 0x07
 #define BCC(A, C) (A) ^ (C)
 
-volatile int STOP=FALSE;
+#define MAX_RETRIES 3
+
+int alarmFlag=1, numRetry=0;
+
+enum state
+{
+    START,
+    FLAG_RCV,
+    A_RCV,
+    C_RCV,
+    BCC_OK,
+    STOP
+};
 
 int main(int argc, char** argv) {
 
@@ -45,6 +59,8 @@ int main(int argc, char** argv) {
     exit(-1);
   }
 
+  (void) signal(SIGALRM, alarmHandler());
+
   bzero(&newtio, sizeof(newtio));
   newtio.c_cflag = BAUDRATE | CS8 | CLOCAL | CREAD;
   newtio.c_iflag = IGNPAR;
@@ -69,35 +85,23 @@ int main(int argc, char** argv) {
 
   printf("New termios structure set\n");
 
-  
-  // building frame
-  frame[0] = FLAG;
-  frame[1] = A_CMD;
-  frame[2] = C_SET; // we want to send a set command
-  frame[3] = BCC(A_CMD, C_SET); // we want to send a set command
-  frame[4] = FLAG;
+  while (numRetry < MAX_RETRIES) {
+    res = sendSet(fd, frame);
+    alarm(MAX_RETRIES);
+    alarmFlag = 0
 
-  // gets(buf); we used to get "ola" from the keyboard
-  res = write(fd, frame, sizeof(frame)/sizeof(unsigned char));
-  
-  printf("%d bytes written\n", res);
+    while (alarmFlag) {
+      printf("cenas\n");
+      readMessage()
+    }
+  } 
 
   sleep(1);
 
+  if(readMessage(fd) == -1)
+    return -1;
+
   tcflush(fd, TCIOFLUSH);
-
-  exit(0);
-
-  char buf_res[255];
-  for(int i = 0; STOP==FALSE; i++) {
-    char c;
-    res = read(fd,&c,1);  
-    buf_res[i] = c;       /* loop for input */
-    if (c=='\0') STOP=TRUE;
-  }
-
-  printf("String read from serial port: %s\n", buf_res);
-
   sleep(1);
    
   if ( tcsetattr(fd,TCSANOW,&oldtio) == -1) {
@@ -108,4 +112,81 @@ int main(int argc, char** argv) {
   close(fd);
 
   return 0;
+}
+
+int readMessage(int fd){
+  
+  enum state current_state = START;
+
+  unsigned char byte_read;
+  printf("Starting state machine\n");
+  while (current_state != STOP) {
+  
+    if (read(fd, &byte_read, 1) != 1) return -1;
+    switch(current_state){
+      case START: {
+        printf("In START state\n");
+        if(byte_read == FLAG)       
+          current_state = FLAG_RCV;
+        break;
+      }
+      case FLAG_RCV: {
+        printf("IN flag_rcv state!\n");
+        if(byte_read == A_CMD)
+          current_state = A_RCV;
+        else if(byte_read != FLAG)
+          current_state = START;
+        break;    
+      }
+      case A_RCV: {
+        printf("IN a_rcv state!\n");
+        if (byte_read == C_UA)
+          current_state = C_RCV;
+        else if (byte_read == FLAG_RCV)
+          current_state = FLAG_RCV;
+        else current_state = START; 
+        break;      
+      }
+      case C_RCV: {
+        printf("IN c_rcv state!\n");
+        unsigned char bcc = BCC(A_CMD, C_UA);
+        if (byte_read == bcc)
+          current_state = BCC_OK;
+        else if (byte_read == FLAG_RCV)
+          current_state = FLAG_RCV;
+        else current_state = START; 
+        break;        
+      }
+      case BCC_OK: {
+        printf("IN bcc_ok state!\n");
+        if (byte_read == FLAG)
+          current_state = STOP;
+        else current_state = START;
+        break;      
+      }
+    };
+  }
+
+  printf("Everything OK!\n");
+
+  return 0;
+}
+
+int sendSet(int fd, unsigned char *frame){
+  // building frame
+  frame[0] = FLAG;
+  frame[1] = A_CMD;
+  frame[2] = C_SET; // we want to send a set command
+  frame[3] = BCC(A_CMD, C_SET); // we want to send a set command
+  frame[4] = FLAG;
+
+  // gets(buf); we used to get "ola" from the keyboard
+  return write(fd, frame, sizeof(frame)/sizeof(unsigned char));
+
+}
+
+void alarmHandler() {
+  printf("alarme # %d\n", numRetry);
+  alarmFlag=1;
+  numRetry++;
 }
