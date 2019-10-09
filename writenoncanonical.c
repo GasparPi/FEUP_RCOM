@@ -22,25 +22,28 @@
 #define BCC(A, C) (A) ^ (C)
 
 #define MAX_RETRIES 3
+#define MAX_TIMEOUT 3
 
 int alarmFlag=1, numRetry=0;
 
-enum state
-{
-    START,
-    FLAG_RCV,
-    A_RCV,
-    C_RCV,
-    BCC_OK,
-    STOP
+int readMessage(int fd);
+void alarmHandler();
+int sendSet(int fd, unsigned char *frame);
+
+enum state {
+  START,
+  FLAG_RCV,
+  A_RCV,
+  C_RCV,
+  BCC_OK,
+  STOP
 };
 
 int main(int argc, char** argv) {
 
-  int fd, c, res;
-  struct termios oldtio,newtio;
-
-  unsigned char frame[255];
+  int fd, c;
+  struct termios oldtio;
+  int stop_alarm = 0;
     
   if ( (argc < 2) || ((strcmp("/dev/ttyS0", argv[1])!=0) && (strcmp("/dev/ttyS4", argv[1])!=0) )) {
     printf("Usage:\tnserial SerialPort\n\tex: nserial /dev/ttyS4\n");
@@ -56,10 +59,36 @@ int main(int argc, char** argv) {
 
   if (tcgetattr(fd, &oldtio) == -1) { /* save current port settings */
     perror("tcgetattr");
+    return -1;
+  }
+
+  /*
+  *  Opens Serial Port communication 
+  */
+  if (llopen(fd) == -1) {
+    perror("LLOPEN");
+    return -1;
+  }
+
+  tcflush(fd, TCIOFLUSH);
+     
+  if (tcsetattr(fd,TCSANOW,&oldtio) == -1) {
+    perror("tcsetattr");
     exit(-1);
   }
 
-  (void) signal(SIGALRM, alarmHandler());
+  close(fd);
+
+  return 0;
+}
+
+int llopen(int fd){
+
+  unsigned char frame[255];
+  struct termios newtio;
+  int res;
+
+  (void) signal(SIGALRM, alarmHandler);
 
   bzero(&newtio, sizeof(newtio));
   newtio.c_cflag = BAUDRATE | CS8 | CLOCAL | CREAD;
@@ -70,7 +99,7 @@ int main(int argc, char** argv) {
   newtio.c_lflag = 0;
 
   newtio.c_cc[VTIME] = 0;  /* inter-character timer unused */
-  newtio.c_cc[VMIN] = 1;   /* blocking read until 5 chars received */
+  newtio.c_cc[VMIN] = 0;   /* blocking read until 5 chars received */
 
   /* 
     VTIME e VMIN devem ser alterados de forma a proteger com um temporizador a 
@@ -80,58 +109,46 @@ int main(int argc, char** argv) {
 
   if (tcsetattr(fd,TCSANOW,&newtio) == -1) {
     perror("tcsetattr");
-    exit(-1);
+    return -1;
   }
 
   printf("New termios structure set\n");
 
-  while (numRetry < MAX_RETRIES) {
+  do {
+    printf("Sending SET Message!\n");
     res = sendSet(fd, frame);
-    alarm(MAX_RETRIES);
-    alarmFlag = 0
+    alarm(MAX_TIMEOUT);
+    alarmFlag = 0;
 
-    while (alarmFlag) {
-      printf("cenas\n");
-      readMessage()
-    }
-  } 
+    readMessage(fd);
 
-  sleep(1);
+  } while(numRetry < MAX_RETRIES && alarmFlag);
 
-  if(readMessage(fd) == -1)
+  if (numRetry >= MAX_RETRIES) {
+    printf("MAX RETRIES!!!\n");
     return -1;
-
-  tcflush(fd, TCIOFLUSH);
-  sleep(1);
-   
-  if ( tcsetattr(fd,TCSANOW,&oldtio) == -1) {
-    perror("tcsetattr");
-    exit(-1);
   }
-
-  close(fd);
 
   return 0;
 }
 
-int readMessage(int fd){
+int readMessage(int fd) {
   
-  enum state current_state = START;
-
   unsigned char byte_read;
+  enum state current_state = START;
   printf("Starting state machine\n");
-  while (current_state != STOP) {
-  
-    if (read(fd, &byte_read, 1) != 1) return -1;
+
+  while (!alarmFlag && current_state != STOP) {
+        
+    read(fd, &byte_read, 1);
+
     switch(current_state){
       case START: {
-        printf("In START state\n");
         if(byte_read == FLAG)       
           current_state = FLAG_RCV;
         break;
       }
       case FLAG_RCV: {
-        printf("IN flag_rcv state!\n");
         if(byte_read == A_CMD)
           current_state = A_RCV;
         else if(byte_read != FLAG)
@@ -139,35 +156,36 @@ int readMessage(int fd){
         break;    
       }
       case A_RCV: {
-        printf("IN a_rcv state!\n");
         if (byte_read == C_UA)
           current_state = C_RCV;
         else if (byte_read == FLAG_RCV)
           current_state = FLAG_RCV;
-        else current_state = START; 
+        else
+          current_state = START; 
         break;      
       }
       case C_RCV: {
-        printf("IN c_rcv state!\n");
         unsigned char bcc = BCC(A_CMD, C_UA);
         if (byte_read == bcc)
           current_state = BCC_OK;
         else if (byte_read == FLAG_RCV)
           current_state = FLAG_RCV;
-        else current_state = START; 
+        else 
+          current_state = START; 
         break;        
       }
       case BCC_OK: {
-        printf("IN bcc_ok state!\n");
-        if (byte_read == FLAG)
+        if (byte_read == FLAG) {
           current_state = STOP;
-        else current_state = START;
+          printf("Everything OK!\n");          
+        }
+        else 
+          current_state = START;
         break;      
       }
     };
   }
 
-  printf("Everything OK!\n");
 
   return 0;
 }
@@ -186,7 +204,7 @@ int sendSet(int fd, unsigned char *frame){
 }
 
 void alarmHandler() {
-  printf("alarme # %d\n", numRetry);
-  alarmFlag=1;
+  printf("Alarm: %d\n", numRetry + 1);
+  alarmFlag = 1;
   numRetry++;
 }
