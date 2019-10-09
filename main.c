@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
   /*
   *  Opens Serial Port communication 
   */
-  if ((fd = llopen(argv[1], argv[2])) == -1) {
+  if ((fd = llopen(argv[1], atoi(argv[2]))) == -1) {
     perror("LLOPEN");
     return -1;
   }

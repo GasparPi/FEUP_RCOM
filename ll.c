@@ -87,8 +87,10 @@ int llopen(const char* port, int role) {
 
 	} else if (role == RECEIVER) {
 
-    	if (readCommand(fd) == -1)
+    	if (readCommand(fd) == -1) {
+			printf("AQUI!\n");
 			return -1;
+		}
  		else {
 			frame[0] = FLAG;
 			frame[1] = A_CMD;
@@ -202,8 +204,8 @@ int readCommand(int fd) {
 
 	printf("Starting state machine\n");
 	while (current_state != STOP) {
-	
-		if (read(fd, &byte_read, 1) != 1) return -1;
+			
+		read(fd, &byte_read, 1);
 		switch(current_state){
 			case START: {
 				if(byte_read == FLAG) 			
