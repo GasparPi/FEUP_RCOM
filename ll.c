@@ -3,14 +3,17 @@
 int alarmFlag = 1, numRetry = 0;
 struct termios newtio, oldtio;
 
-int llopen(char* port, int role) {
+int stopConnection(int fd) {
+	if (tcsetattr(fd,TCSANOW, &oldtio)== -1) {
+		perror("tcsetattr");
+		exit(-1);
+	}
 
-	unsigned char frame[255];
-	struct termios newtio;
-	int res;
+	close(fd);
+}
 
-	(void) signal(SIGALRM, alarmHandler);
-
+int startConnection(const char* port) {
+	int fd;
 	/*
     Open serial port device for reading and writing and not as controlling tty
     because we don't want to get killed if linenoise sends CTRL-C.
@@ -23,7 +26,7 @@ int llopen(char* port, int role) {
 
   	if (tcgetattr(fd, &oldtio) == -1) { /* save current port settings */
     	perror("tcgetattr");
-    	return -1;
+    	exit(-1);
   	}
 
 	bzero(&newtio, sizeof(newtio));
@@ -45,10 +48,23 @@ int llopen(char* port, int role) {
 
 	if (tcsetattr(fd,TCSANOW,&newtio) == -1) {
 		perror("tcsetattr");
-		return -1;
+		exit(-1);
 	}
 
 	printf("New termios structure set\n");
+
+	return fd;
+}
+
+int llopen(const char* port, int role) {
+
+	unsigned char frame[255];
+	int fd, res;
+
+	(void) signal(SIGALRM, alarmHandler);
+
+	// Config termios struct
+	fd = startConnection(port);
 
 	if (role == TRANSMITTER) {
 	
@@ -75,19 +91,32 @@ int llopen(char* port, int role) {
 			return -1;
  		else {
 			frame[0] = FLAG;
-			frame[1] = A;
+			frame[1] = A_CMD;
 			frame[2] = C_UA;
-			frame[3] = BCC_UA;
+			frame[3] = BCC(A_CMD, C_UA);
 			frame[4] = FLAG;
 	
 			write(fd, frame, sizeof(frame)/sizeof(unsigned char));
 		}
 
 	} else {
-		perror("Unkown role:%d", role);
+		printf("Unkown role: %d\n", role);
 		return 1;
-	}  
+	}
+
+	return fd;
 }
+
+int llclose(int fd) {
+	// envia DISC recebe UA
+
+
+	stopConnection(fd);
+
+	return 0;
+}
+
+
 
 int readResponse(int fd) {
   
@@ -182,7 +211,7 @@ int readCommand(int fd) {
 				break;
 			}
 			case FLAG_RCV: {
-				if(byte_read == A)
+				if(byte_read == A_CMD)
 					current_state = A_RCV;
 				else if(byte_read != FLAG)
 					current_state = START;
@@ -197,8 +226,7 @@ int readCommand(int fd) {
 				break;			
 			}
 			case C_RCV: {
-				unsigned char bcc = BCC_SET;
-				if (byte_read == bcc)
+				if (byte_read == BCC(A_CMD, C_SET))
 					current_state = BCC_OK;
 				else if (byte_read == FLAG_RCV)
 					current_state = FLAG_RCV;
@@ -206,10 +234,12 @@ int readCommand(int fd) {
 				break;				
 			}
 			case BCC_OK: {
-				printf("Everything OK!\n");
-				if (byte_read == FLAG)
+				if (byte_read == FLAG) {
+					printf("Everything OK!\n");
 					current_state = STOP;
-				else current_state = START;
+				}
+				else
+					current_state = START;
 				break;			
 			}
 		};
