@@ -23,8 +23,13 @@
 
 #define BCC(X, Y) (X) ^ (Y)
 
+#define N0 	0x00
+#define N1 	0x40
+#define R0	0x05
+#define R1 	0x85
 #define MAX_RETRIES 3
-#define MAX_TIMEOUT 1
+#define MAX_TIMEOUT 3
+#define MAX_FRAME_SIZE 4
 
 #define TRANSMITTER 0
 #define RECEIVER 1
@@ -32,23 +37,22 @@
 #define BAUDRATE B38400
 #define MODEMDEVICE "/dev/ttyS1"
 #define _POSIX_SOURCE 1 /* POSIX compliant source */
-#define FALSE 0
-#define TRUE 1
 
 // aux ll functions
-//int startConnection(const char* port);
-//int stopConnection(int fd);
+int startConnection(const char* port);
+int stopConnection(int fd);
 
 // ll functions
 int llopen(const char* port, int role);
 int llclose(int fd, int role);
+int llwrite(int fd, char* buf, int length);
 
 // Transmitter
-//int readResponse(int fd, const unsigned char expected[]);
+int readResponse(int fd, const unsigned char expected[]);
 void alarmHandler();
 
 // Receiver
-//int readCommand(int fd, const unsigned char expected[]);
+int readCommand(int fd, const unsigned char expected[]);
 
 enum state {
  	START,

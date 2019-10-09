@@ -11,7 +11,6 @@ const unsigned char REJ1[] = {FLAG, A_CMD, C_REJ1, BCC(A_CMD, C_REJ1), FLAG};
 int alarmFlag = 1, numRetry = 0;
 struct termios newtio, oldtio;
 
-
 int llopen(const char* port, int role) {
 
 	int fd, res;
@@ -34,7 +33,7 @@ int llopen(const char* port, int role) {
 
   		if (numRetry >= MAX_RETRIES) {
     		printf("MAX RETRIES!!!\n");
-    		return -1;
+    		return -2;
   		}
 
   		numRetry = 0;
@@ -256,4 +255,41 @@ void alarmHandler() {
  	printf("Alarm: %d\n", numRetry + 1);
  	alarmFlag = 1;
  	numRetry++;
+}
+
+int llwrite(int fd, char* buf, int length) {
+
+	char frame[255];
+	int Ns = 0, dataFrameSize = 0, frameIndex, framesWritten = 0, bcdResult;
+	char bufChar;
+	
+	while (length > 0) {
+		frame[0] = FLAG;
+		frame[1] = A_CMD;
+		frame[2] = (Ns == 0 ? N0 : N1);
+		frame[3] = BCC(A_CMD, frame[2]);
+
+		//Reading first 2 chars to set bcd
+		frame[4] = buf[0];
+		frame[5] = buf[1];
+		bcdResult = frame[4] ^ frame[5];
+ 		
+		dataFrameSize = 2; //0 + 2
+		frameIndex = 6; //4 + 2
+
+		//Process data camp
+		while (dataFrameSize < MAX_FRAME_SIZE && dataFrameSize < length) {
+
+			bufChar = buf[dataFrameSize + framesWritten * MAX_FRAME_SIZE];
+			bcdResult ^= bufChar;
+			frame[frameIndex++] = bufChar;
+			dataFrameSize++;
+		}
+		
+		frame[dataFrameSize] = bcdResult;
+		frame[dataFrameSize + 1] = FLAG;
+		
+		write(fd, frame, sizeof(frame)/sizeof(unsigned char));
+		framesWritten++;
+	}
 }
