@@ -186,9 +186,7 @@ int sendSet(int fd, unsigned char *frame) {
   frame[3] = BCC(A_CMD, C_SET); // we want to send a set command
   frame[4] = FLAG;
 
-  // gets(buf); we used to get "ola" from the keyboard
   return write(fd, frame, sizeof(frame)/sizeof(unsigned char));
-
 }
 
 void alarmHandler() {
@@ -249,4 +247,43 @@ int readCommand(int fd) {
 
 	return 0;
 }
+
+int llwrite(int fd, char* buf, int length) {
+
+	char frame[255];
+	int Ns = 0, dataFrameSize = 0, frameIndex, framesWritten = 0, bcdResult;
+	char bufChar;
+	
+	while (length > 0) {
+		frame[0] = FLAG;
+		frame[1] = A_CMD;
+		frame[2] = (Ns == 0 ? N0 : N1);
+		frame[3] = BCC(A_CMD, frame[2]);
+
+		//Reading first 2 chars to set bcd
+		frame[4] = buf[0];
+		frame[5] = buf[1];
+		bcdResult = frame[4] ^ frame[5];
+ 		
+		dataFrameSize = 2; //0 + 2
+		frameIndex = 6; //4 + 2
+
+		//Process data camp
+		while (dataFrameSize < MAX_FRAME_SIZE && dataFrameSize < length) {
+
+			bufChar = buf[dataFrameSize + framesWritten * MAX_FRAME_SIZE];
+			bcdResult ^= bufChar;
+			frame[frameIndex++] = bufChar;
+			dataFrameSize++;
+		}
+		
+		frame[dataFrameSize] = bcdResult;
+		frame[dataFrameSize + 1] = FLAG;
+		
+		write(fd, frame, sizeof(frame)/sizeof(unsigned char));
+		framesWritten++;
+	}
+}
+
+
 
