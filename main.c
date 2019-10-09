@@ -18,7 +18,8 @@ int main(int argc, char** argv) {
     return -1;
   }
 
-  if (llclose(fd) == -1) {
+  
+  if (llclose(fd, atoi(argv[2])) == -1) {
     perror("LLCLOSE");
     return -1;
   }
