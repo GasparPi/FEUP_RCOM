@@ -17,7 +17,6 @@ int main(int argc, char** argv) {
     perror("LLOPEN");
     return -1;
   }
-
   
   if (llclose(fd, atoi(argv[2])) == -1) {
     perror("LLCLOSE");

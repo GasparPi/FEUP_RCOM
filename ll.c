@@ -23,25 +23,28 @@ int llopen(const char* port, int role) {
 	
 		do {
 			printf("Sending SET Message!\n");
+			// send SET message
 			res = write(fd, SET, sizeof(SET)/sizeof(unsigned char));
-			alarm(MAX_TIMEOUT);
+			alarm(MAX_TIMEOUT); // install alarm
 			alarmFlag = 0;
-
+			// read UA frame
 			readResponse(fd, UA);
 
   		} while(numRetry < MAX_RETRIES && alarmFlag);
 
+		alarm(0); // uninstall alarm
+
   		if (numRetry >= MAX_RETRIES) {
     		printf("MAX RETRIES!!!\n");
-    		return -2;
+    		return -1;
   		}
 
   		numRetry = 0;
 
 	} else if (role == RECEIVER) {
-
+		// read SET frame
     	if (readCommand(fd, SET) == -1)
-			return -1;
+			return -2;
 		// send UA frame
 		write(fd, UA, sizeof(UA)/sizeof(unsigned char));
 
@@ -55,40 +58,58 @@ int llopen(const char* port, int role) {
 
 int llclose(int fd, int role) {
 	int res;
-	// envia DISC -> recebe DISC -> envia UA
+
 	if (role == TRANSMITTER) {
 		do {
 			printf("Sending DISC Message!\n");
+			// send DISC frame
 			res = write(fd, DISC, sizeof(DISC)/sizeof(unsigned char));
-			alarm(MAX_TIMEOUT);
+			alarm(MAX_TIMEOUT); // install alarm
 			alarmFlag = 0;
-
+			// read DISC frame
+			printf("Reading DISC Message!\n");
 			readResponse(fd, DISC);
 
   		} while(numRetry < MAX_RETRIES && alarmFlag);
 
+		alarm(0); // uninstall alarm
+
   		if (numRetry >= MAX_RETRIES)
     		printf("MAX RETRIES!!!\n");
+		else {
+			sleep(1);
+			printf("SENDING UA MESSAGE\n");
+			// send UA frame		
+			write(fd, UA, sizeof(UA)/sizeof(unsigned char));
+		}
 
-	// recebe DISC -> envia DISC -> recebe UA
 	} else if (role == RECEIVER) {
-
+		// read DISC frame
+		printf("Reading DISC\n");
+    	if (readCommand(fd, DISC) == -1)
+			return -2;
+		// send DISC frame
+		printf("Writing DISC\n");
+		write(fd, DISC, sizeof(DISC)/sizeof(unsigned char));
+		// read UA FRAME
+		printf("Reading UA\n");
+		if (readCommand(fd, UA) == -1)
+			return -3;
 	} else {
 		printf("Unkown role: %d\n", role);
 		return 1;
 	}
 
+	// close file descriptors and set old termios struct
 	stopConnection(fd);
 
 	return 0;
 }
 
 int stopConnection(int fd) {
-	/*
-	PROBLEM HERE -> KEYBOARD FREEZES FOR SOME REASON
-	WHEN if IS EXECUTED
-	*/
+
 	tcflush(fd, TCIOFLUSH);
+
 	if (tcsetattr(fd, TCSANOW, &oldtio) == -1) {
 		perror("tcsetattr");
 		exit(-1);
@@ -123,7 +144,7 @@ int startConnection(const char* port) {
 	newtio.c_lflag = 0;
 
 	newtio.c_cc[VTIME] = 0;  /* inter-character timer unused */
-	newtio.c_cc[VMIN] = 0;   /* blocking read until 5 chars received */
+	newtio.c_cc[VMIN] = 0;   /* does no block read */
 
 	/* 
 	TIME e VMIN devem ser alterados de forma a proteger com um temporizador a 
@@ -195,7 +216,7 @@ int readResponse(int fd, const unsigned char expected[]) {
 		};
   	}
 
-  return 0;
+ 	return 0;
 }
 
 int readCommand(int fd, const unsigned char expected[]) {
@@ -208,7 +229,7 @@ int readCommand(int fd, const unsigned char expected[]) {
 			
 		read(fd, &byte_read, 1);
 
-		switch(current_state){
+		switch(current_state) {
 			case START: {
 				if(byte_read == expected[0]) 			
 					current_state = FLAG_RCV;
