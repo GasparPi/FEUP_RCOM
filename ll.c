@@ -91,6 +91,8 @@ int llclose(int fd, int role) {
 		// send DISC frame
 		printf("Writing DISC\n");
 		write(fd, DISC, sizeof(DISC)/sizeof(unsigned char));
+
+		sleep(2);
 		// read UA FRAME
 		printf("Reading UA\n");
 		if (readCommand(fd, UA) == -1)
