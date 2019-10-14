@@ -77,7 +77,6 @@ int llclose(int fd, int role) {
   		if (numRetry >= MAX_RETRIES)
     		printf("MAX RETRIES!!!\n");
 		else {
-			sleep(1);
 			printf("SENDING UA MESSAGE\n");
 			// send UA frame		
 			write(fd, UA, sizeof(UA)/sizeof(unsigned char));
@@ -287,7 +286,7 @@ int llwrite(int fd, char* buf, int length) {
 	while (length > 0) {
 		frame[0] = FLAG;
 		frame[1] = A_CMD;
-		frame[2] = (Ns == 0 ? N0 : N1);
+		frame[2] = (Ns == 0 ? C0 : C1);
 		frame[3] = BCC(A_CMD, frame[2]);
 
 		//Reading first 2 chars to set bcd
@@ -314,3 +313,94 @@ int llwrite(int fd, char* buf, int length) {
 		framesWritten++;
 	}
 }
+
+int llread(int fd, unsigned char* buf) {
+	int received = 0;
+	int bytesRead = 1;
+	unsigned char packet[MAX_PACKET_SIZE]; 
+
+	while(!received) {
+		// readPacket
+		if (readPacket(fd, &packet)) {
+			// destuff packet
+			// verify data packet
+			// send response accordingly
+		}
+		received = 1;
+	}
+
+	return bytesRead;
+}
+
+int readPacket(int fd, unsigned char* buf[]) {
+	enum state connection_state = START;
+	int length = 0;
+	unsigned char read_byte;
+
+	while(connection_state != STOP) {
+		read(fd, &read_byte, 1);
+
+		dataStateMachine(&connection_state, read_byte);
+
+		if(connection_state == FLAG_RCV && length != 0)
+			length = 0;
+		else if(connection_state == DATA_RCV)
+			connection_state = BCC_OK;
+
+		*buf[length] = read_byte;
+		length++;
+	}
+
+	return length;
+}
+
+int dataStateMachine(enum state* connection_state, unsigned char read_byte) {
+	switch(*connection_state) {
+		case START:
+			if(read_byte == FLAG){
+				*connection_state = FLAG_RCV;
+			}
+			break;
+
+		case FLAG_RCV:
+			if(read_byte == A_CMD){
+				*connection_state = A_RCV;
+			}
+			else if(read_byte == FLAG)
+				break;
+			else
+				*connection_state = START;
+			break;
+
+		case A_RCV:
+			if(read_byte == C0 || read_byte == C1)
+				*connection_state = C_RCV;
+			else if(read_byte == FLAG)
+				*connection_state = FLAG_RCV;
+			else
+				*connection_state = START;
+			break;
+
+		case C_RCV:
+			if(read_byte == BCC(A_CMD, C0) || read_byte == BCC(A_CMD, C1) )
+				*connection_state = BCC_OK;
+			else if(read_byte == FLAG)
+				*connection_state = FLAG_RCV;
+			else 
+				*connection_state = START;
+			break;
+
+		case BCC_OK:
+			if(read_byte == FLAG) //received command
+				*connection_state = STOP;
+			else if(read_byte != FLAG) //received data
+				*connection_state = DATA_RCV;
+			break;
+		
+		default:
+			break;
+	}
+
+	return 0;
+}
+

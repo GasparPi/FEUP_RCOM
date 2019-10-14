@@ -6,8 +6,8 @@
 #include <stdlib.h>	
 #include <signal.h>
 
-#define C1     0x40
 #define C0     0x00
+#define C1     0x40
 
 #define FLAG 0x7E
 #define A_CMD 0x03
@@ -23,13 +23,10 @@
 
 #define BCC(X, Y) (X) ^ (Y)
 
-#define N0 	0x00
-#define N1 	0x40
-#define R0	0x05
-#define R1 	0x85
 #define MAX_RETRIES 3
 #define MAX_TIMEOUT 3
 #define MAX_FRAME_SIZE 4
+#define MAX_PACKET_SIZE (6 + MAX_FRAME_SIZE)
 
 #define TRANSMITTER 0
 #define RECEIVER 1
@@ -41,11 +38,14 @@
 // aux ll functions
 int startConnection(const char* port);
 int stopConnection(int fd);
+int dataStateMachine(enum state* connection_state, unsigned char read_byte);
+int readPacket(int fd, unsigned char* buf[]);
 
 // ll functions
 int llopen(const char* port, int role);
 int llclose(int fd, int role);
 int llwrite(int fd, char* buf, int length);
+int llread(int fd, unsigned char* buf);
 
 // Transmitter
 int readResponse(int fd, const unsigned char expected[]);
@@ -60,6 +60,7 @@ enum state {
  	A_RCV,
  	C_RCV,
  	BCC_OK,
+ 	DATA_RCV,
   	STOP
 };
 
