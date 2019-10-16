@@ -1,7 +1,10 @@
 #pragma once
+#include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define DATA_FIELD 1
 #define START_CONTROL_FIELD 2

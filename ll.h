@@ -3,8 +3,11 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <termios.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "alarm.h"
 
 #define C0     0x00
@@ -23,6 +26,7 @@
 #define C_REJ1	0x01
 
 #define BCC(X, Y) (X) ^ (Y)
+#define CHECK_C(C) (C == C_SET || C == C_DISC || C == C_UA || C == C_RR0 || C == C_RR1 || C == C_REJ0 || C == C_REJ1) ? 1 : 0
 
 #define ESC 0x7D
 #define STUFFING 0x20
@@ -45,21 +49,24 @@ enum state {
  	C_RCV,
  	BCC_OK,
  	DATA_RCV,
-  	STOP
+  STOP
 };
 
 // aux ll functions
 int startConnection(const char* port);
 int stopConnection(int fd);
-int dataStateMachine(enum state* connection_state, unsigned char read_byte);
-int readPacket(int fd, unsigned char* buf[]);
+int dataStateMachine(enum state* connection_state, unsigned char byte_read);
+int readFrame(int fd, unsigned char* buf[]);
 int verifyDataPacketReceived(unsigned char * buffer, int size);
 unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length);
+unsigned char communicationStateMachine(enum state* connection_state, unsigned char byte_read);
+int readAck(int fd, int Ns);
+int writeFrame(int fd, char* packet, int length, int Ns);
 
 // ll functions
 int llopen(const char* port, int role);
 int llclose(int fd, int role);
-int llwrite(int fd, char* buf, int length);
+int llwrite(int fd, char* packet, int length);
 int llread(int fd, unsigned char* buf);
 
 // Transmitter

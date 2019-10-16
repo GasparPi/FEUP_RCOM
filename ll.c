@@ -8,7 +8,7 @@ const unsigned char RR1[] = {FLAG, A_CMD, C_RR1, BCC(A_CMD, C_RR1), FLAG};
 const unsigned char REJ0[] = {FLAG, A_CMD, C_REJ0, BCC(A_CMD, C_REJ0), FLAG};
 const unsigned char REJ1[] = {FLAG, A_CMD, C_REJ1, BCC(A_CMD, C_REJ1), FLAG};
 
-int alarmFlag = 1, numRetry = 0, Ns = 0;
+int alarmFlag = 1, numRetry = 0;
 struct termios newtio, oldtio;
 
 int llopen(const char* port, int role) {
@@ -68,11 +68,11 @@ int llclose(int fd, int role) {
 			printf("Reading DISC Message!\n");
 			readResponse(fd, DISC);
 
-  		} while(numRetry < MAX_RETRIES && alarmFlag);
+  	} while(numRetry < MAX_RETRIES && alarmFlag);
 
 		stopAlarm(); // uninstall alarm
 
-  		if (numRetry >= MAX_RETRIES)
+  	if (numRetry >= MAX_RETRIES)
     		printf("MAX RETRIES!!!\n");
 		else {
 			printf("SENDING UA MESSAGE\n");
@@ -89,7 +89,6 @@ int llclose(int fd, int role) {
 		printf("Writing DISC\n");
 		write(fd, DISC, sizeof(DISC)/sizeof(unsigned char));
 
-		sleep(2);
 		// read UA FRAME
 		printf("Reading UA\n");
 		if (readCommand(fd, UA) == -1)
@@ -123,16 +122,16 @@ int startConnection(const char* port) {
 	/*
     Open serial port device for reading and writing and not as controlling tty
     because we don't want to get killed if linenoise sends CTRL-C.
-  	*/
-  	int fd = open(port, O_RDWR | O_NOCTTY );
-  	if (fd < 0) {
+  */
+  int fd = open(port, O_RDWR | O_NOCTTY );
+  if (fd < 0) {
 		perror(port);
 		exit(-1);
 	}
-	  	if (tcgetattr(fd, &oldtio) == -1) { // save current port settings
-    	perror("tcgetattr");
-    	exit(-1);
-  	}
+	 if (tcgetattr(fd, &oldtio) == -1) { // save current port settings
+  	perror("tcgetattr");
+  	exit(-1);
+  }
 
 	bzero(&newtio, sizeof(newtio));
 	newtio.c_cflag = BAUDRATE | CS8 | CLOCAL | CREAD;
@@ -163,131 +162,132 @@ int startConnection(const char* port) {
 
 
 int readResponse(int fd, const unsigned char expected[]) {
-
  	unsigned char byte_read;
  	enum state current_state = START;
- 	printf("Starting state machine\n");
 
  	while (!alarmFlag && current_state != STOP) {
-
 	    read(fd, &byte_read, 1);
-
-	    switch(current_state) {
-		    case START: {
-		        if(byte_read == expected[0])
-		        	current_state = FLAG_RCV;
-		        break;
-		    }
-		    case FLAG_RCV: {
-		        if(byte_read == expected[1])
-		    	    current_state = A_RCV;
-		        else if(byte_read != FLAG)
-		        	current_state = START;
-		        break;
-		    }
-		    case A_RCV: {
-		        if (byte_read == expected[2])
-		        	current_state = C_RCV;
-		        else if (byte_read == FLAG_RCV)
-		        	current_state = FLAG_RCV;
-		        else
-		        	current_state = START;
-		        break;
-		    }
-	      	case C_RCV: {
-		        if (byte_read == expected[3])
-		        	current_state = BCC_OK;
-		        else if (byte_read == FLAG_RCV)
-		         	current_state = FLAG_RCV;
-		        else
-		         	current_state = START;
-		        break;
-	      	}
-	      	case BCC_OK: {
-		        if (byte_read == expected[4]) {
-		         	current_state = STOP;
-		         	printf("Everything OK!\n");
-		        }
-		        else
-		        	current_state = START;
-		        break;
-	      	}
-		};
+	    communicationStateMachine(&current_state, byte_read);
   	}
 
  	return 0;
 }
 
-int readCommand(int fd, const unsigned char expected[]) {
+int readAck(int fd, int Ns) {
+ 	unsigned char byte_read, control_field;
+ 	enum state current_state = START;
 
+	printf("Starting state machine\n");
+
+ 	while (!alarmFlag && current_state != STOP) {
+	  read(fd, &byte_read, 1);
+		control_field = communicationStateMachine(&current_state, byte_read);
+  }
+
+	if (control_field == C_RR0 && Ns == 1)
+		return 0;
+	else if (control_field == C_RR1 && Ns == 0)
+		return 0;
+	else if (control_field == C_REJ0 && Ns == 1)
+		return -1;
+	else if (control_field == C_REJ1 && Ns == 0)
+		return -1;
+	else
+		return -1; // undefined error
+}
+
+unsigned char communicationStateMachine(enum state* connection_state, unsigned char byte_read) {
+	static unsigned char control_field = 0;
+
+	switch(*connection_state) {
+		case START: {
+			if(byte_read == FLAG)
+				*connection_state = FLAG_RCV;
+			break;
+		}
+		case FLAG_RCV: {
+			if(byte_read == A_CMD)
+				*connection_state = A_RCV;
+			else if(byte_read != FLAG)
+				*connection_state = START;
+			break;
+		}
+		case A_RCV: {
+			if (CHECK_C(byte_read)) {
+				*connection_state = C_RCV;
+				control_field = byte_read;
+			}
+			else if (byte_read == FLAG_RCV)
+				*connection_state = FLAG_RCV;
+			else
+				*connection_state = START;
+			break;
+		}
+		case C_RCV: {
+			if (byte_read == BCC(A_CMD, control_field))
+				*connection_state = BCC_OK;
+			else if (byte_read == FLAG_RCV)
+				*connection_state = FLAG_RCV;
+			else
+				*connection_state = START;
+			break;
+		}
+		case BCC_OK: {
+			if (byte_read == FLAG) {
+				printf("Everything OK!\n");
+				*connection_state = STOP;
+			}
+			else
+				*connection_state = START;
+			break;
+		}
+	};
+
+	return control_field;
+}
+
+int readCommand(int fd, const unsigned char expected[]) {
 	enum state current_state = START;
 	unsigned char byte_read;
 
-	printf("Starting state machine\n");
 	while (current_state != STOP) {
-
 		read(fd, &byte_read, 1);
-
-		switch(current_state) {
-			case START: {
-				if(byte_read == expected[0])
-					current_state = FLAG_RCV;
-				break;
-			}
-			case FLAG_RCV: {
-				if(byte_read == expected[1])
-					current_state = A_RCV;
-				else if(byte_read != FLAG)
-					current_state = START;
-				break;
-			}
-			case A_RCV: {
-				if (byte_read == expected[2])
-					current_state = C_RCV;
-				else if (byte_read == FLAG_RCV)
-					current_state = FLAG_RCV;
-				else current_state = START;
-				break;
-			}
-			case C_RCV: {
-				if (byte_read == expected[3])
-					current_state = BCC_OK;
-				else if (byte_read == FLAG_RCV)
-					current_state = FLAG_RCV;
-				else current_state = START;
-				break;
-			}
-			case BCC_OK: {
-				if (byte_read == expected[4]) {
-					printf("Everything OK!\n");
-					current_state = STOP;
-				}
-				else
-					current_state = START;
-				break;
-			}
-		};
+		communicationStateMachine(&current_state, byte_read);
 	}
+
 	return 0;
 }
 
 int llwrite(int fd, char* packet, int length) {
 
-	write_packet(fd, packet, length);
+	int Ns = 0;
+	do {
+		printf("Sending frame!\n");
+		// send frame
+		writeFrame(fd, packet, length, Ns);
+		setAlarm(); // install alarm
+		alarmFlag = 0;
+		// read receiver response
+		if (readAck(fd, Ns) == -1) {
+			stopAlarm();
+			continue;
+		}
+	} while(numRetry < MAX_RETRIES && alarmFlag);
 
-	// Install alarm
+	stopAlarm();
 
-	// Check response
+	if (numRetry == MAX_RETRIES)
+		return -1;
 
 	return 0;
 }
 
-int write_packet(int fd, char* packet, int length) {
+int writeFrame(int fd, char* packet, int length, int Ns) {
 
-	char frame[255]; //TODO change size to max fram size
+	char frame[255]; //TODO change size to max frame size
 	int dataIndex, frameIndex, frameSize, bccResult;
-	char bufChar;
-	
+	char packetChar;
+
 	// Set of frame header
 	frame[0] = FLAG;
 	frame[1] = A_CMD;
@@ -298,7 +298,7 @@ int write_packet(int fd, char* packet, int length) {
 	frame[4] = packet[0];
 	frame[5] = packet[1];
 	bccResult = frame[4] ^ frame[5];
- 		
+
 	dataIndex = 2; //0 + 2
 	frameIndex = 6; //4 + 2
 	frameSize = 6;
@@ -306,24 +306,24 @@ int write_packet(int fd, char* packet, int length) {
 	//Process data camp
 	while (dataIndex < length) {
 
-		bufChar = packet[dataIndex++];
-		bccResult ^= bufChar;
+		packetChar = packet[dataIndex++];
+		bccResult ^= packetChar;
 
 		// Byte stuffing
-		if (bufChar == FLAG || bufChar == ESC) {
+		if (packetChar == FLAG || packetChar == ESC) {
 			frame[frameIndex++] = ESC;
-			frame[frameIndex++] = bufChar ^ STUFFING;
+			frame[frameIndex++] = packetChar ^ STUFFING;
 			frameSize += 2;
 		}
 		else {
-			frame[frameIndex++] = bufChar;
+			frame[frameIndex++] = packetChar;
 			frameSize++;
 		}
-			
+
 		// Set of frame footer
 		frame[frameIndex] = bccResult;
 		frame[frameIndex + 1] = FLAG;
-		
+
 		write(fd, frame, frameSize);
 	}
 
@@ -333,23 +333,51 @@ int write_packet(int fd, char* packet, int length) {
 int llread(int fd, unsigned char* buf) {
 	int received = 0;
 	int bytesRead = 1;
-	unsigned char packet[MAX_PACKET_SIZE];
+	int frame_length = 0;
+	unsigned char frame[MAX_FRAME_SIZE];
+	unsigned char control_field;
 
 	while(!received) {
-		// readPacket
-		if (readPacket(fd, &packet)) {
+		// readFrame
+		if ((frame_length = readFrame(fd, &frame))) {
 			// destuff packet
+			for (int i = 0; i < frame_length; i++) {
+				if (frame[i] == ESC) {
+					i++;
+					if (frame[i] == (FLAG ^ STUFFING))
+						buf[i] = FLAG;
+					else if (frame[i] == (ESC ^ STUFFING))
+						buf[i] = ESC;
+				}
+				else {
+					buf[i] = frame[i];
+				}
+			}
+			control_field = frame[2];
 			// verify data packet
-			// send response accordingly
+			if(verifyDataPacketReceived(frame, frame_length) != 0) {
+				// send response accordingly
+				printf("LLREAD: Packet is not data or has header errors\n"); //does not save packet
+				if (control_field == C0)
+					write(fd, REJ1, sizeof(REJ1)/sizeof(unsigned char));
+				else if (control_field == C1)
+					write(fd, REJ0, sizeof(REJ0)/sizeof(unsigned char));
+			}
+			else {
+				if (control_field == C0)
+					write(fd, RR1, sizeof(RR1)/sizeof(unsigned char));
+				else if (control_field == C1)
+					write(fd, RR0, sizeof(RR0)/sizeof(unsigned char));
+				received = 1;
+			}
 		}
-		received = 1;
 	}
 
 	return bytesRead;
 }
 
 unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length) {
-	unsigned char bcc = 0;
+	unsigned char bcc = 0; //NAO E NEUTRO
 
 	for (int i = 0; i < length; i++)
 		bcc ^= dataBuffer[i];
@@ -358,90 +386,90 @@ unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length) {
 }
 
 int verifyDataPacketReceived(unsigned char * buffer, int size){
-	unsigned char a = buffer[1];
-	unsigned char c = buffer[2];
+	unsigned char address_field = buffer[1];
+	unsigned char control_field = buffer[2];
 	unsigned char headerBCC = buffer[3];
 	unsigned char dataBCC;
 	int dataSize = size - 6;
 
-	if(headerBCC == BCC(a, c) && (c == C0 || c == C1)){
+	if(headerBCC == BCC(address_field, control_field) && (control_field == C0 || control_field == C1)){
 		unsigned char calculatedDataBCC = calculateDataBCC(&buffer[4], size-6); // between buffer[4] and buffer[size-(4+2)] -> DATA
 		unsigned char dataBCC = buffer[size - 2];
 
-		if(dataBCC != calculateDataBCC){
+		if(dataBCC != calculateDataBCC) {
 			printf("LLREAD: Bad dataBCC\n");
 			return -2;
 		}
-	}else if(c != C0 && c != C1){
-		printf("LLREAD: Bad control field: %d\n", c);
+	}
+	else if(control_field != C0 && control_field != C1){
+		printf("LLREAD: Bad control field: %d\n", control_field);
 		return -1;
 	}
 
 	return 0;
 }
 
-int readPacket(int fd, unsigned char* buf[]) {
+int readFrame(int fd, unsigned char* buf[]) {
 	enum state connection_state = START;
 	int length = 0;
-	unsigned char read_byte;
+	unsigned char byte_read;
 
 	while(connection_state != STOP) {
-		read(fd, &read_byte, 1);
+		read(fd, &byte_read, 1);
 
-		dataStateMachine(&connection_state, read_byte);
+		dataStateMachine(&connection_state, byte_read);
 
 		if(connection_state == FLAG_RCV && length != 0)
 			length = 0;
 		else if(connection_state == DATA_RCV)
 			connection_state = BCC_OK;
 
-		*buf[length] = read_byte;
-		length++;
+		*buf[length++] = byte_read;
 	}
 
 	return length;
 }
 
-int dataStateMachine(enum state* connection_state, unsigned char read_byte) {
+int dataStateMachine(enum state* connection_state, unsigned char byte_read) {
 	switch(*connection_state) {
 		case START:
-			if(read_byte == FLAG){
+			if(byte_read == FLAG){
 				*connection_state = FLAG_RCV;
 			}
 			break;
 
 		case FLAG_RCV:
-			if(read_byte == A_CMD){
+			if(byte_read == A_CMD){
 				*connection_state = A_RCV;
 			}
-			else if(read_byte == FLAG)
+			else if(byte_read == FLAG)
 				break;
 			else
 				*connection_state = START;
 			break;
 
 		case A_RCV:
-			if(read_byte == C0 || read_byte == C1)
+			if(byte_read == C0 || byte_read == C1)
 				*connection_state = C_RCV;
-			else if(read_byte == FLAG)
+			else if(byte_read == FLAG)
 				*connection_state = FLAG_RCV;
 			else
 				*connection_state = START;
 			break;
 
 		case C_RCV:
-			if(read_byte == BCC(A_CMD, C0) || read_byte == BCC(A_CMD, C1) )
+			if(byte_read == BCC(A_CMD, C0) || byte_read == BCC(A_CMD, C1) )
 				*connection_state = BCC_OK;
-			else if(read_byte == FLAG)
+			else if(byte_read == FLAG)
 				*connection_state = FLAG_RCV;
 			else
 				*connection_state = START;
 			break;
 
 		case BCC_OK:
-			if(read_byte == FLAG) //received command
+			if(byte_read == FLAG) //received command
 				*connection_state = STOP;
-			else if(read_byte != FLAG) //received data
+			else if(byte_read != FLAG) //received data
 				*connection_state = DATA_RCV;
 			break;
 
