@@ -1,10 +1,11 @@
+#pragma once
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <termios.h>
 #include <stdio.h>
-#include <stdlib.h>	
-#include <signal.h>
+#include <stdlib.h>
+#include "alarm.h"
 
 #define C0     0x00
 #define C1     0x40
@@ -24,9 +25,8 @@
 #define BCC(X, Y) (X) ^ (Y)
 
 #define MAX_RETRIES 3
-#define MAX_TIMEOUT 3
-#define MAX_FRAME_SIZE 4
-#define MAX_PACKET_SIZE (6 + MAX_FRAME_SIZE)
+#define MAX_PACKET_SIZE 4
+#define MAX_FRAME_SIZE (6 + MAX_PACKET_SIZE)
 
 #define TRANSMITTER 0
 #define RECEIVER 1
@@ -42,15 +42,16 @@ enum state {
  	C_RCV,
  	BCC_OK,
  	DATA_RCV,
-  	STOP
+  STOP
 };
-
 
 // aux ll functions
 int startConnection(const char* port);
 int stopConnection(int fd);
 int dataStateMachine(enum state* connection_state, unsigned char read_byte);
 int readPacket(int fd, unsigned char* buf[]);
+int verifyDataPacketReceived(unsigned char * buffer, int size);
+unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length);
 
 // ll functions
 int llopen(const char* port, int role);
@@ -60,8 +61,6 @@ int llread(int fd, unsigned char* buf);
 
 // Transmitter
 int readResponse(int fd, const unsigned char expected[]);
-void alarmHandler();
 
 // Receiver
 int readCommand(int fd, const unsigned char expected[]);
-

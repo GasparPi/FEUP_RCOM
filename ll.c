@@ -15,31 +15,29 @@ int llopen(const char* port, int role) {
 
 	int fd, res;
 
-	(void) signal(SIGALRM, alarmHandler);
-
 	// Config termios struct
 	fd = startConnection(port);
 	if (role == TRANSMITTER) {
-	
+
 		do {
 			printf("Sending SET Message!\n");
 			// send SET message
 			res = write(fd, SET, sizeof(SET)/sizeof(unsigned char));
-			alarm(MAX_TIMEOUT); // install alarm
+			setAlarm(); // install alarm
 			alarmFlag = 0;
 			// read UA frame
 			readResponse(fd, UA);
 
-  		} while(numRetry < MAX_RETRIES && alarmFlag);
+  	} while(numRetry < MAX_RETRIES && alarmFlag);
 
-		alarm(0); // uninstall alarm
+		stopAlarm(); // uninstall alarm
 
-  		if (numRetry >= MAX_RETRIES) {
-    		printf("MAX RETRIES!!!\n");
-    		return -1;
-  		}
+  	if (numRetry >= MAX_RETRIES) {
+    	printf("MAX RETRIES!!!\n");
+    	return -1;
+  	}
 
-  		numRetry = 0;
+  	numRetry = 0;
 
 	} else if (role == RECEIVER) {
 		// read SET frame
@@ -64,7 +62,7 @@ int llclose(int fd, int role) {
 			printf("Sending DISC Message!\n");
 			// send DISC frame
 			res = write(fd, DISC, sizeof(DISC)/sizeof(unsigned char));
-			alarm(MAX_TIMEOUT); // install alarm
+			setAlarm(); // install alarm
 			alarmFlag = 0;
 			// read DISC frame
 			printf("Reading DISC Message!\n");
@@ -72,13 +70,13 @@ int llclose(int fd, int role) {
 
   		} while(numRetry < MAX_RETRIES && alarmFlag);
 
-		alarm(0); // uninstall alarm
+		stopAlarm(); // uninstall alarm
 
   		if (numRetry >= MAX_RETRIES)
     		printf("MAX RETRIES!!!\n");
 		else {
 			printf("SENDING UA MESSAGE\n");
-			// send UA frame		
+			// send UA frame
 			write(fd, UA, sizeof(UA)/sizeof(unsigned char));
 		}
 
@@ -128,14 +126,14 @@ int startConnection(const char* port) {
   	*/
   	int fd = open(port, O_RDWR | O_NOCTTY );
   	if (fd < 0) {
-		perror(port); 
-		exit(-1); 
+		perror(port);
+		exit(-1);
 	}
 	  	if (tcgetattr(fd, &oldtio) == -1) { // save current port settings
     	perror("tcgetattr");
     	exit(-1);
   	}
-  
+
 	bzero(&newtio, sizeof(newtio));
 	newtio.c_cflag = BAUDRATE | CS8 | CLOCAL | CREAD;
 	newtio.c_iflag = IGNPAR;
@@ -145,14 +143,14 @@ int startConnection(const char* port) {
 	newtio.c_lflag = 0;
 
 	newtio.c_cc[VTIME] = 0;  /* inter-character timer unused */
-	newtio.c_cc[VMIN] = 0;   /* does no block read */
+	newtio.c_cc[VMIN] = 1;   /* blocks until 1 byte is read */
 
-	/* 
-	TIME e VMIN devem ser alterados de forma a proteger com um temporizador a 
+	/*
+	TIME e VMIN devem ser alterados de forma a proteger com um temporizador a
 	leitura do(s) próximo(s) caracter(es)
 	*/
 	tcflush(fd, TCIOFLUSH);
-	
+
 	if (tcsetattr(fd, TCSANOW, &newtio) == -1) {
 		perror("tcsetattr");
 		exit(-1);
@@ -171,12 +169,12 @@ int readResponse(int fd, const unsigned char expected[]) {
  	printf("Starting state machine\n");
 
  	while (!alarmFlag && current_state != STOP) {
-        
+
 	    read(fd, &byte_read, 1);
 
 	    switch(current_state) {
 		    case START: {
-		        if(byte_read == expected[0])       
+		        if(byte_read == expected[0])
 		        	current_state = FLAG_RCV;
 		        break;
 		    }
@@ -185,7 +183,7 @@ int readResponse(int fd, const unsigned char expected[]) {
 		    	    current_state = A_RCV;
 		        else if(byte_read != FLAG)
 		        	current_state = START;
-		        break;    
+		        break;
 		    }
 		    case A_RCV: {
 		        if (byte_read == expected[2])
@@ -193,26 +191,26 @@ int readResponse(int fd, const unsigned char expected[]) {
 		        else if (byte_read == FLAG_RCV)
 		        	current_state = FLAG_RCV;
 		        else
-		        	current_state = START; 
-		        break;      
+		        	current_state = START;
+		        break;
 		    }
 	      	case C_RCV: {
 		        if (byte_read == expected[3])
 		        	current_state = BCC_OK;
 		        else if (byte_read == FLAG_RCV)
 		         	current_state = FLAG_RCV;
-		        else 
-		         	current_state = START; 
-		        break;        
+		        else
+		         	current_state = START;
+		        break;
 	      	}
 	      	case BCC_OK: {
 		        if (byte_read == expected[4]) {
 		         	current_state = STOP;
-		         	printf("Everything OK!\n");          
+		         	printf("Everything OK!\n");
 		        }
-		        else 
+		        else
 		        	current_state = START;
-		        break;      
+		        break;
 	      	}
 		};
   	}
@@ -227,12 +225,12 @@ int readCommand(int fd, const unsigned char expected[]) {
 
 	printf("Starting state machine\n");
 	while (current_state != STOP) {
-			
+
 		read(fd, &byte_read, 1);
 
 		switch(current_state) {
 			case START: {
-				if(byte_read == expected[0]) 			
+				if(byte_read == expected[0])
 					current_state = FLAG_RCV;
 				break;
 			}
@@ -241,23 +239,23 @@ int readCommand(int fd, const unsigned char expected[]) {
 					current_state = A_RCV;
 				else if(byte_read != FLAG)
 					current_state = START;
-				break;		
+				break;
 			}
 			case A_RCV: {
 				if (byte_read == expected[2])
 					current_state = C_RCV;
 				else if (byte_read == FLAG_RCV)
 					current_state = FLAG_RCV;
-				else current_state = START;	
-				break;			
+				else current_state = START;
+				break;
 			}
 			case C_RCV: {
 				if (byte_read == expected[3])
 					current_state = BCC_OK;
 				else if (byte_read == FLAG_RCV)
 					current_state = FLAG_RCV;
-				else current_state = START;	
-				break;				
+				else current_state = START;
+				break;
 			}
 			case BCC_OK: {
 				if (byte_read == expected[4]) {
@@ -266,17 +264,11 @@ int readCommand(int fd, const unsigned char expected[]) {
 				}
 				else
 					current_state = START;
-				break;			
+				break;
 			}
 		};
 	}
 	return 0;
-}
-
-void alarmHandler() {
- 	printf("Alarm: %d\n", numRetry + 1);
- 	alarmFlag = 1;
- 	numRetry++;
 }
 
 int llwrite(int fd, char* buf, int length) {
@@ -284,7 +276,7 @@ int llwrite(int fd, char* buf, int length) {
 	char frame[255];
 	int Ns = 0, dataFrameSize = 0, frameIndex, framesWritten = 0, bcdResult;
 	char bufChar;
-	
+
 	while (length > 0) {
 		frame[0] = FLAG;
 		frame[1] = A_CMD;
@@ -295,7 +287,7 @@ int llwrite(int fd, char* buf, int length) {
 		frame[4] = buf[0];
 		frame[5] = buf[1];
 		bcdResult = frame[4] ^ frame[5];
- 		
+
 		dataFrameSize = 2; //0 + 2
 		frameIndex = 6; //4 + 2
 
@@ -307,10 +299,10 @@ int llwrite(int fd, char* buf, int length) {
 			frame[frameIndex++] = bufChar;
 			dataFrameSize++;
 		}
-		
+
 		frame[dataFrameSize] = bcdResult;
 		frame[dataFrameSize + 1] = FLAG;
-		
+
 		write(fd, frame, sizeof(frame)/sizeof(unsigned char));
 		framesWritten++;
 	}
@@ -319,7 +311,7 @@ int llwrite(int fd, char* buf, int length) {
 int llread(int fd, unsigned char* buf) {
 	int received = 0;
 	int bytesRead = 1;
-	unsigned char packet[MAX_PACKET_SIZE]; 
+	unsigned char packet[MAX_PACKET_SIZE];
 
 	while(!received) {
 		// readPacket
@@ -332,6 +324,38 @@ int llread(int fd, unsigned char* buf) {
 	}
 
 	return bytesRead;
+}
+
+unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length) {
+	unsigned char bcc = 0;
+
+	for (int i = 0; i < length; i++)
+		bcc ^= dataBuffer[i];
+
+	return bcc;
+}
+
+int verifyDataPacketReceived(unsigned char * buffer, int size){
+	unsigned char a = buffer[1];
+	unsigned char c = buffer[2];
+	unsigned char headerBCC = buffer[3];
+	unsigned char dataBCC
+	int dataSize = size - 6;
+
+	if(headerBCC == BCC(a, c) && (c == C0 || c == C1)){
+		unsigned char calculatedDataBCC = calculateDataBCC(&buffer[4], size-6); // between buffer[4] and buffer[size-(4+2)] -> DATA
+		unsigned char dataBCC = buffer[size - 2];
+
+		if(dataBCC != calculateDataBCC){
+			printf("LLREAD: Bad dataBCC\n");
+			return -2;
+		}
+	}else if(c != C0 && c != C1){
+		printf("LLREAD: Bad control field: %d\n", c);
+		return -1;
+	}
+
+	return 0;
 }
 
 int readPacket(int fd, unsigned char* buf[]) {
@@ -388,7 +412,7 @@ int dataStateMachine(enum state* connection_state, unsigned char read_byte) {
 				*connection_state = BCC_OK;
 			else if(read_byte == FLAG)
 				*connection_state = FLAG_RCV;
-			else 
+			else
 				*connection_state = START;
 			break;
 
@@ -398,12 +422,10 @@ int dataStateMachine(enum state* connection_state, unsigned char read_byte) {
 			else if(read_byte != FLAG) //received data
 				*connection_state = DATA_RCV;
 			break;
-		
+
 		default:
 			break;
 	}
 
 	return 0;
 }
-
-

@@ -5,7 +5,7 @@ int main(int argc, char** argv) {
 
 	int stop_alarm = 0;
 	int fd;
-    
+
 	if ( (argc < 4) || ((strcmp("/dev/ttyS0", argv[1]) != 0 ) && (strcmp("/dev/ttyS4", argv[1]) != 0) )) {
 		printf("Usage:\t<SerialPort>\t<Sender == 0 || Receiver == 1>\t<Filename>\n");
 		exit(1);
@@ -16,13 +16,13 @@ int main(int argc, char** argv) {
 
 		fptr = fopen(argv[3],"r");
 		if(fptr == NULL){
-		  printf("Error opening file!");   
-		  return -1;             
+		  printf("Error opening file!");
+		  return -1;
 		}
 	}
 
 	/*
-	*  Opens Serial Port communication 
+	*  Opens Serial Port communication
 	*/
 	if ((fd = llopen(argv[1], atoi(argv[2]))) == -1) {
 		perror("LLOPEN");
@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
 			printf("Error sending file.");
 			return -1;
 		}*/
-			
+
 	} else if (atoi(argv[2]) == 1){ //RECEIVER
 		/*if(receiveFile() == -1){
 			printf("Error sending file.");
