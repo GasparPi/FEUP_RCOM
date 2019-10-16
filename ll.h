@@ -3,8 +3,11 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <termios.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "alarm.h"
 
 #define C0     0x00
@@ -56,10 +59,13 @@ int readPacket(int fd, unsigned char* buf[]);
 int verifyDataPacketReceived(unsigned char * buffer, int size);
 unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length);
 
+int readAck(int fd, int Ns);
+int write_packet(int fd, char* packet, int length, int Ns);
+
 // ll functions
 int llopen(const char* port, int role);
 int llclose(int fd, int role);
-int llwrite(int fd, char* buf, int length);
+int llwrite(int fd, char* packet, int length);
 int llread(int fd, unsigned char* buf);
 
 // Transmitter

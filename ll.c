@@ -8,7 +8,7 @@ const unsigned char RR1[] = {FLAG, A_CMD, C_RR1, BCC(A_CMD, C_RR1), FLAG};
 const unsigned char REJ0[] = {FLAG, A_CMD, C_REJ0, BCC(A_CMD, C_REJ0), FLAG};
 const unsigned char REJ1[] = {FLAG, A_CMD, C_REJ1, BCC(A_CMD, C_REJ1), FLAG};
 
-int alarmFlag = 1, numRetry = 0, Ns = 0;
+int alarmFlag = 1, numRetry = 0;
 struct termios newtio, oldtio;
 
 int llopen(const char* port, int role) {
@@ -218,6 +218,82 @@ int readResponse(int fd, const unsigned char expected[]) {
  	return 0;
 }
 
+int readAck(int fd, int Ns) {
+
+ 	unsigned char byte_read;
+ 	enum state current_state = START;
+
+	bool positive_ack = false, expected_rr, expected_rej;
+	if (Ns == 0) {
+		expected_rr = C_RR1;
+		expected_rej = C_REJ1;
+	} else {
+		expected_rr = C_RR0;
+		expected_rej = C_REJ0;
+	}
+
+	printf("Starting state machine\n");
+
+ 	while (!alarmFlag && current_state != STOP) {
+
+	    read(fd, &byte_read, 1);
+
+	    switch(current_state) {
+		    case START: {
+		        if(byte_read == FLAG)
+		        	current_state = FLAG_RCV;
+		        break;
+		    }
+		    case FLAG_RCV: {
+		        if(byte_read == A_CMD)
+		    	    current_state = A_RCV;
+		        else if(byte_read != FLAG)
+		        	current_state = START;
+		        break;
+		    }
+		    case A_RCV: {
+		        if (byte_read == expected_rr) {
+							current_state = C_RCV;
+							positive_ack = true;
+						}
+						else if (byte_read == expected_rej) {
+							current_state = C_RCV;
+							positive_ack = false;
+						}
+		        else if (byte_read == FLAG_RCV)
+		        	current_state = FLAG_RCV;
+		        else
+		        	current_state = START;
+		        break;
+		    	}
+	      	case C_RCV: {
+						if (byte_read == BCC(A_CMD, expected_rr)) {
+							if (positive_ack) current_state = BCC_OK;
+						}
+						else if (byte_read == BCC(A_CMD, expected_rej)) {
+							if (!positive_ack) current_state = BCC_OK;
+						}
+		        else if (byte_read == FLAG_RCV)
+		         	current_state = FLAG_RCV;
+		        else
+		         	current_state = START;
+		        break;
+	      	}
+	      	case BCC_OK: {
+		        if (byte_read == FLAG) {
+		         	current_state = STOP;
+		         	printf("Everything OK!\n");
+		        }
+		        else
+		        	current_state = START;
+		        break;
+	      	}
+				};
+  	}
+
+ 	return positive_ack ? 0 : -1;
+}
+
 int readCommand(int fd, const unsigned char expected[]) {
 
 	enum state current_state = START;
@@ -273,21 +349,31 @@ int readCommand(int fd, const unsigned char expected[]) {
 
 int llwrite(int fd, char* packet, int length) {
 
-	write_packet(fd, packet, length);
+	int Ns = 0;
+	do {
+		printf("Sending frame!\n");
+		// send frame
+		write_packet(fd, packet, length, Ns);
+		setAlarm(); // install alarm
+		alarmFlag = 0;
+		// read receiver response
+		if (readAck(fd, Ns) == -1) continue;
 
-	// Install alarm
+	} while(numRetry < MAX_RETRIES && alarmFlag);
 
-	// Check response
+	stopAlarm();
+
+	if (numRetry == MAX_RETRIES) return -1;
 
 	return 0;
 }
 
-int write_packet(int fd, char* packet, int length) {
+int write_packet(int fd, char* packet, int length, int Ns) {
 
 	char frame[255]; //TODO change size to max fram size
 	int dataIndex, frameIndex, frameSize, bccResult;
-	char bufChar;
-	
+	char packetChar;
+
 	// Set of frame header
 	frame[0] = FLAG;
 	frame[1] = A_CMD;
@@ -298,7 +384,7 @@ int write_packet(int fd, char* packet, int length) {
 	frame[4] = packet[0];
 	frame[5] = packet[1];
 	bccResult = frame[4] ^ frame[5];
- 		
+
 	dataIndex = 2; //0 + 2
 	frameIndex = 6; //4 + 2
 	frameSize = 6;
@@ -306,24 +392,24 @@ int write_packet(int fd, char* packet, int length) {
 	//Process data camp
 	while (dataIndex < length) {
 
-		bufChar = packet[dataIndex++];
-		bccResult ^= bufChar;
+		packetChar = packet[dataIndex++];
+		bccResult ^= packetChar;
 
 		// Byte stuffing
-		if (bufChar == FLAG || bufChar == ESC) {
+		if (packetChar == FLAG || packetChar == ESC) {
 			frame[frameIndex++] = ESC;
-			frame[frameIndex++] = bufChar ^ STUFFING;
+			frame[frameIndex++] = packetChar ^ STUFFING;
 			frameSize += 2;
 		}
 		else {
-			frame[frameIndex++] = bufChar;
+			frame[frameIndex++] = packetChar;
 			frameSize++;
 		}
-			
+
 		// Set of frame footer
 		frame[frameIndex] = bccResult;
 		frame[frameIndex + 1] = FLAG;
-		
+
 		write(fd, frame, frameSize);
 	}
 

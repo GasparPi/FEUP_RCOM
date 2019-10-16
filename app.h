@@ -3,8 +3,9 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <stdio.h>
-#include <stdlib.h>	
+#include <stdlib.h>
 #include <signal.h>
+#include <string.h>
 
 #define START_CONTROL_FIELD 1
 #define START_CONTROL_FIELD 2
