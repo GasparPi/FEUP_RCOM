@@ -35,6 +35,17 @@
 #define MODEMDEVICE "/dev/ttyS1"
 #define _POSIX_SOURCE 1 /* POSIX compliant source */
 
+enum state {
+ 	START,
+ 	FLAG_RCV,
+ 	A_RCV,
+ 	C_RCV,
+ 	BCC_OK,
+ 	DATA_RCV,
+  	STOP
+};
+
+
 // aux ll functions
 int startConnection(const char* port);
 int stopConnection(int fd);
@@ -53,15 +64,4 @@ void alarmHandler();
 
 // Receiver
 int readCommand(int fd, const unsigned char expected[]);
-
-enum state {
- 	START,
- 	FLAG_RCV,
- 	A_RCV,
- 	C_RCV,
- 	BCC_OK,
- 	DATA_RCV,
-  	STOP
-};
-
 
