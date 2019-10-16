@@ -51,9 +51,11 @@ int sendControlPacket(int control_field, int file_size, char* file_name, int fd)
 
 	unsigned char byteArray[sizeof(file_size)];
 
-	for (int i = 0; sizeof(byteArray); i++){
-		byteArray[i] = (file_size >> 8*(sizeof(byteArray) - 1)) & 0x0FF;
+	printf("cenas1\n");
+	for (int i = 0; i < sizeof(byteArray); i++){
+		byteArray[i] = (file_size >> 8*i) & 0x0FF;
 	}
+	printf("cenas2\n");
 
 	packet[index++] = strlen((char *) byteArray);
 
@@ -69,7 +71,9 @@ int sendControlPacket(int control_field, int file_size, char* file_name, int fd)
 		packet[index++] = file_name[i];
 	}
 
+	printf("cenas1\n");
 	bytesWritten = llwrite(fd, packet, index);
+	printf("cenas2\n");
 	if (bytesWritten == -1){
 		printf("ERROR in llwrite!\n");
 		return -1;
@@ -91,7 +95,9 @@ int sendDataPackets(int file_size, int fd_file, int fd){
 	int totalBytesWritten = 0;
 
 	while (chunksSent < chunksToSend){
+		printf("cenas1");
 		bytesRead = read(fd_file, &buf, MAX_CHUNK_SIZE);
+		printf("cenas2");
 		char packet[DATA_PACKET_SIZE + bytesRead];
 		
 		packet[0] = DATA_FIELD;
