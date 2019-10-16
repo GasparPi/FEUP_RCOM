@@ -273,39 +273,61 @@ int readCommand(int fd, const unsigned char expected[]) {
 
 int llwrite(int fd, char* buf, int length) {
 
-	char frame[255];
-	int Ns = 0, dataFrameSize = 0, frameIndex, framesWritten = 0, bcdResult;
+	write_packet(fd, packet, length);
+
+	// Install alarm
+
+	// Check response
+
+	return 0;
+}
+
+int write_packet(int fd, char* packet, int length, int Ns) {
+
+	char frame[255]; //TODO change size to max fram size
+	int dataIndex, frameIndex, frameSize, bccResult;
 	char bufChar;
+	
+	// Set of frame header
+	frame[0] = FLAG;
+	frame[1] = A_CMD;
+	frame[2] = (Ns == 0 ? C0 : C1);
+	frame[3] = BCC(A_CMD, frame[2]);
 
-	while (length > 0) {
-		frame[0] = FLAG;
-		frame[1] = A_CMD;
-		frame[2] = (Ns == 0 ? C0 : C1);
-		frame[3] = BCC(A_CMD, frame[2]);
+	//Reading first 2 chars to set bcd
+	frame[4] = packet[0];
+	frame[5] = packet[1];
+	bccResult = frame[4] ^ frame[5];
+ 		
+	dataIndex = 2; //0 + 2
+	frameIndex = 6; //4 + 2
+	frameSize = 6;
 
-		//Reading first 2 chars to set bcd
-		frame[4] = buf[0];
-		frame[5] = buf[1];
-		bcdResult = frame[4] ^ frame[5];
+	//Process data camp
+	while (dataIndex < length) {
 
-		dataFrameSize = 2; //0 + 2
-		frameIndex = 6; //4 + 2
+		bufChar = buf[dataIndex++];
+		bcdResult ^= bufChar;
 
-		//Process data camp
-		while (dataFrameSize < MAX_FRAME_SIZE && dataFrameSize < length) {
-
-			bufChar = buf[dataFrameSize + framesWritten * MAX_FRAME_SIZE];
-			bcdResult ^= bufChar;
-			frame[frameIndex++] = bufChar;
-			dataFrameSize++;
+		// Byte stuffing
+		if (bufChar == FLAG || bufChar == ESC) {
+			frame[frameIndex++] = ESC;
+			frame[frameIndex++] = bufChar ^ STUFFING;
+			frameSize += 2;
 		}
-
-		frame[dataFrameSize] = bcdResult;
-		frame[dataFrameSize + 1] = FLAG;
-
-		write(fd, frame, sizeof(frame)/sizeof(unsigned char));
-		framesWritten++;
+		else {
+			frame[frameIndex++] = bufChar;
+			frameSize++;
+		}
+			
+		// Set of frame footer
+		frame[frameIndex] = bccResult;
+		frame[frameIndex + 1] = FLAG;
+		
+		write(fd, frame, frameSize);
 	}
+
+	return 0;
 }
 
 int llread(int fd, unsigned char* buf) {
