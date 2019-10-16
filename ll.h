@@ -24,6 +24,9 @@
 
 #define BCC(X, Y) (X) ^ (Y)
 
+#define ESC 0x7D
+#define STUFFING 0x20
+
 #define MAX_RETRIES 3
 #define MAX_PACKET_SIZE 4
 #define MAX_FRAME_SIZE (6 + MAX_PACKET_SIZE)
@@ -42,7 +45,7 @@ enum state {
  	C_RCV,
  	BCC_OK,
  	DATA_RCV,
-  STOP
+  	STOP
 };
 
 // aux ll functions

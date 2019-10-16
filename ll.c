@@ -8,7 +8,7 @@ const unsigned char RR1[] = {FLAG, A_CMD, C_RR1, BCC(A_CMD, C_RR1), FLAG};
 const unsigned char REJ0[] = {FLAG, A_CMD, C_REJ0, BCC(A_CMD, C_REJ0), FLAG};
 const unsigned char REJ1[] = {FLAG, A_CMD, C_REJ1, BCC(A_CMD, C_REJ1), FLAG};
 
-int alarmFlag = 1, numRetry = 0;
+int alarmFlag = 1, numRetry = 0, Ns = 0;
 struct termios newtio, oldtio;
 
 int llopen(const char* port, int role) {
@@ -271,7 +271,7 @@ int readCommand(int fd, const unsigned char expected[]) {
 	return 0;
 }
 
-int llwrite(int fd, char* buf, int length) {
+int llwrite(int fd, char* packet, int length) {
 
 	write_packet(fd, packet, length);
 
@@ -282,7 +282,7 @@ int llwrite(int fd, char* buf, int length) {
 	return 0;
 }
 
-int write_packet(int fd, char* packet, int length, int Ns) {
+int write_packet(int fd, char* packet, int length) {
 
 	char frame[255]; //TODO change size to max fram size
 	int dataIndex, frameIndex, frameSize, bccResult;
@@ -306,8 +306,8 @@ int write_packet(int fd, char* packet, int length, int Ns) {
 	//Process data camp
 	while (dataIndex < length) {
 
-		bufChar = buf[dataIndex++];
-		bcdResult ^= bufChar;
+		bufChar = packet[dataIndex++];
+		bccResult ^= bufChar;
 
 		// Byte stuffing
 		if (bufChar == FLAG || bufChar == ESC) {
@@ -361,7 +361,7 @@ int verifyDataPacketReceived(unsigned char * buffer, int size){
 	unsigned char a = buffer[1];
 	unsigned char c = buffer[2];
 	unsigned char headerBCC = buffer[3];
-	unsigned char dataBCC
+	unsigned char dataBCC;
 	int dataSize = size - 6;
 
 	if(headerBCC == BCC(a, c) && (c == C0 || c == C1)){
