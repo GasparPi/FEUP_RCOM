@@ -10,6 +10,12 @@
 #define START_CONTROL_FIELD 2
 #define END_CONTROL_FIELD 3
 
+#define CONTROL_PACKET_SIZE 5
+#define FILE_SIZE_FLAG 0
+#define FILE_NAME_FLAG 1
+
+#define MAX_CHUNK_SIZE 1024
+
 int sendFile(int fd_file, char* file_name);
 int receiveFile();
 
