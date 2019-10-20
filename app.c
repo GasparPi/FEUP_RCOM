@@ -38,7 +38,7 @@ int sendFile(int fd_file, char* file_name, int fd){
 
 }
 
-int sendControlPacket(int control_field, int file_size, char* file_name, int fd){
+int sendControlPacket(unsigned char control_field, int file_size, char* file_name, int fd){
 
 	int index = 0;
 	char packet[CONTROL_PACKET_SIZE + sizeof(file_size) + strlen(file_name)];
@@ -125,9 +125,12 @@ int receiveFile(int fd){
 	int received = 0;
 
 	int received_fd_file = 0;
-
+	int i = 0;
 	while (!received){
 		bytesRead += llread(fd, max_buf);
+		i++;
+		printf("PACKETS READ: %d\n", i);
+		printf("MAX_BUF[0]: %x\n", max_buf[0] & 0XFF);
 
 		if (max_buf[0] == DATA_FIELD){
 			readDataPackets(max_buf, received_fd_file);
