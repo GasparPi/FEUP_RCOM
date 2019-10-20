@@ -41,32 +41,30 @@ int sendFile(int fd_file, char* file_name, int fd){
 int sendControlPacket(unsigned char control_field, int file_size, char* file_name, int fd){
 
 	int index = 0;
-	int file_size_length = sizeof(file_size)/sizeof(int);
-	char packet[CONTROL_PACKET_SIZE + file_size_length + strlen(file_name)];
+	char packet[CONTROL_PACKET_SIZE + sizeof(file_size) + strlen(file_name)];
 
 	int bytesWritten = 0;
 
 	packet[index++] = control_field;
 
-	// INSERT FILE SIZE INFO
-	packet[index++] = FILE_SIZE_FLAG; // Type 1
+	//INSERT FILE SIZE INFO
+	packet[index++] = FILE_SIZE_FLAG; //Type1
 
-	unsigned char byteArray[file_size_length];
-	int byteArray_length = sizeof(byteArray)/sizeof(unsigned char);
+	unsigned char byteArray[sizeof(file_size)];
 
-	for (int i = 0; i < byteArray_length; i++){
+	for (int i = 0; i < sizeof(byteArray); i++){
 		byteArray[i] = (file_size >> 8*i) & 0x0FF;
 	}
 
-	packet[index++] = byteArray_length;
+	packet[index++] = strlen((char *) byteArray);
 
-	for (int i = 0; i < byteArray_length; i++){
+	for (int i = 0; i < strlen((char *) byteArray) ; i++){
 		packet[index++] = byteArray[i];
 	}
 
 	//INSERT FILE NAME INFO
 	packet[index++] = FILE_NAME_FLAG;
-	packet[index++] = strlen(file_name);
+	packet[index++] = sizeof(file_name);
 
 	for(int i = 0; i < strlen(file_name); i++) {
 		packet[index++] = file_name[i];
@@ -126,27 +124,27 @@ int receiveFile(int fd){
 	int bytesRead = 0;
 	int received = 0;
 
-	int received_fd_file = 0;
+	int new_file_fd;
 	while (!received) {
 
 		bytesRead += llread(fd, max_buf);
 
 		if (max_buf[0] == DATA_FIELD){
-			readDataPackets(max_buf, received_fd_file);
+			readDataPackets(max_buf, new_file_fd);
 		} else if (max_buf[0] == START_CONTROL_FIELD){
-			readControlPacket(max_buf);
+			readControlPacket(max_buf, &new_file_fd);
 		} else if (max_buf[0] == END_CONTROL_FIELD){
 			received = 1;
 		}
 	}
 
-	close(received_fd_file);
+	close(new_file_fd);
 
 	return 0;
 
 }
 
-int readControlPacket(unsigned char* packet){
+int readControlPacket(unsigned char* packet, int* fd){
 
 	int index = 1;
 	int file_size;
@@ -172,7 +170,7 @@ int readControlPacket(unsigned char* packet){
 	if (packet[index] == FILE_NAME_FLAG) { //FILE NAME
 		index++;
 		int name_length = packet[index];
-		printf("Name length: d\n", name_length);
+		printf("Name length: %d\n", name_length);
 		index++;
 
 		file_name = (char*) malloc(name_length);
@@ -181,6 +179,8 @@ int readControlPacket(unsigned char* packet){
 
 		printf("Name: %s\n", file_name);
 	}
+
+	*fd = open(file_name, O_WRONLY | O_CREAT);
 
 	return 0;
 
