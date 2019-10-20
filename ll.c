@@ -239,10 +239,6 @@ unsigned char communicationStateMachine(enum state* connection_state, unsigned c
 				*connection_state = START;
 			break;
 		}
-		case DATA_RCV:
-			break;
-		case STOP:
-			break;
 	};
 
 	return control_field;
@@ -264,7 +260,6 @@ int llwrite(int fd, char* packet, int length) {
 	int Ns = 0;
 	int bytesWritten = 0;
 	do {
-		printf("Sending frame!\n");
 		// send frame
 		bytesWritten = writeFrame(fd, packet, length, Ns);
 		setAlarm(); // install alarm
@@ -334,7 +329,6 @@ int writeFrame(int fd, char* packet, int length, int Ns) {
 }
 
 int llread(int fd, unsigned char* buf) {
-	printf("INSIDE LLREAD\n");
 	int received = 0;
 	int bytesRead = 1;
 	int frame_length = 0;
@@ -380,8 +374,6 @@ int llread(int fd, unsigned char* buf) {
 			}
 		}
 	}
-
-	printf("END OF LLREAD\n");
 
 	return bytesRead;
 }
