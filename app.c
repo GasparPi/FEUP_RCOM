@@ -41,30 +41,32 @@ int sendFile(int fd_file, char* file_name, int fd){
 int sendControlPacket(int control_field, int file_size, char* file_name, int fd){
 
 	int index = 0;
-	char packet[CONTROL_PACKET_SIZE + sizeof(file_size) + strlen(file_name)];
+	int file_size_length = sizeof(file_size)/sizeof(int);
+	char packet[CONTROL_PACKET_SIZE + file_size_length + strlen(file_name)];
 
 	int bytesWritten = 0;
 
 	packet[index++] = control_field;
 
-	//INSERT FILE SIZE INFO
-	packet[index++] = FILE_SIZE_FLAG; //Type1
+	// INSERT FILE SIZE INFO
+	packet[index++] = FILE_SIZE_FLAG; // Type 1
 
-	unsigned char byteArray[sizeof(file_size)];
+	unsigned char byteArray[file_size_length];
+	int byteArray_length = sizeof(byteArray)/sizeof(unsigned char);
 
-	for (int i = 0; i < sizeof(byteArray); i++){
+	for (int i = 0; i < byteArray_length; i++){
 		byteArray[i] = (file_size >> 8*i) & 0x0FF;
 	}
 
-	packet[index++] = strlen((char *) byteArray);
+	packet[index++] = byteArray_length;
 
-	for (int i = 0; i < strlen((char *) byteArray) ; i++){
+	for (int i = 0; i < byteArray_length; i++){
 		packet[index++] = byteArray[i];
 	}
 
 	//INSERT FILE NAME INFO
 	packet[index++] = FILE_NAME_FLAG;
-	packet[index++] = sizeof(file_name);
+	packet[index++] = strlen(file_name);
 
 	for(int i = 0; i < strlen(file_name); i++) {
 		packet[index++] = file_name[i];
