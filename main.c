@@ -1,11 +1,11 @@
-#include "ll.h"
+#include "app.h"
 #include <stdio.h>
 
 int main(int argc, char** argv) {
 
 	int fd;
 	int fd_file;
-    
+
 	if ( (strcmp("/dev/ttyS0", argv[1]) == 0 ) || (strcmp("/dev/ttyS4", argv[1]) == 0) ) {
 		if((atoi(argv[2]) == 0 && argc != 4) || (atoi(argv[2]) == 1 && argc != 3) || (atoi(argv[2]) != 1 && atoi(argv[2]) != 0)){
 			printf("Usage:\t<SerialPort>\t<Sender == 0 || Receiver == 1>\t<Filename>\n");
@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
 		printf("Please use ports /dev/ttyS0 or /dev/ttyS4\n");
 		exit(1);
 	}
-	
+
 
 	if (atoi(argv[2]) == 0){ //GET FILE'S FILE DESCRIPTOR
 
@@ -23,8 +23,8 @@ int main(int argc, char** argv) {
 
 		fd_file = open(argv[3], O_RDONLY);
 		if(fd_file == -1){
-		  printf("Error opening file!\n");   
-		  return -1;             
+		  printf("Error opening file!\n");
+		  return -1;
 		}
 	}
 
@@ -37,12 +37,12 @@ int main(int argc, char** argv) {
 	}
 
 	if (atoi(argv[2]) == 0){ //TRANSMITTER
-		if(sendFile(fd_file, argv[3], fd) == -1){
+		if(sendFile(fd_file, argv[3], fd) == -1) {
 			printf("Error sending file.");
 			return -1;
 		}
 	} else if (atoi(argv[2]) == 1){ //RECEIVER
-		if(receiveFile() == -1){
+		if(receiveFile(fd) == -1){
 			printf("Error sending file.");
 			return -1;
 		}
