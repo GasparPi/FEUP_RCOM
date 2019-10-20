@@ -233,7 +233,6 @@ unsigned char communicationStateMachine(enum state* connection_state, unsigned c
 		}
 		case BCC_OK: {
 			if (byte_read == FLAG) {
-				printf("**** Communication Channel Opened! *****\n");
 				*connection_state = STOP;
 			}
 			else
@@ -343,22 +342,25 @@ int llread(int fd, unsigned char* buf) {
 	unsigned char control_field;
 
 	while(!received) {
-
 		if ((frame_length = readFrame(fd, frame))) {
+			// remove frame header and tail
 			// destuff packet
-			for (int i = 0; i < frame_length; i++) {
+			int j = 0;
+			for (int i = 4; i < frame_length - 2; i++) { // TODO clean i = 4 and -2
 				if (frame[i] == ESC) {
 					i++;
 					if (frame[i] == (FLAG ^ STUFFING))
-						buf[i] = FLAG;
+						buf[j++] = FLAG;
 					else if (frame[i] == (ESC ^ STUFFING))
-						buf[i] = ESC;
+						buf[j++] = ESC;
 				}
 				else {
-					buf[i] = frame[i];
+					buf[j++] = frame[i];
 				}
 			}
 			control_field = frame[2];
+
+			printf("frame[4]: %x\npacket[0]: %x\n",frame[4] & 0xff, buf[0] & 0xff);
 
 			// verify data packet
 			if(verifyDataPacketReceived(frame, frame_length) != 0) {
