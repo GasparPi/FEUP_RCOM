@@ -5,6 +5,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#include "ll.h"
 
 #define DATA_FIELD 1
 #define START_CONTROL_FIELD 2
@@ -23,5 +24,5 @@ int receiveFile(int fd);
 int sendControlPacket(int control_field, int file_size, char* file_name, int fd);
 int sendDataPackets(int file_size, int fd_file, int fd);
 
-int readControlPackets(char* packet);
-int readDataPackets(char* packet, int fd_file);
+int readControlPacket(unsigned char* packet);
+int readDataPackets(unsigned char* packet, int fd_file);

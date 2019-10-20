@@ -32,8 +32,7 @@
 #define STUFFING 0x20
 
 #define MAX_RETRIES 3
-#define MAX_PACKET_SIZE 4
-#define MAX_FRAME_SIZE (6 + MAX_PACKET_SIZE)
+#define MAX_FRAME_SIZE 2500
 
 #define TRANSMITTER 0
 #define RECEIVER 1
@@ -56,7 +55,7 @@ enum state {
 int startConnection(const char* port);
 int stopConnection(int fd);
 int dataStateMachine(enum state* connection_state, unsigned char byte_read);
-int readFrame(int fd, unsigned char* buf[]);
+int readFrame(int fd, unsigned char* buf);
 int verifyDataPacketReceived(unsigned char * buffer, int size);
 unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length);
 unsigned char communicationStateMachine(enum state* connection_state, unsigned char byte_read);

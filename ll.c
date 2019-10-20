@@ -13,7 +13,7 @@ struct termios newtio, oldtio;
 
 int llopen(const char* port, int role) {
 
-	int fd, res;
+	int fd;
 
 	// Config termios struct
 	fd = startConnection(port);
@@ -22,7 +22,7 @@ int llopen(const char* port, int role) {
 		do {
 			printf("Sending SET Message!\n");
 			// send SET message
-			res = write(fd, SET, sizeof(SET)/sizeof(unsigned char));
+			write(fd, SET, sizeof(SET)/sizeof(unsigned char));
 			setAlarm(); // install alarm
 			alarmFlag = 0;
 			// read UA frame
@@ -55,13 +55,12 @@ int llopen(const char* port, int role) {
 }
 
 int llclose(int fd, int role) {
-	int res;
 
 	if (role == TRANSMITTER) {
 		do {
 			printf("Sending DISC Message!\n");
 			// send DISC frame
-			res = write(fd, DISC, sizeof(DISC)/sizeof(unsigned char));
+			write(fd, DISC, sizeof(DISC)/sizeof(unsigned char));
 			setAlarm(); // install alarm
 			alarmFlag = 0;
 			// read DISC frame
@@ -224,7 +223,7 @@ unsigned char communicationStateMachine(enum state* connection_state, unsigned c
 			break;
 		}
 		case C_RCV: {
-			if (byte_read == BCC(A_CMD, control_field))
+			if (byte_read == (BCC(A_CMD, control_field)))
 				*connection_state = BCC_OK;
 			else if (byte_read == FLAG_RCV)
 				*connection_state = FLAG_RCV;
@@ -325,23 +324,14 @@ int writeFrame(int fd, char* packet, int length, int Ns) {
 	frame[frameIndex] = bccResult;
 	frame[frameIndex + 1] = FLAG;
 	frameSize += 2;
-	
-	/* THIS IS CORRECT
-	printf("Frame[0]: %x\n", frame[0] & 0xff);
-	printf("Frame[1]: %x\n", frame[1] & 0xff);
-	printf("Frame[2]: %x\n", frame[2] & 0xff);
-	printf("Frame[3]: %x\n", frame[3] & 0xff);
-	printf("Frame[last-1]: %x\n", frame[frameSize- 2] & 0xff);
-	printf("Frame[last]: %x\n", frame[frameSize - 1] & 0xff);
-	*/
-	tcflush(fd, TCIOFLUSH);
 	write(fd, frame, frameSize);
 
-	printf("Sent frame size: %d\n", frameSize);
+	// printf("Sent frame size: %d\n", frameSize);
 	return frameSize;
 }
 
 int llread(int fd, unsigned char* buf) {
+	printf("INSIDE LLREAD\n");
 	int received = 0;
 	int bytesRead = 1;
 	int frame_length = 0;
@@ -349,8 +339,8 @@ int llread(int fd, unsigned char* buf) {
 	unsigned char control_field;
 
 	while(!received) {
-		// readFrame
-		if ((frame_length = readFrame(fd, &frame))) {
+
+		if ((frame_length = readFrame(fd, frame))) {
 			// destuff packet
 			for (int i = 0; i < frame_length; i++) {
 				if (frame[i] == ESC) {
@@ -365,6 +355,7 @@ int llread(int fd, unsigned char* buf) {
 				}
 			}
 			control_field = frame[2];
+
 			// verify data packet
 			if(verifyDataPacketReceived(frame, frame_length) != 0) {
 				// send response accordingly
@@ -384,11 +375,13 @@ int llread(int fd, unsigned char* buf) {
 		}
 	}
 
+	printf("END OF LLREAD\n");
+
 	return bytesRead;
 }
 
 unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length) {
-	unsigned char bcc = 0; //NAO E NEUTRO
+	unsigned char bcc = 0x00;
 
 	for (int i = 0; i < length; i++)
 		bcc ^= dataBuffer[i];
@@ -396,18 +389,16 @@ unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length) {
 	return bcc;
 }
 
-int verifyDataPacketReceived(unsigned char * buffer, int size){
+int verifyDataPacketReceived(unsigned char* buffer, int size){
 	unsigned char address_field = buffer[1];
 	unsigned char control_field = buffer[2];
 	unsigned char headerBCC = buffer[3];
-	unsigned char dataBCC;
-	int dataSize = size - 6;
 
-	if(headerBCC == BCC(address_field, control_field) && (control_field == C0 || control_field == C1)){
+	if(headerBCC == (BCC(address_field, control_field)) && (control_field == C0 || control_field == C1)){
 		unsigned char calculatedDataBCC = calculateDataBCC(&buffer[4], size-6); // between buffer[4] and buffer[size-(4+2)] -> DATA
 		unsigned char dataBCC = buffer[size - 2];
 
-		if(dataBCC != calculateDataBCC) {
+		if(dataBCC != calculatedDataBCC) {
 			printf("LLREAD: Bad dataBCC\n");
 			return -2;
 		}
@@ -420,12 +411,13 @@ int verifyDataPacketReceived(unsigned char * buffer, int size){
 	return 0;
 }
 
-int readFrame(int fd, unsigned char* buf[]) {
+int readFrame(int fd, unsigned char* buf) {
 	enum state connection_state = START;
 	int length = 0;
 	unsigned char byte_read;
 
 	while(connection_state != STOP) {
+
 		read(fd, &byte_read, 1);
 
 		dataStateMachine(&connection_state, byte_read);
@@ -433,7 +425,7 @@ int readFrame(int fd, unsigned char* buf[]) {
 		if(connection_state == FLAG_RCV && length != 0)
 			length = 0;
 
-		*buf[length++] = byte_read;
+		buf[length++] = byte_read;
 	}
 
 	return length;
@@ -446,7 +438,6 @@ int dataStateMachine(enum state* connection_state, unsigned char byte_read) {
 				*connection_state = FLAG_RCV;
 			}
 			break;
-
 		case FLAG_RCV:
 			if(byte_read == A_CMD){
 				*connection_state = A_RCV;
@@ -456,7 +447,6 @@ int dataStateMachine(enum state* connection_state, unsigned char byte_read) {
 			else
 				*connection_state = START;
 			break;
-
 		case A_RCV:
 			if(byte_read == C0 || byte_read == C1)
 				*connection_state = C_RCV;
@@ -465,16 +455,14 @@ int dataStateMachine(enum state* connection_state, unsigned char byte_read) {
 			else
 				*connection_state = START;
 			break;
-
 		case C_RCV:
-			if(byte_read == BCC(A_CMD, C0) || byte_read == BCC(A_CMD, C1) )
+			if(byte_read == (BCC(A_CMD, C0)) || byte_read == (BCC(A_CMD, C1)) )
 				*connection_state = BCC_OK;
 			else if(byte_read == FLAG)
 				*connection_state = FLAG_RCV;
 			else
 				*connection_state = START;
 			break;
-
 		case BCC_OK:
 			if(byte_read != FLAG) //received data
 				*connection_state = DATA_RCV;

@@ -92,11 +92,11 @@ int sendDataPackets(int file_size, int fd_file, int fd){
 	int totalBytesWritten = 0;
 
 	while (chunksSent < chunksToSend){
-		printf("cenas 1\n");
+		printf("before read in send data packets\n");
 		bytesRead = read(fd_file, &buf, MAX_CHUNK_SIZE);
+		printf("after read in send data packets\n");;
 		char packet[DATA_PACKET_SIZE + bytesRead];
-		printf("cenas 2\n");
-		
+
 		packet[0] = DATA_FIELD;
 		packet[1] = chunksSent % 255;
 		packet[2] = bytesRead / 256;
@@ -108,7 +108,7 @@ int sendDataPackets(int file_size, int fd_file, int fd){
 		if (bytesWritten == -1){
 			printf("ERROR in llwrite!\n");
 			return -1;
-		} 
+		}
 
 		totalBytesWritten += bytesWritten;
 		chunksSent++;
@@ -120,14 +120,13 @@ int sendDataPackets(int file_size, int fd_file, int fd){
 
 int receiveFile(int fd){
 
-	char max_buf[MAX_CHUNK_SIZE + DATA_PACKET_SIZE];
+	unsigned char max_buf[MAX_CHUNK_SIZE + DATA_PACKET_SIZE];
 	int bytesRead = 0;
 	int received = 0;
 
 	int received_fd_file = 0;
 
 	while (!received){
-
 		bytesRead += llread(fd, max_buf);
 
 		if (max_buf[0] == DATA_FIELD){
@@ -145,14 +144,14 @@ int receiveFile(int fd){
 
 }
 
-int readControlPacket(char* packet){
+int readControlPacket(unsigned char* packet){
 
 	int index = 1;
-
 	int file_size;
-	char file_name;
+	char* file_name;
 
-	if(packet[index] == FILE_SIZE_FLAG){ //FILE SIZE
+	//FILE SIZE
+	if(packet[index] == FILE_SIZE_FLAG){
 		index++;
 		int size_length = packet[index];
 		index++;
@@ -162,26 +161,28 @@ int readControlPacket(char* packet){
 			index++;
 		}
 		index++;
-	} 
-	
+	}
+	if (file_size <= 0) {
+		perror("File size error\n");
+		return -1;
+	}
+
 	if (packet[index] == FILE_NAME_FLAG) { //FILE NAME
 		index++;
 		int name_length = packet[index];
 		index++;
 
-		memcpy(file_name, &packet[index], name_length);
-	}
+		file_name = (char*) malloc(name_length);
 
-	if(file_size == NULL || file_name == NULL){
-		printf("ERROR reading file's size or name\n");
-		return -1;
+		memcpy(&file_name, &packet[index], name_length);
 	}
 
 	return 0;
-	
+
 }
 
-int readDataPackets(char* packet, int fd_file){
+// TODO review
+int readDataPackets(unsigned char* packet, int fd_file){
 
 	int dataSize = 256 * packet[2] + packet[3];
 
