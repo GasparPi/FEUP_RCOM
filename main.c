@@ -1,4 +1,5 @@
 #include "ll.h"
+#include "app.h"
 #include <stdio.h>
 
 int main(int argc, char** argv) {
@@ -38,12 +39,12 @@ int main(int argc, char** argv) {
 
 	if (atoi(argv[2]) == 0){ //TRANSMITTER
 		if(sendFile(fd_file, argv[3], fd) == -1){
-			printf("Error sending file.");
+			printf("Error sending file.\n");
 			return -1;
 		}
 	} else if (atoi(argv[2]) == 1){ //RECEIVER
-		if(receiveFile() == -1){
-			printf("Error sending file.");
+		if(receiveFile(fd) == -1){
+			printf("Error reading file.\n");
 			return -1;
 		}
 	}

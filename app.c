@@ -1,4 +1,5 @@
 #include "app.h"
+#include "ll.h"
 
 int sendFile(int fd_file, char* file_name, int fd){
 
@@ -51,11 +52,9 @@ int sendControlPacket(int control_field, int file_size, char* file_name, int fd)
 
 	unsigned char byteArray[sizeof(file_size)];
 
-	printf("cenas1\n");
 	for (int i = 0; i < sizeof(byteArray); i++){
 		byteArray[i] = (file_size >> 8*i) & 0x0FF;
 	}
-	printf("cenas2\n");
 
 	packet[index++] = strlen((char *) byteArray);
 
@@ -71,9 +70,8 @@ int sendControlPacket(int control_field, int file_size, char* file_name, int fd)
 		packet[index++] = file_name[i];
 	}
 
-	printf("cenas1\n");
+	printf("Sending Control Packet\n");
 	bytesWritten = llwrite(fd, packet, index);
-	printf("cenas2\n");
 	if (bytesWritten == -1){
 		printf("ERROR in llwrite!\n");
 		return -1;
@@ -81,7 +79,6 @@ int sendControlPacket(int control_field, int file_size, char* file_name, int fd)
 
 	printf("Wrote %d control bytes\n", bytesWritten);
 	return 0;
-
 }
 
 int sendDataPackets(int file_size, int fd_file, int fd){
@@ -95,17 +92,18 @@ int sendDataPackets(int file_size, int fd_file, int fd){
 	int totalBytesWritten = 0;
 
 	while (chunksSent < chunksToSend){
-		printf("cenas1");
+		printf("cenas 1\n");
 		bytesRead = read(fd_file, &buf, MAX_CHUNK_SIZE);
-		printf("cenas2");
 		char packet[DATA_PACKET_SIZE + bytesRead];
+		printf("cenas 2\n");
 		
 		packet[0] = DATA_FIELD;
 		packet[1] = chunksSent % 255;
 		packet[2] = bytesRead / 256;
 		packet[3] = DATA_PACKET_SIZE % 256;
-		memcpy(packet[4], &buf, bytesRead);
+		memcpy(&packet[4], &buf, bytesRead);
 
+		printf("Sending Data Packet\n");
 		bytesWritten = llwrite(fd, packet, strlen(packet));
 		if (bytesWritten == -1){
 			printf("ERROR in llwrite!\n");

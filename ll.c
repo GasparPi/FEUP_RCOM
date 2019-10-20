@@ -234,7 +234,7 @@ unsigned char communicationStateMachine(enum state* connection_state, unsigned c
 		}
 		case BCC_OK: {
 			if (byte_read == FLAG) {
-				printf("Everything OK!\n");
+				printf("**** Communication Channel Opened! *****\n");
 				*connection_state = STOP;
 			}
 			else
@@ -259,12 +259,12 @@ int readCommand(int fd, const unsigned char expected[]) {
 }
 
 int llwrite(int fd, char* packet, int length) {
-
 	int Ns = 0;
+	int bytesWritten = 0;
 	do {
 		printf("Sending frame!\n");
 		// send frame
-		writeFrame(fd, packet, length, Ns);
+		bytesWritten = writeFrame(fd, packet, length, Ns);
 		setAlarm(); // install alarm
 		alarmFlag = 0;
 		// read receiver response
@@ -279,12 +279,12 @@ int llwrite(int fd, char* packet, int length) {
 	if (numRetry == MAX_RETRIES)
 		return -1;
 
-	return 0;
+	return bytesWritten;
 }
 
 int writeFrame(int fd, char* packet, int length, int Ns) {
 
-	char frame[255]; //TODO change size to max frame size
+	char frame[2 * length + 6]; // TODO clean 2 * ____ + 6
 	int dataIndex, frameIndex, frameSize, bccResult;
 	char packetChar;
 
@@ -319,15 +319,26 @@ int writeFrame(int fd, char* packet, int length, int Ns) {
 			frame[frameIndex++] = packetChar;
 			frameSize++;
 		}
-
-		// Set of frame footer
-		frame[frameIndex] = bccResult;
-		frame[frameIndex + 1] = FLAG;
-
-		write(fd, frame, frameSize);
 	}
 
-	return 0;
+	// Set of frame footer
+	frame[frameIndex] = bccResult;
+	frame[frameIndex + 1] = FLAG;
+	frameSize += 2;
+	
+	/* THIS IS CORRECT
+	printf("Frame[0]: %x\n", frame[0] & 0xff);
+	printf("Frame[1]: %x\n", frame[1] & 0xff);
+	printf("Frame[2]: %x\n", frame[2] & 0xff);
+	printf("Frame[3]: %x\n", frame[3] & 0xff);
+	printf("Frame[last-1]: %x\n", frame[frameSize- 2] & 0xff);
+	printf("Frame[last]: %x\n", frame[frameSize - 1] & 0xff);
+	*/
+	tcflush(fd, TCIOFLUSH);
+	write(fd, frame, frameSize);
+
+	printf("Sent frame size: %d\n", frameSize);
+	return frameSize;
 }
 
 int llread(int fd, unsigned char* buf) {
@@ -421,8 +432,6 @@ int readFrame(int fd, unsigned char* buf[]) {
 
 		if(connection_state == FLAG_RCV && length != 0)
 			length = 0;
-		else if(connection_state == DATA_RCV)
-			connection_state = BCC_OK;
 
 		*buf[length++] = byte_read;
 	}
@@ -467,10 +476,15 @@ int dataStateMachine(enum state* connection_state, unsigned char byte_read) {
 			break;
 
 		case BCC_OK:
-			if(byte_read == FLAG) //received command
-				*connection_state = STOP;
-			else if(byte_read != FLAG) //received data
+			if(byte_read != FLAG) //received data
 				*connection_state = DATA_RCV;
+			break;
+
+		case DATA_RCV:
+			if (byte_read == FLAG)
+				*connection_state = STOP;
+
+		case STOP:
 			break;
 
 		default:
