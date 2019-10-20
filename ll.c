@@ -354,7 +354,7 @@ int llread(int fd, unsigned char* buf) {
 			}
 			control_field = frame[2];
 
-			printf("frame[4]: %x\npacket[0]: %x\n",frame[4] & 0xff, buf[0] & 0xff);
+			//printf("frame[4]: %x\npacket[0]: %x\n",frame[4] & 0xff, buf[0] & 0xff);
 
 			// verify data packet
 			if(verifyDataPacketReceived(frame, frame_length) != 0) {

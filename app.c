@@ -125,12 +125,9 @@ int receiveFile(int fd){
 	int received = 0;
 
 	int received_fd_file = 0;
-	int i = 0;
-	while (!received){
+	while (!received) {
+
 		bytesRead += llread(fd, max_buf);
-		i++;
-		printf("PACKETS READ: %d\n", i);
-		printf("MAX_BUF[0]: %x\n", max_buf[0] & 0XFF);
 
 		if (max_buf[0] == DATA_FIELD){
 			readDataPackets(max_buf, received_fd_file);
@@ -173,11 +170,14 @@ int readControlPacket(unsigned char* packet){
 	if (packet[index] == FILE_NAME_FLAG) { //FILE NAME
 		index++;
 		int name_length = packet[index];
+		printf("Name length: d\n", name_length);
 		index++;
 
 		file_name = (char*) malloc(name_length);
-
 		memcpy(&file_name, &packet[index], name_length);
+		file_name[name_length] = '\0';
+
+		printf("Name: %s\n", file_name);
 	}
 
 	return 0;
