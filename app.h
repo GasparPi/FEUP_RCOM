@@ -24,5 +24,5 @@ int receiveFile(int fd);
 int sendControlPacket(unsigned char control_field, int file_size, char* file_name, int fd);
 int sendDataPackets(int file_size, int fd_file, int fd);
 
-int readControlPacket(unsigned char* packet, int* fd);
+int readControlPacket(int fd);
 int readDataPackets(unsigned char* packet, int fd_file);

@@ -264,8 +264,9 @@ int readCommand(int fd, const unsigned char expected[]) {
 	return 0;
 }
 
-int llwrite(int fd, char* packet, int length) {
-	int Ns = 0;
+int llwrite(int fd, unsigned char* packet, int length) {
+	static int Ns = 1;
+	Ns = (Ns == 0);
 	int bytesWritten = 0;
 
 	do {
@@ -289,7 +290,7 @@ int llwrite(int fd, char* packet, int length) {
 	return bytesWritten;
 }
 
-int writeFrame(int fd, char* packet, int length, int Ns) {
+int writeFrame(int fd, unsigned char* packet, int length, int Ns) {
 
 	char frame[2 * length + 6]; // TODO clean 2 * ____ + 6
 	int dataIndex, frameIndex, frameSize, bccResult;
@@ -301,20 +302,16 @@ int writeFrame(int fd, char* packet, int length, int Ns) {
 	frame[2] = (Ns == 0 ? C0 : C1);
 	frame[3] = BCC(A_CMD, frame[2]);
 
-	//Reading first 2 chars to set bcd
-	frame[4] = packet[0];
-	frame[5] = packet[1];
-	bccResult = frame[4] ^ frame[5];
+	bccResult = calculateDataBCC(packet, length);
 
-	dataIndex = 2; //0 + 2
-	frameIndex = 6; //4 + 2
-	frameSize = 6;
+	dataIndex = 0;
+	frameIndex = 4;
+	frameSize = 4;
 
 	//Process data camp
 	while (dataIndex < length) {
 
 		packetChar = packet[dataIndex++];
-		bccResult ^= packetChar;
 
 		// Byte stuffing
 		if (packetChar == FLAG || packetChar == ESC) {

@@ -60,12 +60,12 @@ int verifyDataPacketReceived(unsigned char * buffer, int size);
 unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length);
 unsigned char communicationStateMachine(enum state* connection_state, unsigned char byte_read);
 int readAck(int fd, int Ns);
-int writeFrame(int fd, char* packet, int length, int Ns);
+int writeFrame(int fd, unsigned char* packet, int length, int Ns);
 
 // ll functions
 int llopen(const char* port, int role);
 int llclose(int fd, int role);
-int llwrite(int fd, char* packet, int length);
+int llwrite(int fd, unsigned char* packet, int length);
 int llread(int fd, unsigned char* buf);
 
 // Transmitter
