@@ -13,8 +13,8 @@
 
 #define DATA_PACKET_SIZE 4
 #define CONTROL_PACKET_SIZE 5
-#define FILE_SIZE_FLAG 0
-#define FILE_NAME_FLAG 1
+#define FILE_SIZE_FLAG 0x00
+#define FILE_NAME_FLAG 0x01
 
 #define MAX_CHUNK_SIZE 1024
 

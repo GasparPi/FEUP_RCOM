@@ -239,6 +239,14 @@ unsigned char communicationStateMachine(enum state* connection_state, unsigned c
 				*connection_state = START;
 			break;
 		}
+		case DATA_RCV:
+			break;
+
+		case STOP:
+			break;
+
+		default:
+			break;
 	};
 
 	return control_field;
