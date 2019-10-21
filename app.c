@@ -35,37 +35,36 @@ int sendFile(int fd_file, char* file_name, int fd){
 	}
 
 	return 0;
+
 }
 
 int sendControlPacket(unsigned char control_field, int file_size, char* file_name, int fd){
 
 	int index = 0;
-	int file_size_length = sizeof(file_size)/sizeof(int);
-	char packet[CONTROL_PACKET_SIZE + file_size_length + strlen(file_name)];
+	unsigned char packet[CONTROL_PACKET_SIZE + sizeof(file_size) + strlen(file_name)];
 
 	int bytesWritten = 0;
 
 	packet[index++] = control_field;
 
 	//INSERT FILE SIZE INFO
-	packet[index++] = FILE_SIZE_FLAG; // Type1
+	packet[index++] = FILE_SIZE_FLAG; //Type1
 
-	unsigned char byteArray[file_size_length];
-	int byteArray_length = sizeof(byteArray)/sizeof(unsigned char);
+	unsigned char byteArray[sizeof(file_size)];
 
-	for (int i = 0; i < byteArray_length; i++){
-		byteArray[i] = (file_size >> 8*i) & 0xFF;
+	for (int i = 0; i < sizeof(byteArray); i++){
+		byteArray[i] = (file_size >> 8*i) & 0x0FF;
 	}
 
-	packet[index++] = byteArray_length;
+	packet[index++] = strlen((char *) byteArray);
 
-	for (int i = 0; i < byteArray_length; i++){
+	for (int i = 0; i < strlen((char *) byteArray) ; i++){
 		packet[index++] = byteArray[i];
 	}
 
 	//INSERT FILE NAME INFO
 	packet[index++] = FILE_NAME_FLAG;
-	packet[index++] = strlen(file_name);
+	packet[index++] = sizeof(file_name);
 
 	for(int i = 0; i < strlen(file_name); i++) {
 		packet[index++] = file_name[i];
@@ -73,7 +72,7 @@ int sendControlPacket(unsigned char control_field, int file_size, char* file_nam
 
 	printf("Sending Control Packet\n");
 	bytesWritten = llwrite(fd, packet, index);
-	if (bytesWritten == -1){
+	if (bytesWritten == -1) {
 		printf("ERROR in llwrite!\n");
 		return -1;
 	}
@@ -86,7 +85,7 @@ int sendDataPackets(int file_size, int fd_file, int fd){
 
 	char buf[MAX_CHUNK_SIZE];
 	int chunksSent = 0;
-	int chunksToSend = ceil(file_size/MAX_CHUNK_SIZE);
+	int chunksToSend = file_size / MAX_CHUNK_SIZE + (file_size % MAX_CHUNK_SIZE != 0);
 	int bytesRead = 0;
 
 	int bytesWritten = 0;
@@ -96,7 +95,7 @@ int sendDataPackets(int file_size, int fd_file, int fd){
 		printf("before read in send data packets\n");
 		bytesRead = read(fd_file, &buf, MAX_CHUNK_SIZE);
 		printf("after read in send data packets\n");;
-		char packet[DATA_PACKET_SIZE + bytesRead];
+		unsigned char packet[DATA_PACKET_SIZE + bytesRead];
 
 		packet[0] = DATA_FIELD;
 		packet[1] = chunksSent % 255;
@@ -105,7 +104,7 @@ int sendDataPackets(int file_size, int fd_file, int fd){
 		memcpy(&packet[4], &buf, bytesRead);
 
 		printf("Sending Data Packet\n");
-		bytesWritten = llwrite(fd, packet, strlen(packet));
+		bytesWritten = llwrite(fd, packet, strlen((char*) packet));
 		if (bytesWritten == -1){
 			printf("ERROR in llwrite!\n");
 			return -1;
@@ -125,31 +124,30 @@ int receiveFile(int fd){
 	int bytesRead = 0;
 	int received = 0;
 
-	int new_file_fd;
-	while (!received) {
+	int new_file_fd = readControlPacket(fd);
 
+	while (!received) {
 		bytesRead += llread(fd, max_buf);
 
-		if (max_buf[0] == DATA_FIELD){
-			readDataPackets(max_buf, new_file_fd);
-		} else if (max_buf[0] == START_CONTROL_FIELD){
-			readControlPacket(max_buf, &new_file_fd);
-		} else if (max_buf[0] == END_CONTROL_FIELD){
+		if(max_buf[0] == DATA_FIELD)
+		 	readDataPackets(max_buf, new_file_fd);
+		else if (max_buf[0] == END_CONTROL_FIELD)
 			received = 1;
-		}
 	}
 
 	close(new_file_fd);
 
 	return 0;
-
 }
 
-int readControlPacket(unsigned char* packet, int* fd){
+int readControlPacket(int fd){
 
 	int index = 1;
-	int file_size;
+	int file_size = 0;
 	char* file_name;
+
+	unsigned char packet[MAX_CHUNK_SIZE];
+	llread(fd, packet);
 
 	//FILE SIZE
 	if(packet[index] == FILE_SIZE_FLAG){
@@ -158,42 +156,48 @@ int readControlPacket(unsigned char* packet, int* fd){
 		index++;
 
 		for (int i = 0; i < size_length; i++){
-			file_size += packet[index] << 8 * (size_length - 1);
+			file_size += packet[index] << 8 * (size_length - 1 - i);
 			index++;
 		}
-		index++;
+
+		printf("File size: %d\n", file_size);
 	}
 	if (file_size <= 0) {
 		perror("File size error\n");
 		return -1;
 	}
 
-	if (packet[index] == FILE_NAME_FLAG) { //FILE NAME
+	//FILE NAME
+	if (packet[index] == FILE_NAME_FLAG) {
 		index++;
 		int name_length = packet[index];
-		printf("Name length: %d\n", name_length);
 		index++;
 
-		file_name = (char*) malloc(name_length);
-		memcpy(&file_name, &packet[index], name_length);
+		file_name = (char*) malloc(name_length + 1);
+		for (int i = 0; i < name_length; i++) {
+			file_name[i] = packet[index];
+			index++;
+		}
+
 		file_name[name_length] = '\0';
 
-		printf("Name: %s\n", file_name);
+		printf("File Name: %s\n", file_name);
 	}
 
-	*fd = open(file_name, O_WRONLY | O_CREAT);
+	fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND);
 
-	return 0;
-
+	return fd;
 }
 
 // TODO review
 int readDataPackets(unsigned char* packet, int fd_file){
 
-	int dataSize = 256 * packet[2] + packet[3];
+	printf("WRITING DATA PACKETS TO FILE\n");
 
-	write(fd_file, packet, dataSize);
+	int dataSize = 256 * packet[2] + packet[3];
+	printf("data size: %d\n", dataSize);
+
+	write(fd_file, &packet[4], dataSize);
 
 	return 0;
-
 }
