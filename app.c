@@ -42,7 +42,7 @@ int sendControlPacket(unsigned char control_field, int file_size, char* file_nam
 
 	int index = 0;
 	int file_size_length = sizeof(file_size);
-	char packet[CONTROL_PACKET_SIZE + file_size_length + strlen(file_name)];
+	unsigned char packet[CONTROL_PACKET_SIZE + file_size_length + strlen(file_name)];
 
 	int bytesWritten = 0;
 
