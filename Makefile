@@ -1,13 +1,20 @@
 CC=gcc
-CFLAGS=
+CFLAGS=-Wall -Wextra -Werror -pedantic
 
-all: writenoncanonical noncanonical
+all: alarm app ll main
 
-writenoncanonical: writenoncanonical.c
-	$(CC) $(CFLAGS) -c -o writenoncanonical writenoncanonical.c
+alarm: alarm.c
+	$(CC) $(CFLAGS) -c -o alarm alarm.c
 
-noncanonical: noncanonical.c
-	$(CC) $(CFLAGS) -c -o noncanonical noncanonical.c
+ll: ll.c
+	$(CC) $(CFLAGS) -c -o ll ll.c
+
+app: app.c
+	$(CC) $(CFLAGS) -c -o app app.c
+
+
+main: main.c
+	$(CC) $(CFLAGS) -o main main.c
 
 clean:
-	rm -f *.o *.d noncanonical writenoncanonical
+	rm -f *.o *.d alarm app ll main

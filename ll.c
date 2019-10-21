@@ -267,14 +267,16 @@ int readCommand(int fd, const unsigned char expected[]) {
 int llwrite(int fd, char* packet, int length) {
 	int Ns = 0;
 	int bytesWritten = 0;
+
 	do {
 		// send frame
 		bytesWritten = writeFrame(fd, packet, length, Ns);
 		setAlarm(); // install alarm
 		alarmFlag = 0;
 		// read receiver response
-		if (readAck(fd, Ns) == -1) {
+		if (readAck(fd, Ns) == -1) { // REJ received
 			stopAlarm();
+			alarmFlag = 1;
 			continue;
 		}
 	} while(numRetry < MAX_RETRIES && alarmFlag);

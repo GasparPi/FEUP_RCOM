@@ -40,7 +40,7 @@ int sendFile(int fd_file, char* file_name, int fd){
 int sendControlPacket(unsigned char control_field, int file_size, char* file_name, int fd){
 
 	int index = 0;
-	int file_size_length = sizeof(file_size)/sizeof(int);
+	int file_size_length = sizeof(file_size);
 	char packet[CONTROL_PACKET_SIZE + file_size_length + strlen(file_name)];
 
 	int bytesWritten = 0;
@@ -51,15 +51,14 @@ int sendControlPacket(unsigned char control_field, int file_size, char* file_nam
 	packet[index++] = FILE_SIZE_FLAG; // Type1
 
 	unsigned char byteArray[file_size_length];
-	int byteArray_length = sizeof(byteArray)/sizeof(unsigned char);
 
-	for (int i = 0; i < byteArray_length; i++){
-		byteArray[i] = (file_size >> 8*i) & 0xFF;
+	for (int i = 0; i < file_size_length; i++){
+		byteArray[i] = (file_size >> 8*(file_size_length - 1 - i)) & 0xFF;
 	}
 
-	packet[index++] = byteArray_length;
+	packet[index++] = file_size_length;
 
-	for (int i = 0; i < byteArray_length; i++){
+	for (int i = 0; i < file_size_length; i++){
 		packet[index++] = byteArray[i];
 	}
 
@@ -67,7 +66,7 @@ int sendControlPacket(unsigned char control_field, int file_size, char* file_nam
 	packet[index++] = FILE_NAME_FLAG;
 	packet[index++] = strlen(file_name);
 
-	for(int i = 0; i < strlen(file_name); i++) {
+	for(size_t i = 0; i < strlen(file_name); i++) {
 		packet[index++] = file_name[i];
 	}
 
@@ -78,6 +77,7 @@ int sendControlPacket(unsigned char control_field, int file_size, char* file_nam
 		return -1;
 	}
 
+
 	printf("Wrote %d control bytes\n", bytesWritten);
 	return 0;
 }
@@ -86,26 +86,33 @@ int sendDataPackets(int file_size, int fd_file, int fd){
 
 	char buf[MAX_CHUNK_SIZE];
 	int chunksSent = 0;
-	int chunksToSend = ceil(file_size/MAX_CHUNK_SIZE);
+	int chunksToSend = file_size / MAX_CHUNK_SIZE + (file_size % MAX_CHUNK_SIZE != 0);
 	int bytesRead = 0;
 
 	int bytesWritten = 0;
 	int totalBytesWritten = 0;
 
+	printf("File size: %d\n", file_size);
+	printf("Chunks Sent: %d\n", chunksToSend);
+
+
 	while (chunksSent < chunksToSend){
 		printf("before read in send data packets\n");
 		bytesRead = read(fd_file, &buf, MAX_CHUNK_SIZE);
-		printf("after read in send data packets\n");;
+		printf("after read in send data packets\n");
 		char packet[DATA_PACKET_SIZE + bytesRead];
 
 		packet[0] = DATA_FIELD;
 		packet[1] = chunksSent % 255;
 		packet[2] = bytesRead / 256;
-		packet[3] = DATA_PACKET_SIZE % 256;
+		packet[3] = bytesRead % 256;
 		memcpy(&packet[4], &buf, bytesRead);
 
+		printf("Packet [1]: %x\n", packet[2] & 0xFF);
+		printf("Packet [2]: %x\n", packet[3] & 0xFF);
+
 		printf("Sending Data Packet\n");
-		bytesWritten = llwrite(fd, packet, strlen(packet));
+		bytesWritten = llwrite(fd, packet, bytesRead + DATA_PACKET_SIZE);
 		if (bytesWritten == -1){
 			printf("ERROR in llwrite!\n");
 			return -1;
