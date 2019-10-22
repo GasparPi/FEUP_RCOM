@@ -61,6 +61,7 @@ unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length);
 unsigned char communicationStateMachine(enum state* connection_state, unsigned char byte_read);
 int readAck(int fd, int Ns);
 int writeFrame(int fd, unsigned char* packet, int length, int Ns);
+int destuffFrame(unsigned char* frame, int frame_length, unsigned char* destuffedFrame);
 
 // ll functions
 int llopen(const char* port, int role);

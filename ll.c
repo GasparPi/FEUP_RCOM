@@ -270,7 +270,7 @@ int llwrite(int fd, unsigned char* packet, int length) {
 	int bytesWritten = 0;
 
 	do {
-		// send frame\
+		// send frame
 		bytesWritten = writeFrame(fd, packet, length, Ns);
 		setAlarm(); // install alarm
 		alarmFlag = 0;
@@ -333,42 +333,18 @@ int writeFrame(int fd, unsigned char* packet, int length, int Ns) {
 
 int llread(int fd, unsigned char* buf) {
 	int received = 0;
-	int bytesRead = 1;
 	int frame_length = 0;
+	int destuffed_frame_length = 0;
+	int packet_length = 0;
 	unsigned char frame[MAX_FRAME_SIZE];
 	unsigned char destuffedFrame[MAX_FRAME_SIZE];
 	unsigned char control_field;
 
 	while(!received) {
 		if ((frame_length = readFrame(fd, frame))) {
-			// remove frame header and tail
 			// destuff packet
-			// HEADER
-			destuffedFrame[0] = frame[0]; // FLAG
-			destuffedFrame[1] = frame[1]; // A
-			destuffedFrame[2] = frame[2]; // C
-			destuffedFrame[3] = frame[3]; // BCC1
-			// DATA
-			int j = 4;
-			int i;
-			for (i = 4; i < frame_length - 2; i++) { // TODO clean i = 4 and -2
-				if (frame[i] == ESC) {
-					i++;
-					if (frame[i] == (FLAG ^ STUFFING))
-						destuffedFrame[j++] = FLAG;
-					else if (frame[i] == (ESC ^ STUFFING))
-						destuffedFrame[j++] = ESC;
-				}
-				else {
-					destuffedFrame[j++] = frame[i];
-				}
-			}
+			destuffed_frame_length = destuffFrame(frame, frame_length, destuffedFrame);			
 			control_field = frame[2];
-			// FOOTER
-			destuffedFrame[j++] = frame[i++]; // BCC2
-			destuffedFrame[j++] = frame[i++]; // FLAG
-
-			//printf("frame[4]: %x\npacket[0]: %x\n",frame[4] & 0xff, buf[0] & 0xff);
 
 			// verify data packet
 			if(verifyDataPacketReceived(destuffedFrame, j) != 0) {
@@ -380,6 +356,12 @@ int llread(int fd, unsigned char* buf) {
 					write(fd, REJ0, sizeof(REJ0)/sizeof(unsigned char));
 			}
 			else {
+				// save packet of buffer
+				for (int i = 4; i < destuffed_frame_length - 2; i++) {
+					buf[packet_length] = destuffFrame[i];
+					packet_length++;
+				}
+
 				if (control_field == C0)
 					write(fd, RR1, sizeof(RR1)/sizeof(unsigned char));
 				else if (control_field == C1)
@@ -389,7 +371,37 @@ int llread(int fd, unsigned char* buf) {
 		}
 	}
 
-	return bytesRead;
+	// of frame_length - not sure
+	return packet_length;
+}
+
+int destuffFrame(unsigned char* frame, int frame_length, unsigned char* destuffedFrame) {
+	// HEADER
+	destuffedFrame[0] = frame[0]; // FLAG
+	destuffedFrame[1] = frame[1]; // A
+	destuffedFrame[2] = frame[2]; // C
+	destuffedFrame[3] = frame[3]; // BCC1
+	// DATA
+	int j = 4;
+	int i;
+	for (i = 4; i < frame_length - 2; i++) { // TODO clean i = 4 and -2
+		if (frame[i] == ESC) {
+			i++;
+			if (frame[i] == (FLAG ^ STUFFING))
+				destuffedFrame[j++] = FLAG;
+			else if (frame[i] == (ESC ^ STUFFING))
+				destuffedFrame[j++] = ESC;
+		}
+		else {
+			destuffedFrame[j++] = frame[i];
+		}
+	}
+
+	// FOOTER
+	destuffedFrame[j++] = frame[i++]; // BCC2
+	destuffedFrame[j++] = frame[i++]; // FLAG
+
+	return j;
 }
 
 unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length) {

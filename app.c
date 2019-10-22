@@ -78,7 +78,6 @@ int sendControlPacket(unsigned char control_field, int file_size, char* file_nam
 		return -1;
 	}
 
-
 	printf("Wrote %d control bytes\n", bytesWritten);
 	printf("file name %s\n", file_name);
 	printf("file name length %lu\n", strlen(file_name));
