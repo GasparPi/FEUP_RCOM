@@ -80,6 +80,9 @@ int sendControlPacket(unsigned char control_field, int file_size, char* file_nam
 
 
 	printf("Wrote %d control bytes\n", bytesWritten);
+	printf("file name %s\n", file_name);
+	printf("file name length %lu\n", strlen(file_name));
+
 	return 0;
 }
 
@@ -180,6 +183,7 @@ int readControlPacket(int fd){
 	if (packet[index] == FILE_NAME_FLAG) {
 		index++;
 		int name_length = packet[index];
+		printf("name length: %d\n", name_length);
 		index++;
 
 		file_name = (char*) malloc(name_length + 1);
