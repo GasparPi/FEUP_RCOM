@@ -292,9 +292,9 @@ int llwrite(int fd, unsigned char* packet, int length) {
 
 int writeFrame(int fd, unsigned char* packet, int length, int Ns) {
 
-	char frame[2 * length + 6]; // TODO clean 2 * ____ + 6
-	int dataIndex, frameIndex, frameSize, bccResult;
-	char packetChar;
+	unsigned char frame[2 * length + 6]; // TODO clean 2 * ____ + 6
+	int dataIndex, frameIndex;
+	unsigned char packetChar;
 
 	// Set of frame header
 	frame[0] = FLAG;
@@ -302,11 +302,10 @@ int writeFrame(int fd, unsigned char* packet, int length, int Ns) {
 	frame[2] = (Ns == 0 ? C0 : C1);
 	frame[3] = BCC(A_CMD, frame[2]);
 
-	bccResult = calculateDataBCC(packet, length);
+	unsigned char bccResult = calculateDataBCC(packet, length);
 
 	dataIndex = 0;
 	frameIndex = 4;
-	frameSize = 4;
 
 	//Process data camp
 	while (dataIndex < length) {
@@ -316,23 +315,20 @@ int writeFrame(int fd, unsigned char* packet, int length, int Ns) {
 		// Byte stuffing
 		if (packetChar == FLAG || packetChar == ESC) {
 			frame[frameIndex++] = ESC;
-			frame[frameIndex++] = packetChar ^ STUFFING;
-			frameSize += 2;
+			frame[frameIndex++] = packetChar ^ STUFFING;		
 		}
 		else {
 			frame[frameIndex++] = packetChar;
-			frameSize++;
 		}
 	}
 
 	// Set of frame footer
-	frame[frameIndex] = bccResult;
-	frame[frameIndex + 1] = FLAG;
-	frameSize += 2;
-	write(fd, frame, frameSize);
+	frame[frameIndex++] = bccResult;
+	frame[frameIndex++] = FLAG;
+	write(fd, frame, frameIndex);
 
-	// printf("Sent frame size: %d\n", frameSize);
-	return frameSize;
+	printf("Sent frame size: %d\n", frameIndex);
+	return frameIndex;
 }
 
 int llread(int fd, unsigned char* buf) {
