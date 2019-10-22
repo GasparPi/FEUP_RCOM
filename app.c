@@ -65,7 +65,7 @@ int sendControlPacket(unsigned char control_field, int file_size, char* file_nam
 
 	//INSERT FILE NAME INFO
 	packet[index++] = FILE_NAME_FLAG;
-	packet[index++] = sizeof(file_name);
+	packet[index++] = strlen(file_name);
 
 	for(size_t i = 0; i < strlen(file_name); i++) {
 		packet[index++] = file_name[i];
@@ -113,7 +113,7 @@ int sendDataPackets(int file_size, int fd_file, int fd){
 		printf("Packet [2]: %x\n", packet[3] & 0xFF);
 
 		printf("Sending Data Packet\n");
-		bytesWritten = llwrite(fd, packet, strlen((char*) packet));
+		bytesWritten = llwrite(fd, packet, bytesRead + DATA_PACKET_SIZE);
 		if (bytesWritten == -1){
 			printf("ERROR in llwrite!\n");
 			return -1;
@@ -190,6 +190,7 @@ int readControlPacket(int fd){
 
 		file_name[name_length] = '\0';
 
+		printf("Name length: %d\n", name_length);
 		printf("File Name: %s\n", file_name);
 	}
 
