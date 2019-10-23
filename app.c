@@ -14,21 +14,25 @@ int sendFile(int fd_file, char* file_name, int fd){
 
 	file_size = buf.st_size;
 
+	printf("\n***File info:***\n\n");
 	printf("File Size: %d\n", file_size);
 
 	//Send Start Control Packet
+	printf("\n***Sending start control packet:***\n\n");
 	if (sendControlPacket(START_CONTROL_FIELD, file_size, file_name, fd) == -1) {
 		printf("ERROR sending the first control packet!\n");
 		return -1;
 	}
 
 	//Send Data Packets
+	printf("\n***Sending data packets:***\n\n");
 	if (sendDataPackets(file_size, fd_file, fd) == -1) {
 		printf("ERROR sending the the data packets!\n");
 		return -1;
 	}
 
 	//Send End Control Packet
+	printf("\n***Sending end control packet:***\n\n");
 	if (sendControlPacket(END_CONTROL_FIELD, file_size, file_name, fd) == -1) {
 		printf("ERROR sending the last control packet!\n");
 		return -1;
@@ -100,9 +104,7 @@ int sendDataPackets(int file_size, int fd_file, int fd){
 
 
 	while (chunksSent < chunksToSend){
-		printf("before read in send data packets\n");
 		bytesRead = read(fd_file, &buf, MAX_CHUNK_SIZE);
-		printf("after read in send data packets\n");;
 		unsigned char packet[DATA_PACKET_SIZE + bytesRead];
 
 		packet[0] = DATA_FIELD;
@@ -111,10 +113,6 @@ int sendDataPackets(int file_size, int fd_file, int fd){
 		packet[3] = bytesRead % 256;
 		memcpy(&packet[4], &buf, bytesRead);
 
-		printf("Packet [1]: %x\n", packet[2] & 0xFF);
-		printf("Packet [2]: %x\n", packet[3] & 0xFF);
-
-		printf("Sending Data Packet\n");
 		bytesWritten = llwrite(fd, packet, bytesRead + DATA_PACKET_SIZE);
 		if (bytesWritten == -1){
 			printf("ERROR in llwrite!\n");
@@ -125,7 +123,8 @@ int sendDataPackets(int file_size, int fd_file, int fd){
 		chunksSent++;
 	}
 
-	printf("Wrote %d data bytes\n", totalBytesWritten);
+	printf("Wrote %d bytes\n", totalBytesWritten);
+	printf("Wrote %d data bytes\n", totalBytesWritten - DATA_PACKET_SIZE * chunksSent);
 	return 0;
 }
 

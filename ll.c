@@ -20,7 +20,7 @@ int llopen(const char* port, int role) {
 	if (role == TRANSMITTER) {
 
 		do {
-			printf("Sending SET Message!\n");
+			printf("Writing SET\n");
 			// send SET message
 			write(fd, SET, sizeof(SET)/sizeof(unsigned char));
 			setAlarm(); // install alarm
@@ -58,13 +58,13 @@ int llclose(int fd, int role) {
 
 	if (role == TRANSMITTER) {
 		do {
-			printf("Sending DISC Message!\n");
+			printf("Writing DISC\n");
 			// send DISC frame
 			write(fd, DISC, sizeof(DISC)/sizeof(unsigned char));
 			setAlarm(); // install alarm
 			alarmFlag = 0;
 			// read DISC frame
-			printf("Reading DISC Message!\n");
+			printf("Reading DISC\n");
 			readResponse(fd, DISC);
 
   	} while(numRetry < MAX_RETRIES && alarmFlag);
@@ -74,15 +74,15 @@ int llclose(int fd, int role) {
   	if (numRetry >= MAX_RETRIES)
     		printf("MAX RETRIES!!!\n");
 		else {
-			printf("SENDING UA MESSAGE\n");
+			printf("Writing UA\n");
 			// send UA frame
 			write(fd, UA, sizeof(UA)/sizeof(unsigned char));
+			sleep(1); // "wait" for receiver to read file UA
 		}
-
 	} else if (role == RECEIVER) {
 		// read DISC frame
 		printf("Reading DISC\n");
-    	if (readCommand(fd, DISC) == -1)
+    if (readCommand(fd, DISC) == -1)
 			return -2;
 		// send DISC frame
 		printf("Writing DISC\n");
@@ -176,21 +176,27 @@ int readAck(int fd, int Ns) {
  	unsigned char byte_read, control_field;
  	enum state current_state = START;
 
-	printf("Starting state machine\n");
-
  	while (!alarmFlag && current_state != STOP) {
 	  read(fd, &byte_read, 1);
 		control_field = communicationStateMachine(&current_state, byte_read);
   }
 
-	if (control_field == C_RR0 && Ns == 1)
+	if (control_field == C_RR0 && Ns == 1) {
+		printf("RR received: %d\n", Ns);
 		return 0;
-	else if (control_field == C_RR1 && Ns == 0)
+	}
+	else if (control_field == C_RR1 && Ns == 0) {
+		printf("RR received: %d\n", Ns);
 		return 0;
-	else if (control_field == C_REJ0 && Ns == 1)
+	}
+	else if (control_field == C_REJ0 && Ns == 1) {
+		printf("REJ received: %d\n", Ns);
 		return -1;
-	else if (control_field == C_REJ1 && Ns == 0)
+	}
+	else if (control_field == C_REJ1 && Ns == 0) {
+		printf("REJ received: %d\n", Ns);
 		return -1;
+	}
 	else
 		return -1; // undefined error
 }
@@ -267,11 +273,10 @@ int readCommand(int fd, const unsigned char expected[]) {
 int llwrite(int fd, unsigned char* packet, int length) {
 	static int Ns = 1;
 	Ns = (Ns == 0);
-	int bytesWritten = 0;
 
 	do {
 		// send frame
-		bytesWritten = writeFrame(fd, packet, length, Ns);
+		writeFrame(fd, packet, length, Ns);
 		setAlarm(); // install alarm
 		alarmFlag = 0;
 		// read receiver response
@@ -287,7 +292,9 @@ int llwrite(int fd, unsigned char* packet, int length) {
 	if (numRetry == MAX_RETRIES)
 		return -1;
 
-	return bytesWritten;
+	numRetry = 0;
+
+	return length;
 }
 
 int writeFrame(int fd, unsigned char* packet, int length, int Ns) {
@@ -315,7 +322,7 @@ int writeFrame(int fd, unsigned char* packet, int length, int Ns) {
 		// Byte stuffing
 		if (packetChar == FLAG || packetChar == ESC) {
 			frame[frameIndex++] = ESC;
-			frame[frameIndex++] = packetChar ^ STUFFING;		
+			frame[frameIndex++] = packetChar ^ STUFFING;
 		}
 		else {
 			frame[frameIndex++] = packetChar;
@@ -323,7 +330,14 @@ int writeFrame(int fd, unsigned char* packet, int length, int Ns) {
 	}
 
 	// Set of frame footer
-	frame[frameIndex++] = bccResult;
+	if (bccResult == ESC || bccResult == FLAG) {
+		frame[frameIndex++] = ESC;
+		frame[frameIndex++] = bccResult ^ STUFFING;
+	}
+	else {
+		frame[frameIndex++] = bccResult;
+	}
+
 	frame[frameIndex++] = FLAG;
 	write(fd, frame, frameIndex);
 
@@ -343,11 +357,11 @@ int llread(int fd, unsigned char* buf) {
 	while(!received) {
 		if ((frame_length = readFrame(fd, frame))) {
 			// destuff packet
-			destuffed_frame_length = destuffFrame(frame, frame_length, destuffedFrame);			
+			destuffed_frame_length = destuffFrame(frame, frame_length, destuffedFrame);
 			control_field = frame[2];
 
 			// verify data packet
-			if(verifyDataPacketReceived(destuffedFrame, j) != 0) {
+			if(verifyDataPacketReceived(destuffedFrame, destuffed_frame_length) != 0) {
 				// send response accordingly
 				printf("LLREAD: Packet is not data or has header errors\n"); //does not save packet
 				if (control_field == C0)
@@ -358,7 +372,7 @@ int llread(int fd, unsigned char* buf) {
 			else {
 				// save packet of buffer
 				for (int i = 4; i < destuffed_frame_length - 2; i++) {
-					buf[packet_length] = destuffFrame[i];
+					buf[packet_length] = destuffedFrame[i];
 					packet_length++;
 				}
 
