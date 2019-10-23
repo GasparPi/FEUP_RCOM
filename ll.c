@@ -51,6 +51,7 @@ int llopen(const char* port, int role) {
 		return 1;
 	}
 
+
 	return fd;
 }
 
@@ -80,6 +81,9 @@ int llclose(int fd, int role) {
 		}
 
 	} else if (role == RECEIVER) {
+
+		printf("***Closing connection***\n\n");
+
 		// read DISC frame
 		printf("Reading DISC\n");
     	if (readCommand(fd, DISC) == -1)
@@ -113,6 +117,8 @@ int stopConnection(int fd) {
 	}
 
 	close(fd);
+
+	printf("\nDATA TRANFER CONCLUDED SUCCESFULLY\n\n");
 
 	return 0;
 }
@@ -347,25 +353,35 @@ int llread(int fd, unsigned char* buf) {
 			control_field = frame[2];
 
 			// verify data packet
-			if(verifyDataPacketReceived(destuffedFrame, j) != 0) {
+			if(verifyDataPacketReceived(destuffedFrame, destuffed_frame_length) != 0) {
 				// send response accordingly
-				printf("LLREAD: Packet is not data or has header errors\n"); //does not save packet
-				if (control_field == C0)
+				printf("LLREAD: Packet is not data or has header errors\n\n"); //does not save packet
+				if (control_field == C0){
 					write(fd, REJ1, sizeof(REJ1)/sizeof(unsigned char));
-				else if (control_field == C1)
+					printf("REJ sent: 1\n");
+				}
+				else if (control_field == C1){
 					write(fd, REJ0, sizeof(REJ0)/sizeof(unsigned char));
+					printf("REJ sent: 0\n");					
+				}
+
+				return 0;
 			}
 			else {
 				// save packet of buffer
 				for (int i = 4; i < destuffed_frame_length - 2; i++) {
-					buf[packet_length] = destuffFrame[i];
+					buf[packet_length] = destuffedFrame[i];
 					packet_length++;
 				}
 
-				if (control_field == C0)
+				if (control_field == C0){
 					write(fd, RR1, sizeof(RR1)/sizeof(unsigned char));
-				else if (control_field == C1)
+					printf("RR sent: 1\n");
+				}
+				else if (control_field == C1){
 					write(fd, RR0, sizeof(RR0)/sizeof(unsigned char));
+					printf("RR sent: 0\n");
+				}
 				received = 1;
 			}
 		}
@@ -384,7 +400,7 @@ int destuffFrame(unsigned char* frame, int frame_length, unsigned char* destuffe
 	// DATA
 	int j = 4;
 	int i;
-	for (i = 4; i < frame_length - 2; i++) { // TODO clean i = 4 and -2
+	for (i = 4; i < frame_length - 1; i++) { 
 		if (frame[i] == ESC) {
 			i++;
 			if (frame[i] == (FLAG ^ STUFFING))
@@ -398,11 +414,11 @@ int destuffFrame(unsigned char* frame, int frame_length, unsigned char* destuffe
 	}
 
 	// FOOTER
-	destuffedFrame[j++] = frame[i++]; // BCC2
 	destuffedFrame[j++] = frame[i++]; // FLAG
 
 	return j;
 }
+
 
 unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length) {
 	unsigned char bcc = 0x00;
@@ -423,12 +439,12 @@ int verifyDataPacketReceived(unsigned char* buffer, int size){
 		unsigned char dataBCC = buffer[size - 2];
 
 		if(dataBCC != calculatedDataBCC) {
-			printf("LLREAD: Bad dataBCC\n");
+			printf("\nLLREAD: Bad dataBCC\n");
 			return -2;
 		}
 	}
 	else if(control_field != C0 && control_field != C1){
-		printf("LLREAD: Bad control field: %d\n", control_field);
+		printf("\nLLREAD: Bad control field: %d\n", control_field);
 		return -1;
 	}
 
@@ -452,6 +468,7 @@ int readFrame(int fd, unsigned char* buf) {
 		buf[length++] = byte_read;
 	}
 
+	printf("Read frame length: %d\n", length);
 	return length;
 }
 

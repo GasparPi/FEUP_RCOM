@@ -49,7 +49,7 @@ int sendControlPacket(unsigned char control_field, int file_size, char* file_nam
 	packet[index++] = control_field;
 
 	//INSERT FILE SIZE INFO
-	packet[index++] = FILE_SIZE_FLAG; //Type1
+	packet[index++] = FILE_SIZE_FLAG;
 
 	unsigned char byteArray[file_size_length];
 
@@ -134,17 +134,25 @@ int receiveFile(int fd){
 	unsigned char max_buf[MAX_CHUNK_SIZE + DATA_PACKET_SIZE];
 	int bytesRead = 0;
 	int received = 0;
+	int llAux = 0;
+
+	printf("\n***Reading Control Packet***\n\n");
 
 	int new_file_fd = readControlPacket(fd);
 
-	while (!received) {
-		bytesRead += llread(fd, max_buf);
+	printf("***Reading Data Packets***\n\n");
 
-		if(max_buf[0] == DATA_FIELD)
-		 	readDataPackets(max_buf, new_file_fd);
-		else if (max_buf[0] == END_CONTROL_FIELD)
-			received = 1;
+	while (!received) {
+		if((llAux = llread(fd, max_buf)) != 0) {
+			bytesRead += llAux;
+			if(max_buf[0] == DATA_FIELD)
+				readDataPackets(max_buf, new_file_fd);
+			else if (max_buf[0] == END_CONTROL_FIELD)
+				received = 1;
+		}
 	}
+
+	printf("\n");
 
 	close(new_file_fd);
 
@@ -160,6 +168,8 @@ int readControlPacket(int fd){
 	unsigned char packet[MAX_CHUNK_SIZE];
 	llread(fd, packet);
 
+	printf("\n***File info:***\n\n");
+
 	//FILE SIZE
 	if(packet[index] == FILE_SIZE_FLAG){
 		index++;
@@ -171,7 +181,7 @@ int readControlPacket(int fd){
 			index++;
 		}
 
-		printf("File size: %d\n", file_size);
+		printf("File size: %d bytes\n", file_size);
 	}
 	if (file_size <= 0) {
 		perror("File size error\n");
@@ -182,7 +192,6 @@ int readControlPacket(int fd){
 	if (packet[index] == FILE_NAME_FLAG) {
 		index++;
 		int name_length = packet[index];
-		printf("name length: %d\n", name_length);
 		index++;
 
 		file_name = (char*) malloc(name_length + 1);
@@ -193,8 +202,7 @@ int readControlPacket(int fd){
 
 		file_name[name_length] = '\0';
 
-		printf("Name length: %d\n", name_length);
-		printf("File Name: %s\n", file_name);
+		printf("File Name: %s\n\n", file_name);
 	}
 
 	fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND);
@@ -202,13 +210,12 @@ int readControlPacket(int fd){
 	return fd;
 }
 
-// TODO review
 int readDataPackets(unsigned char* packet, int fd_file){
 
-	printf("WRITING DATA PACKETS TO FILE\n");
+	printf("Writing data packets to file\n");
 
 	int dataSize = 256 * packet[2] + packet[3];
-	printf("data size: %d\n", dataSize);
+	printf("Packet size: %d bytes\n\n", dataSize);
 
 	write(fd_file, &packet[4], dataSize);
 
