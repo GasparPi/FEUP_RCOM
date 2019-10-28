@@ -48,19 +48,52 @@ enum state {
  	C_RCV,
  	BCC_OK,
  	DATA_RCV,
-  STOP
+	STOP
 };
 
+typedef struct {
+	// port name "/dev/ttySX"
+	char port[20];
+	// connection mode
+	unsigned int mode;
+	// transmission speed
+	unsigned int baudrate;
+	// frame sequence number
+	unsigned int ns;
+	// timeout value
+	unsigned int timeout;
+	// number of retries
+	unsigned int numRetries;
+	// alarm flag
+	unsigned int alarmFlag;
+	// old and new termios struct
+	struct termios oldtio, newtio;
+} DataLink;
+
+typedef struct {
+	unsigned int sentMessages;
+	unsigned int receivedMessages;
+
+	unsigned int timeouts;
+
+	unsigned int numSentRR;
+	unsigned int numReceivedRR;
+
+	unsigned int numSentREJ;
+	unsigned int numReceivedREJ;
+} Statistics;
+
 // aux ll functions
-int startConnection(const char* port);
+int setDataLinkStruct(const char* port, int role);
+int startConnection();
 int stopConnection(int fd);
 int dataStateMachine(enum state* connection_state, unsigned char byte_read);
 int readFrame(int fd, unsigned char* buf);
 int verifyDataPacketReceived(unsigned char * buffer, int size);
 unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length);
 unsigned char communicationStateMachine(enum state* connection_state, unsigned char byte_read);
-int readAck(int fd, int Ns);
-int writeFrame(int fd, unsigned char* packet, int length, int Ns);
+int readAck(int fd);
+int writeFrame(int fd, unsigned char* packet, int length);
 int destuffFrame(unsigned char* frame, int frame_length, unsigned char* destuffedFrame);
 
 // ll functions

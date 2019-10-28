@@ -9,5 +9,5 @@ extern int alarmFlag;
 extern int numRetry;
 
 void alarmHandler(int signal);
-void setAlarm();
+void setAlarm(unsigned int seconds);
 void stopAlarm();

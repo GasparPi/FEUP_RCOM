@@ -11,7 +11,7 @@ void alarmHandler(int signal) {
 	//alarm(MAX_TIMEOUT);
 }
 
-void setAlarm() {
+void setAlarm(unsigned int seconds) {
   // set sigaction struct
 	struct sigaction sa;
 	sa.sa_handler = &alarmHandler;
@@ -22,7 +22,7 @@ void setAlarm() {
 
 	alarmFlag = 0;
 
-	alarm(MAX_TIMEOUT); // install alarm
+	alarm(seconds); // install alarm
 }
 
 void stopAlarm() {
