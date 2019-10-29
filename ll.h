@@ -52,27 +52,8 @@ enum state {
 };
 
 typedef struct {
-	// port name "/dev/ttySX"
-	char port[20];
-	// connection mode
-	unsigned int mode;
-	// transmission speed
-	unsigned int baudrate;
-	// frame sequence number
-	unsigned int ns;
-	// timeout value
-	unsigned int timeout;
-	// number of retries
-	unsigned int numRetries;
-	// alarm flag
-	unsigned int alarmFlag;
-	// old and new termios struct
-	struct termios oldtio, newtio;
-} DataLink;
-
-typedef struct {
-	unsigned int sentMessages;
-	unsigned int receivedMessages;
+	unsigned int numSentIFrames;
+	unsigned int numReceivedIFrames;
 
 	unsigned int timeouts;
 
@@ -83,18 +64,37 @@ typedef struct {
 	unsigned int numReceivedREJ;
 } Statistics;
 
-// aux ll functions
+typedef struct {
+	// port name "/dev/ttySX"
+	char port[20];
+	// connection mode (receiver or transmitter)
+	unsigned int mode;
+	// transmission speed
+	unsigned int baudrate;
+	// frame sequence number
+	unsigned int ns;
+  // alarm
+	unsigned int timeout;
+	unsigned int numRetries;
+	unsigned int alarmFlag;
+
+	struct termios oldtio, newtio;
+
+  Statistics stats;
+} DataLink;
+
+extern DataLink dataLink;
+
+// Data link structure
 int setDataLinkStruct(const char* port, int role);
+int displayStatistics();
+
+// aux ll functions
 int startConnection();
 int stopConnection(int fd);
 int dataStateMachine(enum state* connection_state, unsigned char byte_read);
-int readFrame(int fd, unsigned char* buf);
-int verifyDataPacketReceived(unsigned char * buffer, int size);
 unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length);
 unsigned char communicationStateMachine(enum state* connection_state, unsigned char byte_read);
-int readAck(int fd);
-int writeFrame(int fd, unsigned char* packet, int length);
-int destuffFrame(unsigned char* frame, int frame_length, unsigned char* destuffedFrame);
 
 // ll functions
 int llopen(const char* port, int role);
@@ -104,6 +104,11 @@ int llread(int fd, unsigned char* buf);
 
 // Transmitter
 int readResponse(int fd, const unsigned char expected[]);
+int writeFrame(int fd, unsigned char* packet, int length);
+int readAck(int fd);
 
 // Receiver
 int readCommand(int fd, const unsigned char expected[]);
+int readFrame(int fd, unsigned char* buf);
+int destuffFrame(unsigned char* frame, int frame_length, unsigned char* destuffedFrame);
+int verifyDataPacketReceived(unsigned char * buffer, int size);

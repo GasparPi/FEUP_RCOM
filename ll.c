@@ -18,10 +18,22 @@ int setDataLinkStruct(const char* port, int role) {
 	dataLink.timeout = MAX_TIMEOUT;
 	dataLink.alarmFlag = 1;
 	dataLink.numRetries = 0;
+
+	Statistics statistics;
+	statistics.numSentIFrames = 0;
+	statistics.numReceivedIFrames = 0;
+	statistics.timeouts = 0;
+	statistics.numSentRR = 0;
+	statistics.numReceivedRR = 0;
+	statistics.numSentREJ = 0;
+	statistics.numReceivedREJ = 0;
+
+	dataLink.stats = statistics;
+
+	return 0;
 }
 
 int llopen(const char* port, int role) {
-	
 
 	int fd;
 	setDataLinkStruct(port, role);
@@ -34,7 +46,7 @@ int llopen(const char* port, int role) {
 			printf("Writing SET\n");
 			// send SET message
 			write(fd, SET, sizeof(SET)/sizeof(unsigned char));
-			setAlarm(dataLink.timeout); // install alarm
+			setAlarm(); // install alarm
 			dataLink.alarmFlag = 0;
 			// read UA frame
 			readResponse(fd, UA);
@@ -73,12 +85,11 @@ int llclose(int fd, int role) {
 			printf("Writing DISC\n");
 			// send DISC frame
 			write(fd, DISC, sizeof(DISC)/sizeof(unsigned char));
-			setAlarm(dataLink.timeout); // install alarm
+			setAlarm(); // install alarm
 			dataLink.alarmFlag = 0;
 			// read DISC frame
 			printf("Reading DISC\n");
 			readResponse(fd, DISC);
-
   	} while(dataLink.numRetries < MAX_RETRIES && dataLink.alarmFlag);
 
 		stopAlarm(); // uninstall alarm
@@ -152,7 +163,7 @@ int startConnection() {
 	}
 
 	bzero(&dataLink.newtio, sizeof(dataLink.newtio));
-	dataLink.newtio.c_cflag = BAUDRATE | CS8 | CLOCAL | CREAD;
+	dataLink.newtio.c_cflag = dataLink.baudrate | CS8 | CLOCAL | CREAD;
 	dataLink.newtio.c_iflag = IGNPAR;
 	dataLink.newtio.c_oflag = 0;
 
@@ -186,7 +197,7 @@ int readResponse(int fd, const unsigned char expected[]) {
  	while (!dataLink.alarmFlag && current_state != STOP) {
 	    read(fd, &byte_read, 1);
 	    communicationStateMachine(&current_state, byte_read);
-  	}
+  }
 
  	return 0;
 }
@@ -195,25 +206,29 @@ int readAck(int fd) {
  	unsigned char byte_read, control_field;
  	enum state current_state = START;
 
- 	while (!alarmFlag && current_state != STOP) {
+ 	while (!dataLink.alarmFlag && current_state != STOP) {
 		read(fd, &byte_read, 1);
 		control_field = communicationStateMachine(&current_state, byte_read);
-  	}
+  }
 
 	if (control_field == C_RR0 && dataLink.ns == 1) {
 		printf("RR received: %d\n", dataLink.ns);
+		dataLink.stats.numReceivedRR++;
 		return 0;
 	}
 	else if (control_field == C_RR1 && dataLink.ns == 0) {
 		printf("RR received: %d\n", dataLink.ns);
+		dataLink.stats.numReceivedRR++;
 		return 0;
 	}
 	else if (control_field == C_REJ0 && dataLink.ns == 1) {
 		printf("REJ received: %d\n", dataLink.ns);
+		dataLink.stats.numReceivedREJ++;
 		return -1;
 	}
 	else if (control_field == C_REJ1 && dataLink.ns == 0) {
 		printf("REJ received: %d\n", dataLink.ns);
+		dataLink.stats.numReceivedREJ++;
 		return -1;
 	}
 	else
@@ -295,22 +310,22 @@ int llwrite(int fd, unsigned char* packet, int length) {
 	do {
 		// send frame
 		writeFrame(fd, packet, length);
-		setAlarm(dataLink.timeout); // install alarm
-		alarmFlag = 0;
+		setAlarm(); // install alarm
+		dataLink.alarmFlag = 0;
 		// read receiver response
 		if (readAck(fd) == -1) { // REJ received
 			stopAlarm();
-			alarmFlag = 1;
+			dataLink.alarmFlag = 1;
 			continue;
 		}
-	} while(numRetry < MAX_RETRIES && alarmFlag);
+	} while(dataLink.numRetries < MAX_RETRIES && dataLink.alarmFlag);
 
 	stopAlarm();
 
-	if (numRetry == MAX_RETRIES)
+	if (dataLink.numRetries == MAX_RETRIES)
 		return -1;
 
-	numRetry = 0;
+	dataLink.numRetries = 0;
 
 	return length;
 }
@@ -358,6 +373,7 @@ int writeFrame(int fd, unsigned char* packet, int length) {
 
 	frame[frameIndex++] = FLAG;
 	write(fd, frame, frameIndex);
+	dataLink.stats.numSentIFrames++;
 
 	printf("Sent frame size: %d\n", frameIndex);
 	return frameIndex;
@@ -384,11 +400,13 @@ int llread(int fd, unsigned char* buf) {
 				printf("LLREAD: Packet is not data or has header errors\n\n"); //does not save packet
 				if (control_field == C0){
 					write(fd, REJ1, sizeof(REJ1)/sizeof(unsigned char));
+					dataLink.stats.numSentREJ++;
 					printf("REJ sent: 1\n");
 				}
 				else if (control_field == C1){
 					write(fd, REJ0, sizeof(REJ0)/sizeof(unsigned char));
-					printf("REJ sent: 0\n");					
+					dataLink.stats.numSentREJ++;
+					printf("REJ sent: 0\n");
 				}
 
 				return 0;
@@ -402,10 +420,12 @@ int llread(int fd, unsigned char* buf) {
 
 				if (control_field == C0){
 					write(fd, RR1, sizeof(RR1)/sizeof(unsigned char));
+					dataLink.stats.numSentRR++;
 					printf("RR sent: 1\n");
 				}
 				else if (control_field == C1){
 					write(fd, RR0, sizeof(RR0)/sizeof(unsigned char));
+					dataLink.stats.numSentRR++;
 					printf("RR sent: 0\n");
 				}
 				received = 1;
@@ -426,7 +446,7 @@ int destuffFrame(unsigned char* frame, int frame_length, unsigned char* destuffe
 	// DATA
 	int j = 4;
 	int i;
-	for (i = 4; i < frame_length - 1; i++) { 
+	for (i = 4; i < frame_length - 1; i++) {
 		if (frame[i] == ESC) {
 			i++;
 			if (frame[i] == (FLAG ^ STUFFING))
@@ -495,6 +515,7 @@ int readFrame(int fd, unsigned char* buf) {
 	}
 
 	printf("Read frame length: %d\n", length);
+	dataLink.stats.numReceivedIFrames++;
 	return length;
 }
 
@@ -545,6 +566,19 @@ int dataStateMachine(enum state* connection_state, unsigned char byte_read) {
 		default:
 			break;
 	}
+
+	return 0;
+}
+
+int displayStatistics() {
+	printf("\n***Statistics:***\n\n");
+	printf("Number of sent I frames: %d\n", dataLink.stats.numSentIFrames);
+	printf("Number of received I frames: %d\n", dataLink.stats.numReceivedIFrames);
+	printf("Number of timeouts: %d\n", dataLink.stats.timeouts);
+	printf("Number of sent RR frames: %d\n", dataLink.stats.numSentRR);
+	printf("Number of received RR frames: %d\n", dataLink.stats.numReceivedRR);
+	printf("Number of sent REJ frames: %d\n", dataLink.stats.numSentREJ);
+	printf("Number of received REJ frames: %d\n", dataLink.stats.numReceivedREJ);
 
 	return 0;
 }

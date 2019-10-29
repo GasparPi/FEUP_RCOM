@@ -4,14 +4,13 @@ void alarmHandler(int signal) {
   if(signal != SIGALRM)
     return;
 
-  printf("Alarm: %d\n", numRetry + 1);
-	alarmFlag = 1;
-	numRetry++;
-
-	//alarm(MAX_TIMEOUT);
+  printf("Alarm: %d\n", dataLink.numRetries + 1);
+	dataLink.alarmFlag = 1;
+	dataLink.numRetries++;
+  dataLink.stats.timeouts++;
 }
 
-void setAlarm(unsigned int seconds) {
+void setAlarm() {
   // set sigaction struct
 	struct sigaction sa;
 	sa.sa_handler = &alarmHandler;
@@ -20,9 +19,9 @@ void setAlarm(unsigned int seconds) {
 
 	sigaction(SIGALRM, &sa, NULL);
 
-	alarmFlag = 0;
+	dataLink.alarmFlag = 0;
 
-	alarm(seconds); // install alarm
+	alarm(dataLink.timeout); // install alarm
 }
 
 void stopAlarm() {
