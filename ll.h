@@ -48,20 +48,53 @@ enum state {
  	C_RCV,
  	BCC_OK,
  	DATA_RCV,
-  STOP
+	STOP
 };
 
+typedef struct {
+	unsigned int numSentIFrames;
+	unsigned int numReceivedIFrames;
+
+	unsigned int timeouts;
+
+	unsigned int numSentRR;
+	unsigned int numReceivedRR;
+
+	unsigned int numSentREJ;
+	unsigned int numReceivedREJ;
+} Statistics;
+
+typedef struct {
+	// port name "/dev/ttySX"
+	char port[20];
+	// connection mode (receiver or transmitter)
+	unsigned int mode;
+	// transmission speed
+	unsigned int baudrate;
+	// frame sequence number
+	unsigned int ns;
+  // alarm
+	unsigned int timeout;
+	unsigned int numRetries;
+	unsigned int alarmFlag;
+
+	struct termios oldtio, newtio;
+
+  Statistics stats;
+} DataLink;
+
+extern DataLink dataLink;
+
+// Data link structure
+int setDataLinkStruct(const char* port, int role);
+int displayStatistics();
+
 // aux ll functions
-int startConnection(const char* port);
+int startConnection();
 int stopConnection(int fd);
 int dataStateMachine(enum state* connection_state, unsigned char byte_read);
-int readFrame(int fd, unsigned char* buf);
-int verifyDataPacketReceived(unsigned char * buffer, int size);
 unsigned char calculateDataBCC(const unsigned char* dataBuffer, int length);
 unsigned char communicationStateMachine(enum state* connection_state, unsigned char byte_read);
-int readAck(int fd, int Ns);
-int writeFrame(int fd, unsigned char* packet, int length, int Ns);
-int destuffFrame(unsigned char* frame, int frame_length, unsigned char* destuffedFrame);
 
 // ll functions
 int llopen(const char* port, int role);
@@ -71,6 +104,11 @@ int llread(int fd, unsigned char* buf);
 
 // Transmitter
 int readResponse(int fd, const unsigned char expected[]);
+int writeFrame(int fd, unsigned char* packet, int length);
+int readAck(int fd);
 
 // Receiver
 int readCommand(int fd, const unsigned char expected[]);
+int readFrame(int fd, unsigned char* buf);
+int destuffFrame(unsigned char* frame, int frame_length, unsigned char* destuffedFrame);
+int verifyDataPacketReceived(unsigned char * buffer, int size);

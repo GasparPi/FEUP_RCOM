@@ -8,38 +8,61 @@ const unsigned char RR1[] = {FLAG, A_CMD, C_RR1, BCC(A_CMD, C_RR1), FLAG};
 const unsigned char REJ0[] = {FLAG, A_CMD, C_REJ0, BCC(A_CMD, C_REJ0), FLAG};
 const unsigned char REJ1[] = {FLAG, A_CMD, C_REJ1, BCC(A_CMD, C_REJ1), FLAG};
 
-int alarmFlag = 1, numRetry = 0;
-struct termios newtio, oldtio;
+DataLink dataLink;
+
+int setDataLinkStruct(const char* port, int role) {
+	strcpy(dataLink.port, port);
+	dataLink.mode = role;
+	dataLink.baudrate = BAUDRATE;
+	dataLink.ns = 1;
+	dataLink.timeout = MAX_TIMEOUT;
+	dataLink.alarmFlag = 1;
+	dataLink.numRetries = 0;
+
+	Statistics statistics;
+	statistics.numSentIFrames = 0;
+	statistics.numReceivedIFrames = 0;
+	statistics.timeouts = 0;
+	statistics.numSentRR = 0;
+	statistics.numReceivedRR = 0;
+	statistics.numSentREJ = 0;
+	statistics.numReceivedREJ = 0;
+
+	dataLink.stats = statistics;
+
+	return 0;
+}
 
 int llopen(const char* port, int role) {
 
 	int fd;
+	setDataLinkStruct(port, role);
 
 	// Config termios struct
-	fd = startConnection(port);
-	if (role == TRANSMITTER) {
+	fd = startConnection();
+	if (dataLink.mode == TRANSMITTER) {
 
 		do {
 			printf("Writing SET\n");
 			// send SET message
 			write(fd, SET, sizeof(SET)/sizeof(unsigned char));
 			setAlarm(); // install alarm
-			alarmFlag = 0;
+			dataLink.alarmFlag = 0;
 			// read UA frame
 			readResponse(fd, UA);
 
-  	} while(numRetry < MAX_RETRIES && alarmFlag);
+  	} while(dataLink.numRetries < MAX_RETRIES && dataLink.alarmFlag);
 
 		stopAlarm(); // uninstall alarm
 
-  	if (numRetry >= MAX_RETRIES) {
+  	if (dataLink.numRetries >= MAX_RETRIES) {
     	printf("MAX RETRIES!!!\n");
     	return -1;
   	}
 
-  	numRetry = 0;
+  	dataLink.numRetries = 0;
 
-	} else if (role == RECEIVER) {
+	} else if (dataLink.mode == RECEIVER) {
 		// read SET frame
     	if (readCommand(fd, SET) == -1)
 			return -2;
@@ -47,7 +70,7 @@ int llopen(const char* port, int role) {
 		write(fd, UA, sizeof(UA)/sizeof(unsigned char));
 
 	} else {
-		printf("Unkown role: %d\n", role);
+		printf("Unkown role: %d\n", dataLink.mode);
 		return 1;
 	}
 
@@ -57,22 +80,21 @@ int llopen(const char* port, int role) {
 
 int llclose(int fd, int role) {
 
-	if (role == TRANSMITTER) {
+	if (dataLink.mode == TRANSMITTER) {
 		do {
 			printf("Writing DISC\n");
 			// send DISC frame
 			write(fd, DISC, sizeof(DISC)/sizeof(unsigned char));
 			setAlarm(); // install alarm
-			alarmFlag = 0;
+			dataLink.alarmFlag = 0;
 			// read DISC frame
 			printf("Reading DISC\n");
 			readResponse(fd, DISC);
-
-  	} while(numRetry < MAX_RETRIES && alarmFlag);
+  	} while(dataLink.numRetries < MAX_RETRIES && dataLink.alarmFlag);
 
 		stopAlarm(); // uninstall alarm
 
-  	if (numRetry >= MAX_RETRIES)
+  	if (dataLink.numRetries >= MAX_RETRIES)
     		printf("MAX RETRIES!!!\n");
 		else {
 			printf("Writing UA\n");
@@ -80,7 +102,7 @@ int llclose(int fd, int role) {
 			write(fd, UA, sizeof(UA)/sizeof(unsigned char));
 			sleep(1); // "wait" for receiver to read file UA
 		}
-	} else if (role == RECEIVER) {
+	} else if (dataLink.mode == RECEIVER) {
 
 		printf("***Closing connection***\n\n");
 
@@ -97,7 +119,7 @@ int llclose(int fd, int role) {
 		if (readCommand(fd, UA) == -1)
 			return -3;
 	} else {
-		printf("Unkown role: %d\n", role);
+		printf("Unkown role: %d\n", dataLink.mode);
 		return 1;
 	}
 
@@ -111,7 +133,7 @@ int stopConnection(int fd) {
 
 	tcflush(fd, TCIOFLUSH);
 
-	if (tcsetattr(fd, TCSANOW, &oldtio) == -1) {
+	if (tcsetattr(fd, TCSANOW, &dataLink.oldtio) == -1) {
 		perror("tcsetattr");
 		exit(-1);
 	}
@@ -123,31 +145,33 @@ int stopConnection(int fd) {
 	return 0;
 }
 
-int startConnection(const char* port) {
+int startConnection() {
 	/*
-    Open serial port device for reading and writing and not as controlling tty
-    because we don't want to get killed if linenoise sends CTRL-C.
-  */
-  int fd = open(port, O_RDWR | O_NOCTTY );
-  if (fd < 0) {
-		perror(port);
+	Open serial port device for reading and writing and not as controlling tty
+	because we don't want to get killed if linenoise sends CTRL-C.
+	*/
+
+
+	int fd = open(dataLink.port, O_RDWR | O_NOCTTY );
+	if (fd < 0) {
+			perror(dataLink.port);
+			exit(-1);
+		}
+		if (tcgetattr(fd, &dataLink.oldtio) == -1) { // save current port settings
+		perror("tcgetattr");
 		exit(-1);
 	}
-	 if (tcgetattr(fd, &oldtio) == -1) { // save current port settings
-  	perror("tcgetattr");
-  	exit(-1);
-  }
 
-	bzero(&newtio, sizeof(newtio));
-	newtio.c_cflag = BAUDRATE | CS8 | CLOCAL | CREAD;
-	newtio.c_iflag = IGNPAR;
-	newtio.c_oflag = 0;
+	bzero(&dataLink.newtio, sizeof(dataLink.newtio));
+	dataLink.newtio.c_cflag = dataLink.baudrate | CS8 | CLOCAL | CREAD;
+	dataLink.newtio.c_iflag = IGNPAR;
+	dataLink.newtio.c_oflag = 0;
 
 	/* set input mode (non-canonical, no echo,...) */
-	newtio.c_lflag = 0;
+	dataLink.newtio.c_lflag = 0;
 
-	newtio.c_cc[VTIME] = 0;  /* inter-character timer unused */
-	newtio.c_cc[VMIN] = 1;   /* blocks until 1 byte is read */
+	dataLink.newtio.c_cc[VTIME] = 0;  /* inter-character timer unused */
+	dataLink.newtio.c_cc[VMIN] = 1;   /* blocks until 1 byte is read */
 
 	/*
 	TIME e VMIN devem ser alterados de forma a proteger com um temporizador a
@@ -155,7 +179,7 @@ int startConnection(const char* port) {
 	*/
 	tcflush(fd, TCIOFLUSH);
 
-	if (tcsetattr(fd, TCSANOW, &newtio) == -1) {
+	if (tcsetattr(fd, TCSANOW, &dataLink.newtio) == -1) {
 		perror("tcsetattr");
 		exit(-1);
 	}
@@ -170,37 +194,41 @@ int readResponse(int fd, const unsigned char expected[]) {
  	unsigned char byte_read;
  	enum state current_state = START;
 
- 	while (!alarmFlag && current_state != STOP) {
+ 	while (!dataLink.alarmFlag && current_state != STOP) {
 	    read(fd, &byte_read, 1);
 	    communicationStateMachine(&current_state, byte_read);
-  	}
+  }
 
  	return 0;
 }
 
-int readAck(int fd, int Ns) {
+int readAck(int fd) {
  	unsigned char byte_read, control_field;
  	enum state current_state = START;
 
- 	while (!alarmFlag && current_state != STOP) {
-	  read(fd, &byte_read, 1);
+ 	while (!dataLink.alarmFlag && current_state != STOP) {
+		read(fd, &byte_read, 1);
 		control_field = communicationStateMachine(&current_state, byte_read);
   }
 
-	if (control_field == C_RR0 && Ns == 1) {
-		printf("RR received: %d\n", Ns);
+	if (control_field == C_RR0 && dataLink.ns == 1) {
+		printf("RR received: %d\n", dataLink.ns);
+		dataLink.stats.numReceivedRR++;
 		return 0;
 	}
-	else if (control_field == C_RR1 && Ns == 0) {
-		printf("RR received: %d\n", Ns);
+	else if (control_field == C_RR1 && dataLink.ns == 0) {
+		printf("RR received: %d\n", dataLink.ns);
+		dataLink.stats.numReceivedRR++;
 		return 0;
 	}
-	else if (control_field == C_REJ0 && Ns == 1) {
-		printf("REJ received: %d\n", Ns);
+	else if (control_field == C_REJ0 && dataLink.ns == 1) {
+		printf("REJ received: %d\n", dataLink.ns);
+		dataLink.stats.numReceivedREJ++;
 		return -1;
 	}
-	else if (control_field == C_REJ1 && Ns == 0) {
-		printf("REJ received: %d\n", Ns);
+	else if (control_field == C_REJ1 && dataLink.ns == 0) {
+		printf("REJ received: %d\n", dataLink.ns);
+		dataLink.stats.numReceivedREJ++;
 		return -1;
 	}
 	else
@@ -277,33 +305,32 @@ int readCommand(int fd, const unsigned char expected[]) {
 }
 
 int llwrite(int fd, unsigned char* packet, int length) {
-	static int Ns = 1;
-	Ns = (Ns == 0);
+	dataLink.ns = (dataLink.ns == 0);
 
 	do {
 		// send frame
-		writeFrame(fd, packet, length, Ns);
+		writeFrame(fd, packet, length);
 		setAlarm(); // install alarm
-		alarmFlag = 0;
+		dataLink.alarmFlag = 0;
 		// read receiver response
-		if (readAck(fd, Ns) == -1) { // REJ received
+		if (readAck(fd) == -1) { // REJ received
 			stopAlarm();
-			alarmFlag = 1;
+			dataLink.alarmFlag = 1;
 			continue;
 		}
-	} while(numRetry < MAX_RETRIES && alarmFlag);
+	} while(dataLink.numRetries < MAX_RETRIES && dataLink.alarmFlag);
 
 	stopAlarm();
 
-	if (numRetry == MAX_RETRIES)
+	if (dataLink.numRetries == MAX_RETRIES)
 		return -1;
 
-	numRetry = 0;
+	dataLink.numRetries = 0;
 
 	return length;
 }
 
-int writeFrame(int fd, unsigned char* packet, int length, int Ns) {
+int writeFrame(int fd, unsigned char* packet, int length) {
 
 	unsigned char frame[2 * length + 6]; // TODO clean 2 * ____ + 6
 	int dataIndex, frameIndex;
@@ -312,7 +339,7 @@ int writeFrame(int fd, unsigned char* packet, int length, int Ns) {
 	// Set of frame header
 	frame[0] = FLAG;
 	frame[1] = A_CMD;
-	frame[2] = (Ns == 0 ? C0 : C1);
+	frame[2] = (dataLink.ns == 0 ? C0 : C1);
 	frame[3] = BCC(A_CMD, frame[2]);
 
 	unsigned char bccResult = calculateDataBCC(packet, length);
@@ -346,6 +373,7 @@ int writeFrame(int fd, unsigned char* packet, int length, int Ns) {
 
 	frame[frameIndex++] = FLAG;
 	write(fd, frame, frameIndex);
+	dataLink.stats.numSentIFrames++;
 
 	printf("Sent frame size: %d\n", frameIndex);
 	return frameIndex;
@@ -372,11 +400,13 @@ int llread(int fd, unsigned char* buf) {
 				printf("LLREAD: Packet is not data or has header errors\n\n"); //does not save packet
 				if (control_field == C0){
 					write(fd, REJ1, sizeof(REJ1)/sizeof(unsigned char));
+					dataLink.stats.numSentREJ++;
 					printf("REJ sent: 1\n");
 				}
 				else if (control_field == C1){
 					write(fd, REJ0, sizeof(REJ0)/sizeof(unsigned char));
-					printf("REJ sent: 0\n");					
+					dataLink.stats.numSentREJ++;
+					printf("REJ sent: 0\n");
 				}
 
 				return 0;
@@ -390,10 +420,12 @@ int llread(int fd, unsigned char* buf) {
 
 				if (control_field == C0){
 					write(fd, RR1, sizeof(RR1)/sizeof(unsigned char));
+					dataLink.stats.numSentRR++;
 					printf("RR sent: 1\n");
 				}
 				else if (control_field == C1){
 					write(fd, RR0, sizeof(RR0)/sizeof(unsigned char));
+					dataLink.stats.numSentRR++;
 					printf("RR sent: 0\n");
 				}
 				received = 1;
@@ -414,7 +446,7 @@ int destuffFrame(unsigned char* frame, int frame_length, unsigned char* destuffe
 	// DATA
 	int j = 4;
 	int i;
-	for (i = 4; i < frame_length - 1; i++) { 
+	for (i = 4; i < frame_length - 1; i++) {
 		if (frame[i] == ESC) {
 			i++;
 			if (frame[i] == (FLAG ^ STUFFING))
@@ -483,6 +515,7 @@ int readFrame(int fd, unsigned char* buf) {
 	}
 
 	printf("Read frame length: %d\n", length);
+	dataLink.stats.numReceivedIFrames++;
 	return length;
 }
 
@@ -534,5 +567,18 @@ int dataStateMachine(enum state* connection_state, unsigned char byte_read) {
 			break;
 	}
 
+	return 0;
+}
+
+int displayStatistics() {
+	printf("***Statistics:***\n\n");
+	printf("Number of sent I frames: %d\n", dataLink.stats.numSentIFrames);
+	printf("Number of received I frames: %d\n", dataLink.stats.numReceivedIFrames);
+	printf("Number of timeouts: %d\n", dataLink.stats.timeouts);
+	printf("Number of sent RR frames: %d\n", dataLink.stats.numSentRR);
+	printf("Number of received RR frames: %d\n", dataLink.stats.numReceivedRR);
+	printf("Number of sent REJ frames: %d\n", dataLink.stats.numSentREJ);
+	printf("Number of received REJ frames: %d\n", dataLink.stats.numReceivedREJ);
+	printf("\n");
 	return 0;
 }
