@@ -53,5 +53,7 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
+	displayStatistics();
+
 	return 0;
 }

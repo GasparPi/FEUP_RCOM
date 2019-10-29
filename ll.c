@@ -571,7 +571,7 @@ int dataStateMachine(enum state* connection_state, unsigned char byte_read) {
 }
 
 int displayStatistics() {
-	printf("\n***Statistics:***\n\n");
+	printf("***Statistics:***\n\n");
 	printf("Number of sent I frames: %d\n", dataLink.stats.numSentIFrames);
 	printf("Number of received I frames: %d\n", dataLink.stats.numReceivedIFrames);
 	printf("Number of timeouts: %d\n", dataLink.stats.timeouts);
@@ -579,6 +579,6 @@ int displayStatistics() {
 	printf("Number of received RR frames: %d\n", dataLink.stats.numReceivedRR);
 	printf("Number of sent REJ frames: %d\n", dataLink.stats.numSentREJ);
 	printf("Number of received REJ frames: %d\n", dataLink.stats.numReceivedREJ);
-
+	printf("\n");
 	return 0;
 }
