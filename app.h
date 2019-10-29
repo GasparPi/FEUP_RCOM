@@ -18,11 +18,24 @@
 
 #define MAX_CHUNK_SIZE 1024
 
+typedef struct {
+    char* sentFileName;
+	char* receivedFilename;
+	int sentFileSize;
+	int receivedFileSize;
+    //Sent image's file descriptor
+	int file_fd;
+    //Serial Port's file descriptor
+	int serial_port_fd;
+    //Received image's file descriptor
+	int created_file_fd;
+} App;
+
 int sendFile(int fd_file, char* file_name, int fd);
 int receiveFile(int fd);
 
-int sendControlPacket(unsigned char control_field, int file_size, char* file_name, int fd);
-int sendDataPackets(int file_size, int fd_file, int fd);
+int sendControlPacket(unsigned char control_field);
+int sendDataPackets();
 
-int readControlPacket(int fd);
-int readDataPackets(unsigned char* packet, int fd_file);
+int readControlPacket();
+int readDataPackets(unsigned char* packet);
