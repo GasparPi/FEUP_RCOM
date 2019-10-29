@@ -23,6 +23,7 @@ int sendFile(int fd_file, char* file_name, int fd){
 	//Send Start Control Packet
 	printf("\n***Sending start control packet:***\n\n");
 	if (sendControlPacket(START_CONTROL_FIELD) == -1) {
+		app.receivedFileSize = 0;
 		printf("ERROR sending the first control packet!\n");
 		return -1;
 	}
@@ -185,6 +186,13 @@ int readControlPacket(){
 			index++;
 		}
 
+		if (app.receivedFileSize != 0){
+			if(app.receivedFileSize == file_size){
+				printf("Start Control Packet and End Control Packet data does not match\n");
+				return -1;
+			}
+		}
+
 		printf("File size: %d bytes\n", file_size);
 	}
 	if (file_size <= 0) {
@@ -207,6 +215,13 @@ int readControlPacket(){
 		}
 
 		file_name[name_length] = '\0';
+
+		if (app.receivedFilename != NULL){
+			if(app.receivedFilename == file_name){
+				printf("Start Control Packet and End Control Packet data does not match\n");
+				return -1;
+			}
+		}
 
 		printf("File Name: %s\n\n", file_name);
 	}
