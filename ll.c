@@ -27,8 +27,10 @@ int setDataLinkStruct(const char* port, int role) {
 	statistics.numReceivedRR = 0;
 	statistics.numSentREJ = 0;
 	statistics.numReceivedREJ = 0;
-	statistics.start = clock();
-
+	if(timespec_get(&statistics.start, TIME_UTC) != TIME_UTC) {
+		printf("Error in calling timespec_get\n");
+		exit(EXIT_FAILURE);
+  }
 	dataLink.stats = statistics;
 
 	return 0;
@@ -132,7 +134,10 @@ int llclose(int fd, int role) {
 
 int stopConnection(int fd) {
 
-	dataLink.stats.end = clock();
+	if(timespec_get(&dataLink.stats.end, TIME_UTC) != TIME_UTC) {
+		printf("Error in calling timespec_get\n");
+		exit(EXIT_FAILURE);
+  }
 
 	tcflush(fd, TCIOFLUSH);
 
@@ -575,7 +580,7 @@ int dataStateMachine(enum state* connection_state, unsigned char byte_read) {
 
 int displayStatistics() {
 	printf("***Statistics:***\n\n");
-	printf("Total execution time: %f seconds\n", (float) (dataLink.stats.end - dataLink.stats.start) / CLOCKS_PER_SEC);
+	printf("Total execution time: %f seconds\n",  (double)(dataLink.stats.end.tv_sec - dataLink.stats.start.tv_sec) + ((double)(dataLink.stats.end.tv_nsec - dataLink.stats.start.tv_nsec)/1000000000L));
 	printf("Number of sent I frames: %d\n", dataLink.stats.numSentIFrames);
 	printf("Number of received I frames: %d\n", dataLink.stats.numReceivedIFrames);
 	printf("Number of timeouts: %d\n", dataLink.stats.timeouts);

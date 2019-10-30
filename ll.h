@@ -63,7 +63,7 @@ typedef struct {
 	unsigned int numSentREJ;
 	unsigned int numReceivedREJ;
 
-	clock_t start, end;
+  struct timespec start, end;
 } Statistics;
 
 typedef struct {
