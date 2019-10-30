@@ -27,6 +27,7 @@ int setDataLinkStruct(const char* port, int role) {
 	statistics.numReceivedRR = 0;
 	statistics.numSentREJ = 0;
 	statistics.numReceivedREJ = 0;
+	statistics.start = clock();
 
 	dataLink.stats = statistics;
 
@@ -130,6 +131,8 @@ int llclose(int fd, int role) {
 }
 
 int stopConnection(int fd) {
+
+	dataLink.stats.end = clock();
 
 	tcflush(fd, TCIOFLUSH);
 
@@ -572,6 +575,7 @@ int dataStateMachine(enum state* connection_state, unsigned char byte_read) {
 
 int displayStatistics() {
 	printf("***Statistics:***\n\n");
+	printf("Total execution time: %f seconds\n", (float) (dataLink.stats.end - dataLink.stats.start) / CLOCKS_PER_SEC);
 	printf("Number of sent I frames: %d\n", dataLink.stats.numSentIFrames);
 	printf("Number of received I frames: %d\n", dataLink.stats.numReceivedIFrames);
 	printf("Number of timeouts: %d\n", dataLink.stats.timeouts);

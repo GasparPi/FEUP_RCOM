@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <time.h>
 #include "alarm.h"
 
 #define C0     0x00
@@ -62,6 +62,8 @@ typedef struct {
 
 	unsigned int numSentREJ;
 	unsigned int numReceivedREJ;
+
+	clock_t start, end;
 } Statistics;
 
 typedef struct {
