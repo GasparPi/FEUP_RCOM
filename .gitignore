@@ -3,3 +3,7 @@
 # binary files
 receiver
 transmitter
+
+# project 2 binaries
+Proj2/bin/*
+Proj2/buildtemp/*
