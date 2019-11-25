@@ -1,0 +1,2587 @@
+No.     Time           Source                Destination           Protocol Length Info
+      1 0.000000000    Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 1: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+      2 0.301348098    Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 2: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+      3 2.311241535    Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 3: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+      4 4.311062322    Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 4: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+      5 6.315927187    Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 5: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+      6 8.325907297    Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 6: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+      7 10.007352193   Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 7: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+      8 10.325702452   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 8: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+      9 12.330660834   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 9: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     10 14.340624461   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 10: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     11 16.340386582   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 11: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     12 18.345236640   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 12: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     13 20.011961997   Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 13: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     14 20.350133911   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 14: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     15 22.355300280   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 15: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     16 24.359919024   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 16: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     17 26.180734157   Cisco_3a:f6:09        CDP/VTP/DTP/PAgP/UDLD CDP      432    Device ID: tux-sw5  Port ID: FastEthernet0/7  
+
+Frame 17: 432 bytes on wire (3456 bits), 432 bytes captured (3456 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Cisco Discovery Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     18 26.364773343   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 18: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     19 28.369653922   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 19: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     20 30.014276607   Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 20: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     21 30.374615586   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 21: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     22 32.379504476   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 22: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     23 34.384619582   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 23: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     24 36.389192929   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 24: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     25 38.394125190   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 25: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     26 40.021909142   Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 26: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     27 40.398958626   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 27: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     28 42.403888513   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 28: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     29 44.408854926   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 29: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     30 46.413670134   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 30: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     31 48.418631030   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 31: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     32 50.029618712   Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 32: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     33 50.428563159   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 33: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     34 52.428321438   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 34: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     35 54.438241834   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 35: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     36 56.438097263   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 36: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     37 58.442959194   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 37: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     38 60.028923303   Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 38: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     39 60.447933849   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 39: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     40 62.452729082   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 40: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     41 64.457662949   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 41: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     42 66.462536404   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 42: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     43 68.467400989   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 43: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     44 70.036492003   Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 44: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     45 70.472275003   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 45: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     46 72.477175557   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 46: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     47 74.482321462   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 47: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     48 76.486960251   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 48: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     49 78.491825394   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 49: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     50 80.044142418   Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 50: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     51 80.496688653   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 51: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     52 82.501612184   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 52: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     53 84.506475791   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 53: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     54 86.184603855   Cisco_3a:f6:09        CDP/VTP/DTP/PAgP/UDLD CDP      432    Device ID: tux-sw5  Port ID: FastEthernet0/7  
+
+Frame 54: 432 bytes on wire (3456 bits), 432 bytes captured (3456 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Cisco Discovery Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     55 86.511336745   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 55: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     56 88.516247285   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 56: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     57 90.070922569   Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 57: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     58 90.521172842   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 58: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     59 92.526012214   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 59: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     60 94.530890488   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 60: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     61 96.535771975   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 61: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     62 98.540856560   Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 62: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     63 100.081286108  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 63: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     64 100.545555691  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 64: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     65 102.550440670  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 65: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     66 104.555327465  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 66: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     67 106.560225015  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 67: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     68 108.565062641  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 68: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     69 110.088931005  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 69: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     70 110.569987919  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 70: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     71 112.574895736  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 71: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     72 114.579728752  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 72: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     73 116.584628258  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 73: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     74 118.589527694  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 74: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     75 120.083195988  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 75: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     76 120.594390952  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 76: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     77 122.599309175  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 77: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     78 124.604319799  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 78: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     79 126.609063838  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 79: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     80 128.613929261  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 80: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     81 130.090792764  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 81: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     82 130.618804113  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 82: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     83 132.623698311  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 83: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     84 134.628624915  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 84: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     85 136.633503329  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 85: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     86 138.638430282  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 86: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     87 140.098414823  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 87: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     88 140.643226073  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 88: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     89 142.648127605  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 89: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     90 144.653017542  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 90: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     91 146.188570073  Cisco_3a:f6:09        CDP/VTP/DTP/PAgP/UDLD CDP      432    Device ID: tux-sw5  Port ID: FastEthernet0/7  
+
+Frame 91: 432 bytes on wire (3456 bits), 432 bytes captured (3456 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Cisco Discovery Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     92 146.657914883  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 92: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     93 148.662838693  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 93: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     94 150.106039466  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 94: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+     95 150.667681558  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 95: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     96 152.672545095  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 96: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     97 154.677581420  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 97: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     98 156.695314122  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 98: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     99 158.695576726  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 99: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    100 160.105306762  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 100: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    101 160.700562835  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 101: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    102 162.705367985  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 102: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    103 164.710549510  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 103: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    104 166.715136406  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 104: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    105 168.720021594  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 105: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    106 170.113063824  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 106: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    107 170.724905735  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 107: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    108 172.729792041  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 108: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    109 174.734668219  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 109: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    110 176.739561579  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 110: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    111 178.744472120  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 111: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    112 180.120609267  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 112: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    113 180.749336216  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 113: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    114 182.754202058  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 114: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    115 184.759082148  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 115: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    116 186.764005400  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 116: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    117 188.773918462  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 117: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    118 190.128248227  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 118: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    119 190.773792818  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 119: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    120 192.783688629  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 120: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    121 194.783505436  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 121: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    122 196.788407107  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 122: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    123 198.798715191  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 123: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    124 200.127536266  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 124: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    125 200.798162118  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 125: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    126 202.803324926  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 126: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    127 204.813091042  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 127: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    128 206.192388228  Cisco_3a:f6:09        CDP/VTP/DTP/PAgP/UDLD CDP      432    Device ID: tux-sw5  Port ID: FastEthernet0/7  
+
+Frame 128: 432 bytes on wire (3456 bits), 432 bytes captured (3456 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Cisco Discovery Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    129 206.812951918  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 129: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    130 208.817719983  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 130: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    131 210.135142820  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 131: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    132 210.827774404  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 132: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    133 212.827477020  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 133: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    134 214.832348728  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 134: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    135 216.842309562  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 135: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    136 218.842114984  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 136: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    137 220.134513620  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 137: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    138 220.847321024  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 138: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    139 222.857046841  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 139: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    140 224.856763286  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 140: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    141 226.861942716  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 141: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    142 228.871698425  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 142: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    143 230.142056409  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 143: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    144 230.871734184  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 144: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    145 232.876343569  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 145: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    146 234.886341279  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 146: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    147 236.886079724  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 147: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    148 238.896039510  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 148: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    149 240.154758234  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 149: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    150 240.895855688  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 150: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    151 242.905861848  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 151: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    152 244.905635423  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 152: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    153 246.915628803  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 153: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    154 248.915396231  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 154: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    155 250.157357378  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 155: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    156 250.920303420  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 156: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    157 252.930276406  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 157: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    158 254.930057384  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 158: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    159 256.935072547  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 159: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    160 258.944956555  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 160: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    161 260.156599390  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 161: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    162 260.944806047  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 162: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    163 262.949674962  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 163: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    164 264.959563021  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 164: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    165 266.196332236  Cisco_3a:f6:09        CDP/VTP/DTP/PAgP/UDLD CDP      432    Device ID: tux-sw5  Port ID: FastEthernet0/7  
+
+Frame 165: 432 bytes on wire (3456 bits), 432 bytes captured (3456 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Cisco Discovery Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    166 266.959430183  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 166: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    167 268.964240502  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 167: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    168 270.164260560  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 168: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    169 270.974299532  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 169: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    170 272.974007805  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 170: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    171 274.979162511  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 171: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    172 276.988852780  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 172: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    173 278.988711840  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 173: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    174 280.171902105  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 174: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    175 280.993563575  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 175: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    176 283.003604796  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 176: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    177 285.003427748  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 177: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    178 287.008209152  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 178: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    179 289.018146729  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 179: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    180 290.179560202  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 180: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    181 291.017978621  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 181: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    182 292.223653868  fe80::221:5aff:fe61:2fd6 ff02::2               ICMPv6   70     Router Solicitation from 00:21:5a:61:2f:d6
+
+Frame 182: 70 bytes on wire (560 bits), 70 bytes captured (560 bits) on interface 0
+Ethernet II, Src: HewlettP_61:2f:d6 (00:21:5a:61:2f:d6), Dst: IPv6mcast_02 (33:33:00:00:00:02)
+Internet Protocol Version 6, Src: fe80::221:5aff:fe61:2fd6, Dst: ff02::2
+Internet Control Message Protocol v6
+
+No.     Time           Source                Destination           Protocol Length Info
+    183 293.022902501  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 183: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    184 295.033039195  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 184: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    185 297.041545026  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 185: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    186 299.045979668  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 186: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    187 300.178798304  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 187: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    188 301.055843702  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 188: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    189 303.055671403  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 189: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    190 305.060549468  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 190: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    191 307.070493330  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 191: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    192 309.070321102  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 192: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    193 310.186474210  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 193: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    194 311.075205242  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 194: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    195 313.085147219  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 195: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    196 315.085119003  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 196: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    197 317.089859620  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 197: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    198 319.099843082  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 198: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    199 320.194082790  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 199: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    200 321.099622524  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 200: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    201 323.104568055  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 201: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    202 325.114485098  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 202: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    203 326.205399662  Cisco_3a:f6:09        CDP/VTP/DTP/PAgP/UDLD CDP      432    Device ID: tux-sw5  Port ID: FastEthernet0/7  
+
+Frame 203: 432 bytes on wire (3456 bits), 432 bytes captured (3456 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Cisco Discovery Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    204 327.114296108  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 204: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    205 329.119215029  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 205: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    206 330.206799281  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 206: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    207 331.129110911  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 207: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    208 333.128943152  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 208: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    209 335.133838188  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 209: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    210 337.143890095  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 210: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    211 339.143601161  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 211: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    212 340.200974379  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 212: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    213 341.148461626  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 213: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    214 343.158460942  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 214: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    215 345.158492860  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 215: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    216 347.163210499  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 216: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    217 349.173152755  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 217: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    218 350.208754000  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 218: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    219 351.172935967  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 219: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    220 353.177792660  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 220: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    221 355.187776821  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 221: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    222 357.187590834  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 222: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    223 359.192529590  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 223: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    224 360.208216641  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 224: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    225 361.202376932  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 225: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    226 363.215800078  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 226: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    227 365.215490541  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 227: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    228 367.220370491  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 228: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    229 369.225273349  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 229: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    230 370.215540059  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 230: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    231 371.230135420  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 231: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    232 373.235015510  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 232: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    233 375.239897975  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 233: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    234 377.244791195  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 234: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    235 379.249691609  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 235: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    236 380.223203464  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 236: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    237 381.254623451  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 237: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    238 383.259454931  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 238: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    239 385.264416735  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 239: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    240 386.204200000  Cisco_3a:f6:09        CDP/VTP/DTP/PAgP/UDLD CDP      432    Device ID: tux-sw5  Port ID: FastEthernet0/7  
+
+Frame 240: 432 bytes on wire (3456 bits), 432 bytes captured (3456 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Cisco Discovery Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    241 387.269214552  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 241: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    242 389.274270433  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 242: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    243 390.230838792  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 243: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    244 391.278985069  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 244: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    245 393.283881641  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 245: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    246 395.288741756  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 246: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    247 397.293642380  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 247: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    248 399.298519257  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 248: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    249 400.235507124  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 249: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    250 401.303397461  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 250: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    251 403.308405360  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 251: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    252 405.313169095  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 252: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    253 407.318139699  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 253: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    254 409.322950436  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 254: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    255 410.242877335  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 255: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    256 411.327832482  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 256: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    257 413.332990680  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 257: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    258 415.337705316  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 258: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    259 417.342503202  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 259: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    260 419.347364435  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 260: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    261 420.245367177  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 261: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    262 421.352259052  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 262: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    263 423.357180488  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 263: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    264 425.362009454  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 264: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    265 427.366919646  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 265: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    266 429.371801342  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 266: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    267 430.252997407  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 267: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    268 431.376693654  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 268: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    269 433.381557890  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 269: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    270 435.386435815  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 270: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    271 437.391601695  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 271: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    272 439.396274775  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 272: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    273 440.252571865  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 273: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    274 441.401127627  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 274: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    275 443.405977825  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 275: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    276 445.410975248  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 276: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    277 446.208585405  Cisco_3a:f6:09        CDP/VTP/DTP/PAgP/UDLD CDP      432    Device ID: tux-sw5  Port ID: FastEthernet0/7  
+
+Frame 277: 432 bytes on wire (3456 bits), 432 bytes captured (3456 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Cisco Discovery Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    278 447.429173093  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 278: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    279 449.429011550  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 279: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    280 450.259915396  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 280: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    281 451.433901418  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 281: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    282 453.438792194  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 282: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    283 455.443723338  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 283: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    284 457.448641351  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 284: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    285 459.453447200  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 285: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    286 460.267582782  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 286: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    287 461.458348871  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 287: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    288 463.463200046  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 288: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    289 465.468108562  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 289: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    290 467.472992633  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 290: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    291 469.477903453  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 291: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    292 470.275216365  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 292: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    293 471.482743733  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 293: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    294 473.487615163  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 294: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    295 475.492607767  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 295: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    296 477.502506791  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 296: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    297 479.502304391  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 297: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+    298 480.279605401  Cisco_3a:f6:09        Cisco_3a:f6:09        LOOP     60     Reply
+
+Frame 298: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09), Dst: Cisco_3a:f6:09 (fc:fb:fb:3a:f6:09)
+Configuration Test Protocol (loopback)
+Data (40 bytes)
+
+0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0020  00 00 00 00 00 00 00 00                           ........
+
+No.     Time           Source                Destination           Protocol Length Info
+    299 481.507247897  Cisco_3a:f6:09        Spanning-tree-(for-bridges)_00 STP      60     Conf. Root = 32768/51/fc:fb:fb:3a:f6:00  Cost = 0  Port = 0x8009
+
+Frame 299: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+IEEE 802.3 Ethernet 
+Logical-Link Control
+Spanning Tree Protocol
