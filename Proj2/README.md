@@ -47,7 +47,7 @@ copy flash:tux5-clean startup-config # para tux y -> tuxy-clean
 reload
 ```
 
-## Comandos uteis
+### Comandos uteis
 
 ```bash
 # mostra a configuração das vlans (incluindo portas)
