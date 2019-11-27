@@ -47,11 +47,42 @@ copy flash:tux5-clean startup-config # para tux y -> tuxy-clean
 reload
 ```
 
+### Criar uma VLAN
+
+```bash
+configure terminal
+vlan 50 # ou 51
+end
+```
+
+### Apagar uma VLAN
+
+```bash
+configure terminal
+no vlan 50 # ou 51
+end
+```
+
+### Adicionar uma porta X a uma VLAN Y
+
+```bash
+configure terminal
+interface fastethernet 0/X # porta 1 -> 0/1
+switchport mode access
+switchport access vlan Y
+end
+```
+
 ### Comandos uteis
 
 ```bash
+# mostra a configuracao da vlan com id 50
+show vlan id 50
 # mostra a configuração das vlans (incluindo portas)
 show vlan brief
 # mostra a configuração das portas (incluindo vlans)
 show interface status
+# mostra a configuracao da porta 1
+show running-config interface fastethernet 0/1
+show interfaces fastethernet 0/1 switchport
 ```
