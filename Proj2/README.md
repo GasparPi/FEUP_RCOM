@@ -35,6 +35,8 @@ reload
     - E0 - switch **port 5** (vlan 50)
  - **Tux52**
     - E0 - switch **port 4** (vlan 51)
+ - **Router**
+    - GE0/0 - switch **port 7** (vlan 51)
 
 ### Reset do switch
 
@@ -85,4 +87,22 @@ show interface status
 # mostra a configuracao da porta 1
 show running-config interface fastethernet 0/1
 show interfaces fastethernet 0/1 switchport
+```
+
+## Configuração do Router
+
+```bash
+configure terminal
+interface gigabitethernet 0/0
+ip address 192.168.51.254 255.255.255.0
+no shutdown
+exit
+```
+
+### Commandos uteis
+
+```bash
+# mostra a configuracao da porta ethernet 0
+show interface gigabitethernet 0/0
+show ip route
 ```
