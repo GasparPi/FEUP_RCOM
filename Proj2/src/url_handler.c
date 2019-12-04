@@ -24,7 +24,7 @@ int get_ip_address(url_t* url) {
         return 1;
     }
 
-    char* ip = inet_ntoa(*((struct in_addr *) h->h_addr));
+    char* ip = inet_ntoa(*((struct in_addr *)h->h_addr));
 	strcpy(url->ip_address, ip);
 
 	return 0;
