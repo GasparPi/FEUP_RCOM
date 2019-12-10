@@ -1,6 +1,6 @@
 #include "socket_handler.h"
 
-int open_socket(char* ip_address, int port) {
+int open_socket(const char* ip_address, const int port) {
     int socket_fd;
 	struct sockaddr_in server_addr;
 
@@ -12,25 +12,25 @@ int open_socket(char* ip_address, int port) {
 
 	// open a TCP socket
 	if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-		perror("socket()");
+		perror("socket()\n");
 		return -1;
 	}
 
 	// connect to the server
 	if (connect(socket_fd, (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0) {
-		perror("connect()");
+		perror("connect()\n");
 		return -1;
 	}
 
 	return socket_fd;
 }
 
-int write_to_socket(int socket_fd, char* str, size_t str_size) {
+int write_to_socket(const int socket_fd, const char* str, const size_t str_size) {
     int bytes;
 
     // Write a string to the server
 	if ((bytes = write(socket_fd, str, str_size)) <= 0) {
-		perror('Write to socket');
+		perror("Write to socket\n");
 		return 1;
 	}
 
@@ -39,7 +39,7 @@ int write_to_socket(int socket_fd, char* str, size_t str_size) {
 	return 0;
 }
 
-int read_from_socket(int socket_fd, char* str, size_t str_size) {
+int read_from_socket(const int socket_fd, char* str, size_t str_size) {
     FILE* fp = fdopen(socket_fd, "r");
 
 	do {

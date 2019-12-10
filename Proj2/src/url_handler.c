@@ -10,24 +10,144 @@ void create_url_struct(url_t* url) {
 	url->port = 21;
 }
 
-int get_url(url_t* url, const char* str) {
+int get_url_info(url_t* url, char* str) {
 
-    //TODO
+    // str = ftp://[<user>:<password>@]<host>/<url-path>
+    if (!check_ftp(str))
+        return 1;
 
+    printf("Success on reading ftp protocol\n");
+
+    char* temp_url = (char*) malloc(strlen(str));
+	memcpy(temp_url, str, strlen(str));
+    
+    // removing ftp:// from string
+	strcpy(temp_url, temp_url + 6); // temp_url = [<user>:<password>@]<host>/<url-path>
+
+    char* url_rest = strchr(temp_url, '@');
+    if (url_rest == NULL) {
+        printf("User not defined\n");
+
+        url_rest = temp_url; // url_rest = <host>/<url-path>
+        strcpy(url->user, "anonymous");
+        strcpy(url->password, "any");
+    }
+    else {
+        printf("User defined\n");
+
+        strcpy(url_rest, url_rest + 1); // url_rest = <host>/<url-path>
+
+        get_username(temp_url, url->user);
+        printf("Username obtained\n");
+
+        strcpy(temp_url, temp_url + strlen(url->user) + 1); // temp_url = <password>@<host>/<url-path>
+
+        get_password(temp_url, url->password);
+        printf("Password obtained\n");
+    }
+
+    get_host_name(url_rest, url->host_name);
+    printf("Host name obtained\n");
+
+    get_url_path(url_rest, url->url_path, url->filename);
+    printf("URL path obtained\n");
+
+    return 0;
 }
 
 int get_ip_address(url_t* url) {
     struct hostent* h;
 
-    if ((h=gethostbyname(url->host_name)) == NULL) {  
-        herror("gethostbyname");
+    if ((h = gethostbyname(url->host_name)) == NULL) {  
+        perror("gethostbyname()\n");
         return 1;
     }
 
-    char* ip = inet_ntoa(*((struct in_addr *)h->h_addr));
+    char* ip = inet_ntoa(*( (struct in_addr *) h->h_addr) );
 	strcpy(url->ip_address, ip);
 
 	return 0;
+}
+
+int check_ftp(const char* str) {
+
+    char* ftp_str = "ftp://";
+    char substring[6];
+
+    memcpy(substring, str, 6);
+
+    return !strcmp(ftp_str, substring);
+}
+
+int get_username(const char* str, char* username) {
+    strcpy(username, get_str_before_char(str, ':'));
+
+    return 0;
+}
+
+int get_password(const char* str, char* password) {
+    strcpy(password, get_str_before_char(str, '@'));
+
+    return 0;
+}
+
+int get_host_name(const char* str, char* host_name) {
+    strcpy(host_name, get_str_before_char(str, '/'));
+
+    return 0;
+}
+
+int get_url_path(const char* str, char* url_path, char* filename) {
+
+    char* path = (char*) malloc(strlen(str));
+
+    char* working_str = (char*) malloc(strlen(str));
+    memcpy(working_str, str, strlen(str));
+    char* temp_str = (char*) malloc(strlen(str));
+
+	int startPath = 1;
+	while (strchr(working_str, '/')) {
+		
+        temp_str = get_str_before_char(working_str, '/');
+        strcpy(working_str, working_str + strlen(temp_str) + 1);
+
+		if (startPath) {
+			startPath = 0;
+			strcpy(path, temp_str);
+		} else {
+			strcat(path, temp_str);
+		}
+
+		strcat(path, "/");
+	}
+
+	strcpy(url_path, path);
+	strcpy(filename, working_str);
+
+	free(path);
+    free(temp_str);
+
+    return 0;
+}
+
+char* get_str_before_char(const char* str, const char chr) {
+
+	char* temp = (char*) malloc(strlen(str));
+	int index = strlen(str) - strlen(strcpy(temp, strchr(str, chr)));
+
+	temp[index] = '\0'; 
+	strncpy(temp, str, index);
+
+	return temp;
+}
+
+void print_url(url_t* url) {
+    printf("USER: %s\n", url->user);
+    printf("PASSWORD: %s\n", url->password);
+    printf("HOST: %s\n", url->host_name);
+    printf("IP: %s\n", url->ip_address);
+    printf("PATH: %s\n", url->url_path);
+    printf("FILE: %s\n", url->filename);
 }
 
 
