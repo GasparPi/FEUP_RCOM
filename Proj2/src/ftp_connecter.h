@@ -25,7 +25,6 @@ int ftp_init_connection(ftp_t* ftp, const char* ip_addres, const int port);
 int ftp_command(const int socket_fd, const char* command);
 int ftp_command_with_response(const int socket_fd, const char* command, char* response);
 int ftp_login(const ftp_t* ftp, const char* user, const char* password);
-int ftp_cwd(const ftp_t* ftp, const char* path);
 int ftp_passive_mode(ftp_t* ftp);
 int ftp_retr_file(const ftp_t* ftp, const char* filename);
 int ftp_download_file(ftp_t* ftp, const char* filename);

@@ -76,19 +76,6 @@ int ftp_login(const ftp_t* ftp, const char* user, const char* password) {
 	return 0;
 }
 
-int ftp_cwd(const ftp_t* ftp, const char* path) {
-
-	char command[MAX_COMMAND_SIZE]; 
-
-	sprintf(command, "CWD %s", path);
-	if (ftp_command(ftp->control_socket_fd, command)) {
-		perror("ftp_command()\n");
-		return 1;
-	}
-
-	return 0;
-}
-
 int ftp_passive_mode(ftp_t* ftp) {
 
 	char command[MAX_BUFFER_SIZE];

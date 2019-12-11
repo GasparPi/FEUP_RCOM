@@ -24,7 +24,7 @@ typedef struct url_t {
 } url_t;
 
 void create_url_struct(url_t* url);
-int get_url_info(url_t* url, char* str);
+int get_url_info(url_t* url, const char* str);
 int get_ip_address(url_t* url);
 
 // Auxiliary functions

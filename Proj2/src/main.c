@@ -19,18 +19,20 @@ int main(int argc, char** argv) {
     url_t url;
     create_url_struct(&url);
 
+    printf("\n\nPARSING URL...\n\n");
     if (get_url_info(&url, argv[1])) {
         perror("Error in URL syntax!\n");
         exit(1);
-    }
+    }   
 
+    printf("\n\nGETTING IP ADDRESS BY HOST NAME...\n");
     if (get_ip_address(&url)) {
         perror("Getting IP address by host name\n");
         exit(1);
     }
 
+    printf("\nURL INFO:\n\n");
     print_url(&url);
-
 
     ftp_t ftp;
     if (ftp_init_connection(&ftp, url.ip_address, url.port)) {
@@ -44,12 +46,6 @@ int main(int argc, char** argv) {
         exit(1);
     }
     printf("Loged in successfully\n");
-/*
-    if (ftp_cwd(&ftp, url.url_path)) {
-		perror("ftp_cwd()");
-		exit(1);
-	}
-    printf("Changed directory successfully\n");*/
 
     if (ftp_passive_mode(&ftp)) {
         perror("ftp_passive_mode()\n");
@@ -59,8 +55,6 @@ int main(int argc, char** argv) {
 
     char filepath[MAX_BUFFER_SIZE];
     sprintf(filepath, "%s%s", url.url_path, url.filename);
-    printf("Filepath: %s\n", filepath);
-
     if (ftp_retr_file(&ftp, filepath)) {
         perror("ftp_retr_file()");
         exit(1);

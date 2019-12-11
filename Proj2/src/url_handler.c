@@ -10,47 +10,50 @@ void create_url_struct(url_t* url) {
 	url->port = 21;
 }
 
-int get_url_info(url_t* url, char* str) {
+int get_url_info(url_t* url, const char* str) {
 
     // str = ftp://[<user>:<password>@]<host>/<url-path>
     if (!check_ftp(str))
         return 1;
 
-    printf("Success on reading ftp protocol\n");
-
     char* temp_url = (char*) malloc(strlen(str));
+    char* url_path = (char*) malloc(strlen(str));
 	memcpy(temp_url, str, strlen(str));
     
     // removing ftp:// from string
 	strcpy(temp_url, temp_url + 6); // temp_url = [<user>:<password>@]<host>/<url-path>
 
     char* url_rest = strchr(temp_url, '@');
+
     if (url_rest == NULL) {
         printf("User not defined\n");
 
-        url_rest = temp_url; // url_rest = <host>/<url-path>
+        strcpy(url_path, temp_url);  // url_path = <host>/<url-path>
+
         strcpy(url->user, "anonymous");
         strcpy(url->password, "any");
     }
     else {
         printf("User defined\n");
 
-        strcpy(url_rest, url_rest + 1); // url_rest = <host>/<url-path>
+        strcpy(url_path, url_rest + 1); // url_path = <host>/<url-path>
 
         get_username(temp_url, url->user);
-        printf("Username obtained\n");
+        printf("Username obtained: %s\n", url->user);
 
         strcpy(temp_url, temp_url + strlen(url->user) + 1); // temp_url = <password>@<host>/<url-path>
 
         get_password(temp_url, url->password);
-        printf("Password obtained\n");
+        printf("Password obtained: %s\n", url->password);
     }
 
-    get_host_name(url_rest, url->host_name);
-    printf("Host name obtained\n");
+    get_host_name(url_path, url->host_name);
+    printf("Host name obtained: %s\n", url->host_name);
 
-    get_url_path(url_rest, url->url_path, url->filename);
-    printf("URL path obtained\n");
+    strcpy(url_path, url_path + strlen(url->host_name) + 1); // url_rest = /<url-path>
+
+    get_url_path(url_path, url->url_path, url->filename);
+    printf("URL path obtained: %s\n", url->url_path);
 
     return 0;
 }
@@ -105,19 +108,12 @@ int get_url_path(const char* str, char* url_path, char* filename) {
     memcpy(working_str, str, strlen(str));
     char* temp_str = (char*) malloc(strlen(str));
 
-	int startPath = 1;
 	while (strchr(working_str, '/')) {
 		
         temp_str = get_str_before_char(working_str, '/');
         strcpy(working_str, working_str + strlen(temp_str) + 1);
 
-		if (startPath) {
-			startPath = 0;
-			strcpy(path, temp_str);
-		} else {
-			strcat(path, temp_str);
-		}
-
+		strcpy(path, temp_str);
 		strcat(path, "/");
 	}
 
@@ -147,7 +143,7 @@ void print_url(url_t* url) {
     printf("HOST: %s\n", url->host_name);
     printf("IP: %s\n", url->ip_address);
     printf("PATH: %s\n", url->url_path);
-    printf("FILE: %s\n", url->filename);
+    printf("FILE: %s\n\n\n", url->filename);
 }
 
 
