@@ -17,5 +17,9 @@ echo "tux51 ethernet port 0 activated with address 192.168.50.1 and with 24 bits
 route add -net 192.168.51.0/24 gw 192.168.50.254
 echo "Route for subnetwork 51 has been set up using gateway 254"
 
+# add tux 4 as default router
+route add default gw 192.168.50.254
+echo "tux 4 (192.168.50.254) added as default router"
+
 # list routes
 route -n
