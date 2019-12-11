@@ -9,6 +9,8 @@
 ```bash
 # comunicar com a subrede 50 atraves da gateway .253 da subrede 51
 route add -net 192.168.50.0/24 gw 192.168.51.253
+# apagar a rota para a subrede 50 atraves da gateway .253 da subrede 51
+route del -net 192.168.50.0/24 gw 192.168.51.253
 ```
 
 ## Configuração do Switch
