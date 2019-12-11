@@ -36,7 +36,7 @@ reload
  - **Tux52**
     - E0 - switch **port 4** (vlan 51)
  - **Router**
-    - GE0/0 - switch **port 7** (vlan 51)
+    - GE0/1 - switch **port 7** (vlan 51)
 
 ### Reset do switch
 
@@ -91,12 +91,25 @@ show interfaces fastethernet 0/1 switchport
 
 ## Configuração do Router
 
+**Porta 0/1 ligada à rede do laboratório 172.16.1.59 (netmask 255.255.255.0)**
+
 ```bash
 configure terminal
 interface gigabitethernet 0/0
 ip address 192.168.51.254 255.255.255.0
 no shutdown
 exit
+```
+
+**Adicionar rota para a subrede 50 usando a porta .253 da subrede 51**
+
+```bash
+configure terminal
+# connect to internet?
+ip route 0.0.0.0 0.0.0.0 172.16.1.254
+# route para a sub-rede 50 tem que passar pela gateway .253 da subrede 51
+ip route 192.168.50.0 255.255.255.0 192.168.51.253
+end
 ```
 
 ### Commandos uteis
