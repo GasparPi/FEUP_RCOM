@@ -89,8 +89,7 @@ show running-config interface fastethernet 0/1
 show interfaces fastethernet 0/1 switchport
 ```
 
-## Co socket handler file"
-[master 9d239e0] Added socket handler filenfiguração do Router
+## Configuração do Router
 
 ```bash
 configure terminal
