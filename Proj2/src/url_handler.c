@@ -75,7 +75,7 @@ int get_ip_address(url_t* url) {
 int check_ftp(const char* str) {
 
     char* ftp_str = "ftp://";
-    char substring[6];
+    char substring[7];
 
     memcpy(substring, str, 6);
 
@@ -113,7 +113,7 @@ int get_url_path(const char* str, char* url_path, char* filename) {
         temp_str = get_str_before_char(working_str, '/');
         strcpy(working_str, working_str + strlen(temp_str) + 1);
 
-		strcpy(path, temp_str);
+		strcat(path, temp_str);
 		strcat(path, "/");
 	}
 

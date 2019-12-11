@@ -160,6 +160,7 @@ int ftp_download_file(ftp_t* ftp, const char* filename) {
 			return 1;
 		}
 
+		//sleep(1);
 	}
 
 	close(file_fd);
