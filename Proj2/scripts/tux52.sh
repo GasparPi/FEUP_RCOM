@@ -19,3 +19,10 @@ echo "Route for subnetwork 50 has been set up using gatewayt 253"
 
 # list routes
 route -n
+
+# for experiment 4
+# activate accept redirects
+echo 0 > /proc/sys/net/ipv4/conf/eth0/accept_redirects
+echo 0 > /proc/sys/net/ipv4/conf/all/accept_redirects
+# remove route to subnetwork 50 using tux 4
+route del -net 192.168.50.0 gw 192.168.51.253 netmask 255.255.255.0 eth0
