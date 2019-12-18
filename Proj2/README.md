@@ -1,12 +1,12 @@
 # Configurações
 
-<img src="https://raw.githubusercontent.com/Gaspar99/FEUP_RCOM/master/Proj2/report/diagrams/exp2_diagram.png" width="500"><br>
+<img src="https://raw.githubusercontent.com/Gaspar99/FEUP_RCOM/master/Proj2/report/diagrams/exp2_diagram.png?token=AIYHIMPJ26DMGHOGXREWZBC6AMXWK" width="500"><br>
 **Fig. 1: Configuração no final da experiencia 2** <br><br>
 
-<img src="https://raw.githubusercontent.com/Gaspar99/FEUP_RCOM/master/Proj2/report/diagrams/exp3_diagram.png" width="500"><br>
+<img src="https://raw.githubusercontent.com/Gaspar99/FEUP_RCOM/master/Proj2/report/diagrams/exp3_diagram.png?token=AIYHIMML22Q4HO6JPXHKC2C6AMXX4" width="500"><br>
 **Fig. 2: Configuração no final da experiencia 3** <br><br>
 
-<img src="https://raw.githubusercontent.com/Gaspar99/FEUP_RCOM/master/Proj2/report/diagrams/setup_diagram.png" width="500"><br>
+<img src="https://raw.githubusercontent.com/Gaspar99/FEUP_RCOM/master/Proj2/report/diagrams/setup_diagram.png?token=AIYHIMJOY7KZQK6UFRMIAIC6AMX2K" width="500"><br>
 **Fig. 3: Configuração final** <br><br>
 
 
