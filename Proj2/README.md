@@ -1,5 +1,15 @@
 # Configurações
 
+<img src="https://raw.githubusercontent.com/Gaspar99/FEUP_RCOM/master/Proj2/report/diagrams/exp2_diagram.png" width="500"><br>
+**Fig. 1: Configuração no final da experiencia 2** <br><br>
+
+<img src="https://raw.githubusercontent.com/Gaspar99/FEUP_RCOM/master/Proj2/report/diagrams/exp3_diagram.png" width="500"><br>
+**Fig. 2: Configuração no final da experiencia 3** <br><br>
+
+<img src="https://raw.githubusercontent.com/Gaspar99/FEUP_RCOM/master/Proj2/report/diagrams/setup_diagram.png" width="500"><br>
+**Fig. 3: Configuração final** <br><br>
+
+
 ## Configuração dos Tuxs
 
 [Scripts](https://github.com/Gaspar99/FEUP_RCOM/tree/master/Proj2/scripts) para ativar e configurar ethernet ports e ativar routing entre vlans
@@ -93,17 +103,29 @@ show interfaces fastethernet 0/1 switchport
 
 ## Configuração do Router
 
-**Porta 0/1 ligada à rede do laboratório 172.16.1.59 (netmask 255.255.255.0)**
+### Porta 0/0 ligada ao switch (VLAN 51)
 
 ```bash
 configure terminal
 interface gigabitethernet 0/0
 ip address 192.168.51.254 255.255.255.0
 no shutdown
+ip nat inside
 exit
 ```
 
-**Adicionar rota para a subrede 50 usando a porta .253 da subrede 51**
+### Porta 0/1 ligada à rede do laboratório 172.16.1.59 (netmask 255.255.255.0)
+
+```bash
+configure terminal
+interface gigabitethernet 0/1
+ip address 172.16.1.59 255.255.255.0
+no shutdown
+ip nat outside
+exit
+```
+
+### Adicionar rota para a subrede 50 usando a porta .253 da subrede 51
 
 ```bash
 configure terminal
@@ -111,6 +133,19 @@ configure terminal
 ip route 0.0.0.0 0.0.0.0 172.16.1.254
 # route para a sub-rede 50 tem que passar pela gateway .253 da subrede 51
 ip route 192.168.50.0 255.255.255.0 192.168.51.253
+end
+```
+
+### Configuração do NAT
+
+```bash
+configure terminal
+# something
+ip nat pool ovrld 172.16.1.59 172.16.1.59 prefix 24
+ip nat inside source list 1 pool ovrld overload
+# other something
+access-list 1 permit 192.168.50.0 0.0.0.7
+access-list 1 permit 192.168.51.0 0.0.0.7
 end
 ```
 
